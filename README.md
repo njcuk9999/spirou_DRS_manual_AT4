@@ -6,6 +6,8 @@ Main .tex file is `SPIRou_DRS_USERManual.tex`, this file contains all the usepac
 
 `pdflatex SPURou_DRS_UserManual.tex`
 
+** The rendered manual is stored in SPIRou_DRS_USERManual.pdf **
+
 The individual chapters are located in "Chapters" folder
 
 Figures should be placed in the "figures" folder.
