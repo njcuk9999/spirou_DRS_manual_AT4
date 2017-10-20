@@ -1,0 +1,22 @@
+% ----------------------------------------------------------------------
+% formatting constants
+% ----------------------------------------------------------------------
+% formatting the named variables (from user setup)
+\newcommand{\definevariable}[1]{\textcolor{blue}{\{#1\}}}
+% formatting the named keywords 
+\newcommand{\definekeyword}[1]{\textcolor{red}{\{#1\}}}
+% formatting the TODO command
+\newcommand{\TODO}[1]{\vspace{0.5cm}\colorbox{black}{\parbox{0.9\textwidth}{\textcolor{green}{!!!! TODO !!!! #1 !!!!}}}\vspace{0.5cm}}
+
+% formatting for the directories trees
+\newcommand{\customdirtree}[1]{
+\vspace{-0.25cm}
+\definecolor{shadecolor}{rgb}{0.85,0.85,0.82}
+\begin{shaded}
+\renewcommand*\DTstylecomment{\ttfamily\textcolor{black}}
+\renewcommand*\DTstyle{\ttfamily\textcolor{blue}}
+\dirtree{%
+#1}
+\end{shaded}
+}
+ 

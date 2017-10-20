@@ -1,0 +1,428 @@
+% ---------------------------------------------------------------------
+\chapter{Pre-Installation}
+% ---------------------------------------------------------------------
+
+This file is just for use with the current installation files (version 43), the author does not recommend that this is the final set-up procedure, nor that any of the `modifications' to the original source code applied here should be used in any final version of the DRS (better solutions should be found). \\
+
+
+
+% ---------------------------------------------------------------------
+\section{Prerequisites}
+% ---------------------------------------------------------------------
+
+Before one can use the DRS pipeline one must follow the followings steps before installing the pipeline.
+
+\begin{enumerate}
+\item Add variables to the system environment (Section \ref{section:edit_env_setup})
+\item Setup and check the folder structure (Section \ref{section:folder_setup})
+\item Make sure Fortran and C back-ends are installed (Section \ref{section:fortran_gsl})
+\item Install an isolated, clean version of python (Section \ref{section:install-python})
+\item Install required python modules - exact version not older not newer (Section \ref{section:install-py-modules})
+\end{enumerate}
+
+\noindent There is no need for root access for any of the following steps.
+
+% ---------------------------------------------------------------------
+\section{Adding variables to the system environment}
+\label{section:edit_env_setup}
+% ---------------------------------------------------------------------
+
+This can be done one of two ways. The first root (Section \ref{section:using_setup_sh}) is via a setup file and will allow you to switch on and switch of the environmental variables (to avoid clashes with other programs and to keep ones environment clean). Note with this method you will have to source the setup script before installing or running this code (each time the environment changes) or add the activation to your bashrc. This route is recommended. Otherwise you can follow the second root (Section \ref{section:using_bashrc}) and hard-code variables to your `.bashrc' file.
+
+\subsection{Using a setup script}
+\label{section:using_setup_sh}
+
+\noindent Open up `env\_setup.sh' and edit the following lines. You will find a copy of `env\_setup.sh' in Appendix \ref{section:source_code_env_setup_sh}.
+
+\begin{enumerate}
+\item Set the instrument name \definevariable{INSTRUMENT\_NAME}
+\item Directory in which all SPIROU files go \definevariable{DATA\_ROOT}
+\item Define installation folder name \definevariable{INSTALL\_ROOT}
+\item Define data folder name \definevariable{DATA\_ROOT}
+\item Define raw path \definevariable{DATA\_ROOT\_RAW}
+\item Define reduced path \definevariable{DATA\_ROOT\_REDUCED}
+\item Define calibDB path \definevariable{DATA\_ROOT\_CALIB}
+\item Define msg path \definevariable{DATA\_ROOT\_MSG}
+\item Define tmp path \definevariable{DATA\_ROOT\_TMP}
+\item Define python version \definevariable{PYTHON\_VERSION}
+\item Define python directory (i.e. result of command "which python") \definevariable{PYTHON\_DIR}
+\item Define GSL path (default paths if installed may be /usr/local/include/gsl or /opt/gsl) \definevariable{GSL\_DIR}
+\end{enumerate}
+
+\noindent i.e. these lines in `env\_setup.sh'.
+
+\begin{lstlisting}[style=text]
+<INSTRUMENT_NAME>="SPIROU"
+<DIR>="/data/spirou/drs"
+<INSTALL_ROOT>="@$DIR@/INTROOT"
+<DATA_ROOT>="@$DIR@/data"
+<DATA_RAW_ROOT>="@$DATA_ROOT@/raw/"
+<DATA_ROOT_REDUCED>="@$DATA_ROOT@/reduced/"
+<DATA_ROOT_CALIB>="@$DATA_ROOT@/calibDB"
+<DATA_ROOT_MSG>="@$DATA_ROOT@/msg/"
+<DATA_ROOT_TMP>="@$DATA_ROOT@/tmp/"
+<PYTHON_VERSION>="2.7"
+<PYTHON_DIR>="@$DIR@/python/miniconda2/"
+<GSL_DIR>="@$DIR@/c-libraries/gsl"
+\end{lstlisting}
+
+\noindent where any pre-defined variable can be used with a preceding \$ sign (to avoid repetition - coloured above in red).
+
+
+\subsection{Adding variables to .bashrc file}
+\label{section:using_bashrc}
+
+Open `\~\/.bashrc' in your favourite text editor.
+
+Add the following to it:
+\begin{lstlisting}[style=text]
+    
+  @export@ INSTRUMENT={INSTRUMENT_NAME}
+  @export@ DRS_DATA_RAW={DATA_ROOT_RAW}
+  @export@ DRS_DATA_REDUC={DATA_ROOT_REDUCED}
+  @export@ DRS_CALIB_DB={DATA_ROOT_CALIB}
+  @export@ DRS_DATA_MSG={DATA_ROOT_MSG}
+  @export@ DRS_DATA_WORKING={DATA_ROOT_TMP}
+  @export@ TDATA={DATA_ROOT}
+
+  @export@ INTROOT={INSTALL_ROOT}
+  @export@ PATH={INSTALL_ROOT}/bin:{PYTHON_DIR}/bin/:$PATH
+  @export@ PYTHONPATH=.:{PYTHON_DIR}/lib/python{PYTHON_VERSION}/site-packages/:{INSTALL_ROOT}/bin
+  @export@ DRS_LOG=1
+  @export@ PYTHON_INCLUDE_DIR="{PYTHON_DIR}/lib/python{PYTHON_VERSION}/site-packages/numpy/core/include"
+  @export@ GSL_INCLUDE_DIR={GSL_DIR}/include
+  @export@ GSL_LIBRARY_DIR={GSL_DIR}/lib
+
+\end{lstlisting}
+
+where:
+
+\begin{itemize}
+\item \definevariable{INSTRUMENT\_NAME} = Set the instrument name
+\item \definevariable{DATA\_ROOT}= Directory in which all SPIROU files go
+\item \definevariable{INSTALL\_ROOT} = Define installation folder name
+\item \definevariable{DATA\_ROOT} = Define data folder name
+\item \definevariable{DATA\_ROOT\_RAW} = Define raw path
+\item \definevariable{DATA\_ROOT\_REDUCED} Define reduced path
+\item \definevariable{DATA\_ROOT\_CALIB} = Define calibDB path
+\item \definevariable{DATA\_ROOT\_MSG} = Define msg path
+\item \definevariable{DATA\_ROOT\_TMP} = Define tmp path
+\item \definevariable{PYTHON\_VERSION} = Define python version
+\item \definevariable{PYTHON\_DIR} = Define python directory (i.e. result of command "which python")
+\item \definevariable{GSL\_DIR} = Define GSL path (default paths if installed may be /usr/local/include/gsl or /opt/gsl)
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Setup up and check file structure}
+\label{section:folder_setup}
+% ---------------------------------------------------------------------
+
+Make sure the following folders are created:
+
+\begin{lstlisting}[style=bashstyle]
+@mkdir@ {DIR}
+@mkdir@ {DIR}/{INSTALL_ROOT}/bin
+@mkdir@ {DATA_ROOT}
+@mkdir@ {DATA_RAW_ROOT}
+@mkdir@ {DATA_ROOT_REDUCED}
+@mkdir@ {DATA_ROOT_CALIB}
+@mkdir@ {DATA_ROOT_MSG}
+@mkdir@ {DATA_ROOT_TMP}
+\end{lstlisting}
+
+\noindent i.e. for the above `env\_setup.sh' this would be
+
+\begin{lstlisting}[style=bashstyle]
+@mkdir@ "/data/spirou/drs"
+@mkdir@ "/data/spirou/drs/INTROOT/bin"
+@mkdir@ "/data/spirou/drs/data"
+@mkdir@ "/data/spirou/drs/data/raw"
+@mkdir@ "/data/spirou/drs/data/reduced"
+@mkdir@ "/data/spirou/drs/data/calibDB"
+@mkdir@ "/data/spirou/drs/data/msg"
+@mkdir@ "/data/spirou/drs/data/tmp"
+\end{lstlisting}
+
+% ---------------------------------------------------------------------
+\section{Fortran and C back-end installation}
+\label{section:fortran_gsl}
+% ---------------------------------------------------------------------
+
+% ---------------------------------------------------------------------
+\subsection{Checking Fortran/C back-ends}
+\label{section:checking for Fortran/C}
+% --------------------------------------------------------------------
+
+\TODO{design checks for Fortran and C, or do we just say that \\ installation requires Fortran and C to be install \\(Installing Fortran and C will require root access).}
+
+Please check whether Fortran and C are installed. In addition to C you will need the C package `GSL', check that it is installed (default paths may be: /usr/local/include/gsl or /opt/gsl). If it is not installed please follow the instructions in Section \ref{section:install-gsl}.
+
+% ---------------------------------------------------------------------
+\subsection{Installing GSL back-ends without root access}
+\label{section:install-gsl}
+% ---------------------------------------------------------------------
+
+To install GSL without root us the following steps:
+
+\begin{enumerate}
+\item download from \url{http://ftpmirror.gnu.org/gsl/}
+
+\begin{lstlisting}[style=bashstyle]
+@wget@ http://ftpmirror.gnu.org/gsl/gsl-1.16.tar.gz
+\end{lstlisting}
+
+\item create the \definevariable{GSL\_DIR} (from above)
+\begin{lstlisting}[style=bashstyle]
+@mkdir@ {GSL_DIR}
+\end{lstlisting}
+
+\item untar the GSL files
+\begin{lstlisting}[style=bashstyle]
+@tar@ -xvf gs1-1.16.tar.gz
+\end{lstlisting}
+
+\item change to untarred directory
+\begin{lstlisting}[style=bashstyle]
+@cd@ gs1-1.16/
+\end{lstlisting}
+
+\item configure the installation dir for GSL
+\begin{lstlisting}[style=bashstyle]
+./configure prefix={GSL_DIR}
+\end{lstlisting}
+
+\item build the GSL installation
+\begin{lstlisting}[style=bashstyle]
+make
+\end{lstlisting}
+
+\item install the GSL installation
+\begin{lstlisting}[style=bashstyle]
+make install
+\end{lstlisting}
+
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+\section{Install isolated version of Python}
+\label{section:install-python}
+% ---------------------------------------------------------------------
+
+As the current DRS requires specific versions of modules to run we recommend a isolated version of python (as to not interfere with your system or running other python codes). 
+
+\noindent Python installation must meet the following specifications:
+
+\begin{itemize}
+\item  numpy 1.8.2 (versions later than 1.8.2 are unsupported)
+\item  scipy 0.14
+\item  matplotlib 1.3.1
+\item  pyfits 3.2.4 
+\end{itemize}
+
+\noindent Hence installing Miniconda (a minimal version of the anaconda python distribution) is the easiest way to achieve this in an isolated environment (as not to destroy any current/system version of python). See section \ref{section:install-miniconda} for Miniconda install instructions.
+
+
+% -------------------------------------------------------------------------------------------
+\subsection{Installing Miniconda}
+\label{section:install-miniconda}
+% -------------------------------------------------------------------------------------------
+
+To install Miniconda follow the steps below:
+
+\begin{enumerate}
+\item  download miniconda from here: https://conda.io/miniconda.html
+\begin{lstlisting}[style=bashstyle]
+@wget@ https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+\end{lstlisting}
+
+
+\item  run bash script
+\begin{lstlisting}[style=bashstyle]
+@bash@ Miniconda2-latest-Linux-x86_64.sh
+\end{lstlisting}
+
+
+\noindent Note: choose Miniconda installation directory to match \definevariable{PYTHON\_DIR} above
+\noindent Note: if you wish to activate this environment/use other python installations do not add Miniconda2 install location to PATH in \~/.bashrc
+          
+\item  add \definevariable{PYTHON\_DIR} to FRONT of PATH environment (temporarily).
+\begin{lstlisting}[style=bashstyle]
+@export@ PATH={PYTHON_DIR}/bin:$PATH
+\end{lstlisting}
+
+
+
+\item  check that we are using the correct version of python/conda/pip
+\begin{lstlisting}[style=bashstyle]
+@which@ python
+\end{lstlisting}
+
+
+      
+Should read: 
+\begin{lstlisting}[style=bashstyle]
+{PYTHON_DIR}/bin/python 
+\end{lstlisting}
+
+
+\noindent or 
+\begin{lstlisting}[style=bashstyle]
+{PYTHON_DIR}/bin/python{PYTHON_VERSION} 
+\end{lstlisting}
+
+
+\noindent similarly for
+\begin{lstlisting}[style=bashstyle]
+@which@ conda
+@which@ pip
+\end{lstlisting}
+
+\noindent which should read:
+\begin{lstlisting}[style=bashstyle]
+{PYTHON_DIR}/bin/conda  
+\end{lstlisting}
+
+\noindent and 
+\begin{lstlisting}[style=bashstyle]
+{PYTHON_DIR}/bin/pip respectively
+\end{lstlisting}
+
+\end{enumerate}
+
+
+
+% ---------------------------------------------------------------------
+\section{Install required python modules}
+\label{section:install-py-modules}
+% ---------------------------------------------------------------------
+
+\subsection{Installation}
+
+\begin{enumerate}
+\item  install numpy with miniconda
+\begin{lstlisting}[style=bashstyle]
+@conda@ install numpy==1.8.2
+\end{lstlisting}
+\begin{lstlisting}[style=bashstyle]
+Fetching package metadata .........
+Solving package specifications: .
+
+Package plan for installation in environment /scratch/bin/miniconda2/test:
+
+The following NEW packages will be INSTALLED:
+
+    libgfortran: 1.0-0
+    numpy:       1.8.2-py27_1
+
+The following packages will be UPDATED:
+
+    conda:       4.3.21-py27_0 --> 4.3.27-py27hff99c7a_0
+
+          Proceed ([y]/n)? y
+\end{lstlisting}
+
+          
+\item  install scipy with miniconda
+\begin{lstlisting}[style=bashstyle]
+@conda@ install scipy==0.14
+\end{lstlisting}
+\begin{lstlisting}[style=bashstyle]
+Fetching package metadata ...........
+Solving package specifications: .
+
+Package plan for installation in environment /scratch/bin/miniconda2/test:
+
+The following NEW packages will be INSTALLED:
+
+    scipy:     0.14.0-np18py27_0
+
+The following packages will be UPDATED:
+
+    conda-env: 2.6.0-0           --> 2.6.0-h36134e3_1
+
+
+          Proceed ([y]/n)? y
+\end{lstlisting}
+
+\item  install matplotlib with miniconda
+\begin{lstlisting}[style=bashstyle]
+@conda@ install matplotlib==1.3.1
+\end{lstlisting}
+\begin{lstlisting}[style=bashstyle]
+Fetching package metadata ...........
+Solving package specifications: .
+
+Package plan for installation in environment /scratch/bin/miniconda2/test:
+
+The following NEW packages will be INSTALLED:
+
+    cairo:      1.12.18-0
+    dateutil:   2.4.1-py27_0
+    freetype:   2.4.10-0
+    libpng:     1.5.13-1
+    matplotlib: 1.3.1-np18py27_1
+    pixman:     0.26.2-0
+    py2cairo:   1.10.0-py27_2
+    pyqt:       4.10.4-py27_0
+    pytz:       2017.2-py27hcac29fa_1
+    qt:         4.8.5-0
+    sip:        4.15.5-py27_0
+
+The following packages will be DOWNGRADED:
+
+    pyparsing:  2.1.4-py27_0          --> 2.0.1-py27_0
+
+            
+        Proceed ([ y ]/ n ) ? y
+
+\end{lstlisting}
+
+\item  download pyfits 3.2.4 from \url{http://www.stsci.edu/institute/software_hardware/pyfits/Download}
+\begin{lstlisting}[style=bashstyle]
+@wget@ https://pypi.python.org/packages/source/p/pyfits/pyfits-3.2.4.tar.gz
+\end{lstlisting}
+
+\item  install pyfits with pip
+\begin{lstlisting}[style=bashstyle]
+@pip@ install pyfits-3.2.4.tar.gz
+\end{lstlisting}
+
+\end{enumerate}
+
+
+% ----------------------------------------------------------------
+\subsection{Checking installed module versions}
+\label{section:check-versions}
+% ----------------------------------------------------------------
+
+Before we continue we should check python and module installation.
+
+\begin{enumerate}
+\item  run python
+          
+\begin{lstlisting}[style=bashstyle]
+@python@
+\end{lstlisting}
+
+\noindent Inside python run following commands
+\begin{lstlisting}[style=pythonstyle]
+>>> @import@ numpy
+>>> @import@ matplotlib
+>>> @import@ scipy
+>>> @import@ pyfits
+\end{lstlisting}
+
+
+\noindent Test the version with:
+\begin{lstlisting}[style=pythonstyle]
+>>> numpy.__version__
+1.8.2
+>>> matplotlib.__version__
+1.3.1
+>>> scipy.__version__
+0.14.0
+>>> pyfits.__version__
+3.2.4
+\end{lstlisting}
+
+\end{enumerate}

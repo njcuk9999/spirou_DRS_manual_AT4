@@ -1,0 +1,203 @@
+\chapter{Data Architecture}
+
+Below we describe the data architecture, first by providing the installed file structure in a tree diagram (\ref{section:folder_layout}), and then describing individual directories.
+
+% ---------------------------------------------------------
+\section{Installed file structure}
+\label{section:folder_layout}
+% ---------------------------------------------------------
+
+The file structure should look as follows:
+\customdirtree{%
+.1 \{DIR\}.
+.2 \{INSTALL\_ROOT\}.
+.3 bin.
+.4 \DTcomment{Recipe symbolic-link}.
+.3 DRS\_\{INSTRUMENT\_NAME\}.
+.4 \DTcomment{Worker functions}.
+.2 spirou.
+.3 read\_harps.py.
+.3 src.
+.4 \DTcomment{source installation files}.
+.1 \{DATA\_ROOT\}*.
+.2 raw.
+.3 YYYYMMDD \DTcomment{Observation directory}.
+.4 \DTcomment{Raw observation files}. 
+.2 reduced.
+.2 calibDB.
+.2 msg.
+.2 tmp.
+}
+
+* Note that this is the recommended file structure and raw, reduced, calibDB, msg and tmp can be changed using the \definevariable{DATA\_ROOT\_RAW}, \definevariable{DATA\_ROOT\_REDUCED}, \definevariable{DATA\_ROOT\_CALIB}, 
+\definevariable{DATA\_ROOT\_MSG}, and \definevariable{DATA\_ROOT\_TMP} variables in \ref{section:edit_env_setup}.
+
+\newpage
+
+\noindent i.e. for the given `env\_setup.sh' (Appendix \ref{section:source_code_env_setup_sh}) this would be:
+\customdirtree{%
+.1 /data/spirou/drs.
+.2 INTROOT/.
+.3 bin.
+.4 \DTcomment{Recipe symbolic-link}.
+.3 DRS\_SPIROU.
+.4 \DTcomment{Worker functions}.
+.2 data.
+.3 raw.
+.4 YYYYMMDD \DTcomment{night\_repository}.
+.5 \DTcomment{Raw observation files}. 
+.3 reduced.
+.3 calibDB.
+.3 msg.
+.3 tmp.
+.2 spirou.
+.3 read\_harps.py.
+.3 src.
+.4 \DTcomment{source installation files}.
+}
+
+% ------------------------------------------------------------------------
+\section{The \definevariable{INSTALL\_ROOT} directory}
+\label{section:install_root_folder}
+% ------------------------------------------------------------------------
+
+The \definevariable{INSTALL\_ROOT} contains all the installed recipes, worker functions and configuration files needed to run the DRS. The file structure is set up as below: 
+
+\customdirtree{%
+.1 /data/spirou/drs.
+.2 \{INSTALL\_ROOT\}.
+.3 bin.
+.4 \DTcomment{Recipes}.
+.3 DRS\_SPIROU.
+}
+
+% ------------------------------------------------------------------------
+\subsection{The bin directory}
+\label{section:install_root_folder:bin_folder}
+% ------------------------------------------------------------------------
+
+The bin directory is located in the \definevariable{INSTALL\_ROOT} directory. This contains symbolic links to the DRS recipes.
+
+\newpage
+
+% ------------------------------------------------------------------------
+\subsection{The DRS\_SPIROU directory}
+\label{section:install_root_folder:drs_spirou}
+% ------------------------------------------------------------------------
+
+The DRS\_SPIROU directory contains all the worker functions and configuration files for the DRS. The file structure is as follows:
+
+\customdirtree{%
+.1 DRS\_SPIROU.
+.2 C.
+.3 \DTcomment{The C programs and setup.py}.
+.2 config.
+.3 \DTcomment{The config files}.
+.2 docs.
+.2 fortran.
+.3 \DTcomment{The fortran programs and install.csh}.
+.2 man.
+.2 python.
+.3 C-modules.
+.3 f2pymodules.
+.3 Modules.
+.3 Recipes.
+.2 util.
+}
+
+The C and Fortran functions are found in their own directories. The configuration files are explained in Section \ref{section:the_config_files}.
+
+The python directory contains the translation of the C and fortran functions into python (C-modules and f2pymodules directories).
+
+The functions `startup.py' and `startup\_recipes.py' are called automatically by the recipes.
+
+`python.csh' is the custom python environment for the DRS.
+
+The python modules are explained in Section \ref{section:the_modules} and the recipes are explained in Section \ref{section:the_recipes}.
+
+% ------------------------------------------------------------------------
+\section{The \definevariable{DATA\_ROOT} directory}
+\label{section:data_root_folder}
+% ------------------------------------------------------------------------
+
+This is the directory where all the data should be stored. The default and recommended design is to have \definevariable{DATA\_ROOT\_RAW}, \definevariable{DATA\_ROOT\_REDUCED}, \definevariable{DATA\_ROOT\_CALIB}, 
+\definevariable{DATA\_ROOT\_MSG}, and \definevariable{DATA\_ROOT\_TMP} as sub-directories of \definevariable{DATA\_ROOT}. However as in Section \ref{section:edit_env_setup} these sub-directories can be defined elsewhere.
+
+\newpage
+
+% ------------------------------------------------------------------------
+\subsection{The raw and reduced data directories}
+\label{section:data_root_folder:raw_folder}
+% ------------------------------------------------------------------------
+The raw observed data is stored under the \definevariable{DATA\_ROOT\_RAW} path, the files are stored by night in the form \constantFolderDateFormat. \\
+
+\noindent The file structure can be seen below:
+\customdirtree{%
+.1 \{DATA\_ROOT\_RAW\}.
+.2 YYYYMMDD \DTcomment{night\_repository}.
+.3 \DTcomment{Raw observation files}. 
+.3 dark\_dark\{name\}.fits.
+.3 dark\_flat\{name\}.fits.
+.3 flat\_dark\{name\}.fits.
+.3 fp\_fp\{name\}.fits.
+}
+
+% ------------------------------------------------------------------------
+\section{The calibration database directory}
+\label{section:data_root_folder:calibDB}
+% ------------------------------------------------------------------------
+
+\customdirtree{%
+.1 \{DATA\_ROOT\}.
+.2 calibDB or \{DATA\_ROOT\_CALIB\}.
+.3 master\_calib\_SPIROU.txt.
+.3 \DTcomment{The calibration fits files}. 
+}
+
+The calibDB contains all the calibration files that pass the qulaity tests and a test file `master\_calib.txt'. It is located at \definevariable{DATA\_ROOT\_CALIB} or if this is not defined is located by default at the \definevariable{DATA\_ROOT} directory.
+
+Each line in this file is a uniqie calibration file and lines are formatted in the following manner:
+\begin{lstlisting}[style=text]
+@{key}@ @{night_repository}@ @{filename}@ @{human readable date}@ @{unix time}@ 
+\end{lstlisting}
+
+\noindent where
+\begin{itemize}
+\item \definekeyword{key} is a code assigned for each type of calibration file. Currently accepted keys are:
+\begin{itemize}
+\item DARK - Created from cal\_DARK\_spirou
+\item ORDER\_PROFIL\_\definevariable{fiber} - Created in cal\_loc\_RAW\_spirou
+\item LOC\_C - Created in cal\_loc\_RAW\_spirou
+\item TILT - Created in cal\_SLIT\_spirou
+\item FLAT\_\definevariable{fiber} - Created in cal\_FF\_RAW\_spirou
+\item WAVE - Currently manually added
+\end{itemize}
+
+\item \definekeyword{night\_repository} is the raw data observation directory (in \definevariable{DATA\_ROOT\_RAW}) normally in the form \constantFolderDateFormat.
+
+\item \definekeyword{filename} is the filename of the calibration file (located in the calibDB).
+
+\item \definekeyword{human readable date} is the date in DD/MM/YY/HH:MM:SS format taken from the header of the file that created the calibration file (using the header keyword `\constantAcqtimeKey').
+
+\item \definekeyword{unix time} is the time (as in \definekeyword{human readable date}) but in unix time (in seconds).
+
+\end{itemize}
+
+\noindent An example working master\_calib\_SPIROU.txt is shown below (assuming the listed files are present in \definevariable{DATA\_ROOT\_CALIB})
+\begin{lstlisting}[style=text]
+DARK 20170710 dark_dark02d406.fits 07/10/17/16:37:48 1499704668.0
+ORDER_PROFIL_C 20170710 dark_flat02f10_order_profil_C.fits 07/10/17/17:03:50 1499706230.0
+LOC_C 20170710 dark_flat02f10_loco_C.fits 07/10/17/17:03:50 1499706230.0
+ORDER_PROFIL_AB 20170710 flat_dark02f10_order_profil_AB.fits 07/10/17/17:07:08 1499706428.0
+LOC_AB 20170710 flat_dark02f10_loco_AB.fits 07/10/17/17:07:08 1499706428.0
+TILT 20170710 fp_fp02a203_tilt.fits 07/10/17/17:25:15 1499705515.0
+FLAT_C 20170710 dark_flat02f10_flat_C.fits 07/10/17/17:03:50 1499706230.0
+WAVE 20170710 spirou_wave_ini3.fits 07/10/17/17:03:50 1499706230.0
+\end{lstlisting}
+
+% ------------------------------------------------------------------------
+\section{The configuration files}
+\label{section:the_config_files}
+% ------------------------------------------------------------------------
+
+Some text here.

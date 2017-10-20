@@ -1,0 +1,75 @@
+% ---------------------------------------------------------------
+\chapter{The Modules}
+\label{section:the_modules}
+% ---------------------------------------------------------------
+
+Some text here
+
+% ---------------------------------------------------------------
+\section{The Module directory}
+% ---------------------------------------------------------------
+
+This contains all the python worker files for the DRS. The file structure is as below.
+
+\customdirtree{%
+.1 \{DIR\}.
+.2 \{INSTALL\_ROOT\}.
+.3 DRS\_SPIROU.
+.4 python.
+.5 Modules.
+.6 hadgtVISU.
+.7 \DTcomment{hadmrVISU module files}.
+.6 hadmrBACK.
+.7 \DTcomment{hadmrBACK module files}.
+.6 hadmrBIAS.
+.7 \DTcomment{hadmrBIAS module files}.
+.6 hadmrCDB.
+.7 \DTcomment{hadmrCDB module files}.
+.6 hadmrDARK.
+.7 \DTcomment{hadmrDARK module files}.
+.6 hadmrEXTOR.
+.7 \DTcomment{hadmrEXTOR module files}.
+.6 hadmrFITS.
+.7 \DTcomment{hadmrFITS module files}.
+.6 hadmrFLAT.
+.7 \DTcomment{hadmrFLAT module files}.
+.6 hadmrLED.
+.7 \DTcomment{hadmrLED module files}.
+.6 hadmrLOCOR.
+.7 \DTcomment{hadmrLOCOR module files}.
+.6 hadmrMATH.
+.7 \DTcomment{hadmrMATH module files}.
+.6 hadmrRV.
+.7 \DTcomment{hadmrRV module files}.
+.6 hadmrSIMU.
+.7 \DTcomment{hadmrSIMU module files}.
+.6 hadmrTHORCA.
+.7 \DTcomment{hadmrTHORCA module files}.
+.6 hadrgdCONFIG.
+.7 \DTcomment{hadrgdCONFIG module files}.
+.6 spirouBACK.py.
+.6 spirouBIAS.py.
+.6 spirouCDB.py.
+.6 spirouEXTOR.py.
+.6 spirouFITS.py.
+.6 spirouFLAT.py.
+.6 spirouLOCOR.py.
+.6 spirouRV.py.
+.6 spirouTHORCA.py.
+.6 spirouVISU.py.
+}
+
+\section{spirouBACK}
+spirouBACK.py contains functions to calculate the detector background
+\section{spirouCDB}
+spirouCDB.py: contains functions for the calibrations database (infos for master\_calib.txt, and to coy files in the caliDB directory)
+\section{spirouEXTOR}
+spirouEXTOR.py: contains function for the ordres extraction
+\section{spirouFITS}
+spirouFITS.py: contains functions to read FITS file and copy keywords
+\section{spirouLOCOR}
+spirouLOCOR.py: contains functions for order localization
+\section{spirouRV}
+spirouRV.py: contains functions to compute radial velocity
+\section{spirouVISU}
+spirouVISU.py: contains functions for visualization

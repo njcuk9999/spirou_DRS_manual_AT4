@@ -1,0 +1,193 @@
+% ---------------------------------------------------------------------
+\chapter{Installation}
+% ---------------------------------------------------------------------
+
+This is just for use with the current installation files (version 43), the author does not recommend that this is the final set-up procedure, nor that any of the `modifications' to the original source code applied here should be used in any final version of the DRS (better solutions should be found). \\
+
+
+% ---------------------------------------------------------
+\section{Activate environment}
+\label{section:activate}
+% ---------------------------------------------------------
+
+If you followed the steps in \ref{section:using_setup_sh} please follow this section, if however you followed the steps in \ref{section:using_bashrc} continue to Section \ref{section:downloading_install_Scripts}.
+
+\noindent Before running the installation (or before running the code) one must run the following:
+\begin{lstlisting}[style=bashstyle]
+@source@ env_setup.sh
+\end{lstlisting}
+
+\noindent Output should look like this:
+\begin{lstlisting}[style=bashstyle]
+  =========================================
+    Environmental setup for SPIRou Pipeline
+  =========================================
+    Setting up environment
+    Set up for {INSTRUMENT}
+      - Python located at: {PYTHON_DIR}
+      - GLS located at: {GSL_DIR}
+      - data located at:
+            {DATA_ROOT}
+            {DATA_RAW_ROOT}
+            {DATA_ROOT_REDUCED}
+            {DATA_ROOT_CALIB}
+            {DATA_ROOT_MSG}
+            {DATA_ROOT_TMP}
+
+    Done
+\end{lstlisting}
+
+\noindent Note to deactivate type
+\begin{lstlisting}[style=bashstyle]
+@source@ env_setup.sh --clean
+\end{lstlisting}
+
+
+% ---------------------------------------------------------
+\section{Downloading the install scripts}
+\label{section:downloading_install_Scripts}
+% ---------------------------------------------------------
+
+Minor modifications need to be made to the code to allow a isolated version of GSL to be used. If and only if your GSL is installed to `/opt/gsl/' will the code install correctly with out this modification. \\
+
+\noindent The other steps are as in the original installation procedure. \\
+
+\begin{enumerate}
+\item change directory to \definevariable{DIR}
+\begin{lstlisting}[style=bashstyle]
+{DIR}
+\end{lstlisting}
+
+\item download source code for spirou, location should be \definevariable{DIR}/spirou
+\begin{lstlisting}[style=bashstyle]
+svn co https://svn.lam.fr/repos/spirou/trunk spirou
+\end{lstlisting}
+
+\end{enumerate}
+
+\begin{enumerate}
+\item change directory to source files
+\begin{lstlisting}[style=bashstyle]
+cd {DIR}/spirou/src
+\end{lstlisting}
+
+\item find and change \definevariable{DIR}/spirou/src/C/setup.py
+
+\begin{enumerate}
+\item Below the line \definevariable{PYTHON\_INCLUDE\_DIR} = os.getenv(`\definevariable{PYTHON\_INCLUDE\_DIR}') add the following:
+\begin{lstlisting}[style=text]
+<gsl_include_dir> = os.getenv('GSL_INCLUDE_DIR')
+<gsl_library_dir> = os.getenv('GSL_LIBRARY_DIR')
+\end{lstlisting}
+
+\item Find and replace all instances of
+\begin{lstlisting}[style=text]
+include_dirs = [python_include_dir,@'/opt/gsl/include'@],
+\end{lstlisting}
+
+with
+\begin{lstlisting}[style=text]
+include_dirs = [python_include_dir, @gsl_include_dir@],
+\end{lstlisting}
+
+\item Find and replace all instances of 
+\begin{lstlisting}[style=text]
+library_dirs = [@'/opt/gsl/lib'@],  
+\end{lstlisting}
+
+with
+\begin{lstlisting}[style=text]
+library_dirs = [@gsl_library_dir@],
+\end{lstlisting}
+
+\end{enumerate}
+
+\end{enumerate}
+
+% ---------------------------------------------------------
+\section{Running installation scripts}
+\label{section:running_install_Scripts}
+% ---------------------------------------------------------
+
+run installation scripts
+
+\begin{lstlisting}[style=bashstyle]
+./hardrsInstall SPIROU 2.7
+./scriptInstall SPIROU 2.7
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Updating local version}
+\label{section:how_to_update}
+% ---------------------------------------------------------
+
+The code currently uses `Subversion' (SVN) to monitor the different versions of the code that is under development. To update a local version of the DRS:
+
+\begin{enumerate}
+\item Go inside the \definevariable{DIR}/spirou folder:
+\begin{lstlisting}[style=bashstyle]
+cd \{DIR\}/spirou
+\end{lstlisting}
+
+\item Type:
+\begin{lstlisting}[style=bashstyle]
+svn update
+\end{lstlisting}
+
+You will then receive information on the DRS version.
+
+\item Then you need to re-install the DRS. \textcolor{red}{This will rewrite all codes in the \{INSTALL\_ROOT\} folder}.
+
+Reinstall the DRS using:
+\begin{lstlisting}[style=bashstyle]
+cd src
+./hardrsInstall SPIROU 2.7
+./scriptInstall SPIROU 2.7
+\end{lstlisting}
+
+\end{enumerate}
+
+You are now ready to work with the latest version.
+
+
+% ---------------------------------------------------------
+\section{Adding new files to the shared DRS}
+\label{section:how_to_add}
+% ---------------------------------------------------------
+
+Note: this is only to be done if your new functions are running correctly.
+
+\begin{enumerate}
+\item Go inside the \definevariable{DIR}/spirou folder:
+\begin{lstlisting}[style=bashstyle]
+cd \{DIR\}/spirou
+\end{lstlisting}
+
+\item run the update on the svn
+\begin{lstlisting}[style=bashstyle]
+svn update
+\end{lstlisting}
+
+\item copy your modifications into the source code:
+\begin{lstlisting}[style=bashstyle]
+cp {modified file} src/{location of new file}
+\end{lstlisting}
+
+\item Add the file to the list of pending SVN files:
+\begin{lstlisting}[style=bashstyle]
+svn add src/{location of new file}
+\end{lstlisting}
+
+\item once all new files are added, commit to releasing the modifications to the SVN:
+\begin{lstlisting}[style=bashstyle]
+svn commit -m 'modification of {file name}'
+\end{lstlisting}
+
+\end{enumerate}
+
+\subsection{Useful links about subversion}:
+\label{section:useful-links}
+
+Presentation: \url{http://multithread.org/files/presentations/subversion/subversion_tutorial.pdf}
+Book: \url{http://svnbook.red-bean.com/}
+Introduction to subversion: \url{https://dev.nozav.org/intro_svn.html}

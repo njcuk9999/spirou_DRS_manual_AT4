@@ -1,0 +1,128 @@
+\chapter{Source code for environmental setup file}
+\label{section:source_code_env_setup_sh}
+
+\begin{lstlisting}[style=text]
+<#@!/bin/bash@
+# activate using:
+#    source env_setup.sh
+# Use --clean to restore environment
+# i.e. 
+#    source env_setup.sh --clean
+
+# --------------------------------------------------------------------
+# EDIT THESE PARAMETERS
+# -------------------------------------------------------------------->
+<# Set the instrument name>
+INSTRUMENT_NAME="SPIROU"
+<# Directory in which all SPIROU files go>
+DIR="/scratch/Projects/SPIRou_Pipeline"
+<# Define installation folder name>
+INSTALL_ROOT="$DIR/INTROOT"
+<# Define data folder name>
+DATA_ROOT="$DIR/data"
+<# Define raw path>
+DATA_ROOT_RAW="$DATA_ROOT/raw/"
+<# Define reduced path>
+DATA_ROOT_REDUCED="$DATA_ROOT/reduced/"
+<# Define calibDB path>
+DATA_ROOT_CALIB="$DATA_ROOT/calibDB"
+<# Define msg path>
+DATA_ROOT_MSG="$DATA_ROOT/msg/"
+<# Define tmp path>
+DATA_ROOT_TMP="$DATA_ROOT/tmp/"
+<# Define python version>
+PYTHON_VERSION="2.7"
+<# Define python directory (i.e. result of command "which python")>
+PYTHON_DIR="/scratch/Projects/SPIRou_Pipeline/miniconda2"
+<# Define GSL path>
+GSL_DIR="/scratch/Projects/SPIRou_Pipeline/c-libraries/gsl"
+
+<# -------------------------------------------------------------------->
+<# DO NOT EDIT PAST THIS POINT>
+<# -------------------------------------------------------------------- >
+@echo@ " ========================================= "
+@echo@ "  Environmental setup for DRS Pipeline     "
+@echo@ " ========================================= "
+
+<# get arguments>
+CLEAN="0"
+@for@ i @in@ "$\@"; do
+  @case@ $i in 
+    --clean) CLEAN="1";;
+    *) @echo@ "Invalid argument"; @exit@ 1;;
+  @esac@
+@done@
+
+@if@ [ "$CLEAN" = "1" ]; @then@
+  @if@ [[ -z "${DRS_ACTIVE}" ]]; @then@
+    @if@ [ "$DRS_ACTIVE" != 1 ]; @then@
+      @echo@ "   No need to clean - environment clean"
+      @echo@ ""
+      @echo@ "   Done"
+      @exit@
+    @fi@
+  @fi@
+  echo "   Cleaning environment"
+  export PATH=$OLDPATH
+  export PYTHONPATH=$OLDPYTHONPATH
+  @unset@ OLDPATH
+  @unset@ DRS_ACTIVE
+  @unset@ OLDPYTHONPATH
+  @unset@ INTROOT
+  @unset@ DRS_LOG
+  @unset@ PYTHON_INCLUDE_DIR
+  @unset@ GSL_INCLUDE_DIR
+  @unset@ GSL_LIBRARY_DIR
+  @unset@ INSTRUMENT
+  @unset@ DRS_DATA_RAW
+  @unset@ DRS_DATA_REDUC
+  @unset@ DRS_CALIB_DB
+  @unset@ DRS_DATA_MSG
+  @unset@ DRS_DATA_WORKING
+  @unset@ TDATA
+@else@
+  echo "   Setting up environment"
+  <# Backup old path and python path for clean>
+  OLDPATH=$PATH
+  OLDPYTHONPATH=$PYTHONPATH
+  @export@ OLDPATH
+  @export@ DRS_ACTIVE=1
+  @export@ OLDPYTHONPATH
+  
+  <# User specific environment and startup programs>
+  @export@ INTROOT="$INSTALL_ROOT"
+  @export@ PATH="$INSTALL_ROOT/bin":"$PYTHON_DIR/bin/":$PATH
+  @export@ PYTHONPATH=.:"$PYTHON_DIR/lib/python$PYTHON_VERSION/site-packages/":"$INSTALL_ROOT/bin"
+  @export@ DRS_LOG=1
+  @export@ PYTHON_INCLUDE_DIR="$PYTHON_DIR/lib/python$PYTHON_VERSION/site-packages/numpy/core/include"
+  @export@ GSL_INCLUDE_DIR="$GSL_DIR/include"
+  @export@ GSL_LIBRARY_DIR="$GSL_DIR/lib"
+  
+<  #SPIROU DRS and DATA environment variables>
+  @export@ INSTRUMENT=$INSTRUMENT_NAME
+  @export@ DRS_DATA_RAW=$DATA_ROOT_RAW
+  @export@ DRS_DATA_REDUC=$DATA_ROOT_REDUCED
+  @export@ DRS_CALIB_DB=$DATA_ROOT_CALIB
+  @export@ DRS_DATA_MSG=$DATA_ROOT_MSG
+  @export@ DRS_DATA_WORKING=$DATA_ROOT_TMP
+  @export@ TDATA=$DATA_ROOT
+  
+  @echo@ "   Set up for $INSTRUMENT"
+  @echo@ "    - Python located at: $PYTHON_DIR"
+  @echo@ "    - GLS located at: $GSL_DIR"
+  @echo@ "    - installation located at: $INSTALL_ROOT"
+  @echo@ "    - data located at:"
+  @echo@ "           $DATA_ROOT"
+  @echo@ "           $DATA_ROOT_RAW"
+  @echo@ "           $DATA_ROOT_REDUCED"
+  @echo@ "           $DATA_ROOT_CALIB"
+  @echo@ "           $DATA_ROOT_MSG"
+  @echo@ "           $DATA_ROOT_TMP"
+  @echo@ " "
+  
+@fi@
+
+@echo@ "   Done"
+
+
+\end{lstlisting}  

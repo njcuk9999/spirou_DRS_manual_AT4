@@ -1,0 +1,229 @@
+\chapter{Using the DRS}
+
+
+% -------------------------------------------------------------------------------------------
+\section{Running the code}
+\label{section:run_code}
+% -------------------------------------------------------------------------------------------
+
+To run the DRS python (assuming env\_setup is activated, see Section \ref{section:activate}) type:
+\begin{lstlisting}[style=bashstyle]
+DRS_{INSTRUMENT} -m
+\end{lstlisting}  
+
+\noindent i.e. 
+\begin{lstlisting}[style=bashstyle]
+DRS_spirou -m {PROGRAM NAME} {FOLDER} {FILES}
+DRS_spirou -m cal_DARK_spirou {YYMMDD} {Filenames*}
+\end{lstlisting}  
+
+\noindent instead of python
+
+\noindent Note: location should of script should be \textcolor{blue}{\{DIR\}/\{INSTALL\_ROOT\}/bin/DRS\{INSTRUMENT\}}
+
+\noindent i.e. for `cal\_DARK\_spirou' in the \textcolor{blue}{\{DATA\_RAW\_ROOT\}/YYMMDD} directory one would result in something like the following:
+\begin{lstlisting}[style=bashstyle]
+DRS_spirou -m cal_DARK_spirou YYMMDD Filenames*
+\end{lstlisting}
+\begin{lstlisting}[style=bashstyle]
+19:44:52.5 -   || *****************************************
+19:44:52.5 -   || * SPIROU (\@) Geneva Observatory ()
+19:44:52.5 -   || *****************************************
+19:44:52.5 -   ||(dir_data_raw)      DRS_DATA_RAW=/data/spirou/drs/data/raw/
+19:44:52.5 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/data/spirou/drs/data/reduced/
+19:44:52.5 -   ||(dir_drs_config)    DRS_CONFIG=/data/spirou/drs/INTROOT/DRS_SPIROU/config/
+19:44:52.5 -   ||(dir_calib_db)      DRS_CALIB_DB=/data/spirou/drs/data/calibDB
+19:44:52.5 -   ||(dir_data_msg)      DRS_DATA_MSG=/data/spirou/drs/data/msg/
+19:44:52.5 -   ||(print_log)         DRS_LOG=1         %(0: minimum stdin-out logs)
+19:44:52.5 -   ||(plot_graph)        DRS_PLOT=NONE            %(def/undef/trigger)
+19:44:52.5 -   ||(used_date)         DRS_USED_DATE=undefined
+19:44:52.5 -   ||(working_dir)       DRS_DATA_WORKING=/data/spirou/drs/data/tmp/
+19:44:52.5 -   ||                    DRS_INTERACTIVE is not set, running on-line mode
+19:44:52.5 -   |-c:+[...]|Now running : -c on file(s):  dark_dark...
+19:44:52.5 -   |-c:+[...]|On directory /data/spirou/drs/data/raw/20170811
+19:44:52.5 -   |-c:+[...]|ICDP loaded from: /data/spirou/drs/INTROOT/DRS_SPIROU/config/hadmrICDP_SPIROU.py
+19:44:52.5 - * |-c:+[...]|Now processing Image TYPE DARK with -c recipe
+19:44:52.5 -   |-c:+[...]|Reading Image /data/spirou/drs/data/raw/20170811/dark_dark02d.fits
+19:44:52.5 -   |-c:+[...]|Image 2048x2048 loaded
+
+\end{lstlisting}
+
+% -------------------------------------------------------------------------------------------
+\section{Working example of the code for SPIRou}
+\label{section:working_example}
+% -------------------------------------------------------------------------------------------
+
+All files are from:
+\begin{lstlisting}[style=bashstyle]
+spirou\@10.102.14.81:/data/RawImages/H2RG-AT4/AT4-04/2017-07-10_15-36-18/ramps/
+\end{lstlisting}  
+
+Will also need current WAVE file from here:
+\begin{lstlisting}[style=bashstyle]
+spirou\@10.102.14.81:/data/reduced/DATA-CALIB/spirou_wave_ini3.fits
+\end{lstlisting}  
+
+
+\noindent Setup as in previous sections.
+
+\begin{enumerate}
+
+\item Change to the \textcolor{blue}{\{DIR\}} directory
+\begin{lstlisting}[style=bashstyle]
+@cd@ DIR
+\end{lstlisting}  
+
+\item Activate the environment (in bash only)
+\begin{lstlisting}[style=bashstyle]
+@source @env_setup.sh
+\end{lstlisting}  
+
+\item Check that environment is active
+\begin{lstlisting}[style=bashstyle]
+@echo @$DRS_ACTIVE
+\end{lstlisting}  
+
+\noindent result should be = 1
+
+\item run the dark extraction:
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_DARK_spirou.py 20170710 @dark_dark02d406.fits
+\end{lstlisting}  
+
+
+\item run the dark extraction on the `dark\_dark' file:
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_DARK_spirou.py 20170710 @dark_dark02d406.fits
+\end{lstlisting}  
+
+\item run the order localisation on the `dark\_flat' files:
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_loc_RAW_spirou.py 20170710 @dark_flat02f10.fits dark_flat03f10.fits dark_flat04f10.fits dark_flat05f10.fits dark_flat06f10.fits
+\end{lstlisting}  
+
+\item run the order localisation on the `flat\_dark' files:
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_loc_RAW_spirou.py 20170710 @flat_dark02f10.fits flat_dark03f10.fits flat_dark04f10.fits flat_dark05f10.fits flat_dark06f10.fits
+\end{lstlisting}  
+
+\item run the slit calibration on the `fp\_fp' files.
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_SLIT_spirou.py 20170710 @fp_fp02a203.fits fp_fp03a203.fits fp_fp04a203.fits
+\end{lstlisting}  
+
+\item run the flat field creation on the `dark\_flat' files:
+
+\noindent \textcolor{red}{Note: if using same files as above you will get an error message when running the file}.
+\noindent To solve this open the `master\_calib\_SPIROU.txt' file located in \textcolor{blue}{\{DATA\_ROOT\_CALIB\}}. Edit the unix date in the line that begins `TILT' so that it is less than the unix date on rwos `ORDER\_PROFIL\_AB' (i.e. change it from 1499707515.0 to 1499705515.0).
+
+\noindent i.e. the `master\_calib\_SPIROU.txt' file should look go from
+\begin{lstlisting}[style=text]
+DARK 20170710 dark_dark02d406.fits 07/10/17/16:37:48 1499704668.0
+ORDER_PROFIL_C 20170710 dark_flat02f10_order_profil_C.fits 07/10/17/17:03:50 1499706230.0
+LOC_C 20170710 dark_flat02f10_loco_C.fits 07/10/17/17:03:50 1499706230.0
+ORDER_PROFIL_AB 20170710 flat_dark02f10_order_profil_AB.fits 07/10/17/17:07:08 1499706428.0
+LOC_AB 20170710 flat_dark02f10_loco_AB.fits 07/10/17/17:07:08 1499706428.0
+TILT 20170710 fp_fp02a203_tilt.fits 07/10/17/17:25:15 @1499707515.0@
+\end{lstlisting}
+
+\noindent to this:
+
+\definecolor{shadecolor}{named}{Tan} 
+\begin{lstlisting}[style=text]
+DARK 20170710 dark_dark02d406.fits 07/10/17/16:37:48 1499704668.0
+ORDER_PROFIL_C 20170710 dark_flat02f10_order_profil_C.fits 07/10/17/17:03:50 1499706230.0
+LOC_C 20170710 dark_flat02f10_loco_C.fits 07/10/17/17:03:50 1499706230.0
+ORDER_PROFIL_AB 20170710 flat_dark02f10_order_profil_AB.fits 07/10/17/17:07:08 1499706428.0
+LOC_AB 20170710 flat_dark02f10_loco_AB.fits 07/10/17/17:07:08 1499706428.0
+TILT 20170710 fp_fp02a203_tilt.fits 07/10/17/17:25:15 @1499705515.0@
+
+\end{lstlisting}
+
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_FF_RAW_spirou.py 20170710 @dark_flat02f10.fits dark_flat03f10.fits dark_flat04f10.fits dark_flat05f10.fits dark_flat06f10.fits
+\end{lstlisting}  
+
+\item run the flat field creation on the `flat\_dark' files:
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_FF_RAW_spirou.py 20170710 @flat_dark02f10.fits flat_dark03f10.fits flat_dark04f10.fits flat_dark05f10.fits flat_dark06f10.fits
+\end{lstlisting}  
+
+\item Currently we do not create a new wavelength calibration file for this run. Therefore we need to get one from here:
+\begin{lstlisting}[style=bashstyle]
+spirou\@10.102.14.81:/data/reduced/DATA-CALIB/spirou_wave_ini3.fits
+\end{lstlisting}  
+
+\noindent then place it in the \textcolor{blue}{\{DATA\_ROOT\_CALIB\}} folder. You will also need to edit the `master\_calib\_SPIROU.txt' file located in \textcolor{blue}{\{DATA\_ROOT\_CALIB\}}. Add the folloing line to `master\_calib\_SPIROU.txt'
+\begin{lstlisting}[style=text]
+WAVE 20170710 spirou_wave_ini3.fits 07/10/17/17:03:50 1499706230.0
+\end{lstlisting}
+
+\noindent and the `master\_calib\_SPIROU.txt' should look like this:
+\begin{lstlisting}[style=text]
+DARK 20170710 dark_dark02d406.fits 07/10/17/16:37:48 1499704668.0
+ORDER_PROFIL_C 20170710 dark_flat02f10_order_profil_C.fits 07/10/17/17:03:50 1499706230.0
+LOC_C 20170710 dark_flat02f10_loco_C.fits 07/10/17/17:03:50 1499706230.0
+ORDER_PROFIL_AB 20170710 flat_dark02f10_order_profil_AB.fits 07/10/17/17:07:08 1499706428.0
+LOC_AB 20170710 flat_dark02f10_loco_AB.fits 07/10/17/17:07:08 1499706428.0
+TILT 20170710 fp_fp02a203_tilt.fits 07/10/17/17:25:15 1499705515.0
+FLAT_C 20170710 dark_flat02f10_flat_C.fits 07/10/17/17:03:50 1499706230.0
+@WAVE 20170710 spirou_wave_ini3.fits 07/10/17/17:03:50 1499706230.0@
+\end{lstlisting}
+
+\item run the extraction files on the `hcone\_dark', `dark\_hcone', `hcone\_hcone', `dark\_dark\_AHC1', `hctwo\_dark', `dark\_hctwo', `hctwo-hctwo', `dark\_dark\_AHC2' and `fp\_fp'  files:
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouAB.py 20170710 @hcone_dark02c61.fits  hcone_dark03c61.fits  hcone_dark04c61.fits  hcone_dark05c61.fits  hcone_dark06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 @dark_hcone02c61.fits  dark_hcone03c61.fits  dark_hcone04c61.fits  dark_hcone05c61.fits  dark_hcone06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouAB.py 20170710 @hcone_hcone02c61.fits  hcone_hcone03c61.fits  hcone_hcone04c61.fits  hcone_hcone05c61.fits  hcone_hcone06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 @hcone_hcone02c61.fits  hcone_hcone03c61.fits  hcone_hcone04c61.fits  hcone_hcone05c61.fits  hcone_hcone06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouAB.py 20170710 @dark_dark_AHC102d61.fits  dark_dark_AHC103d61.fits  dark_dark_AHC104d61.fits  dark_dark_AHC105d61.fits  dark_dark_AHC106d61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 @dark_dark_AHC102d61.fits  dark_dark_AHC103d61.fits  dark_dark_AHC104d61.fits  dark_dark_AHC105d61.fits  dark_dark_AHC106d61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouAB.py 20170710 @hctwo_dark02c61.fits  hctwo_dark03c61.fits  hctwo_dark04c61.fits  hctwo_dark05c61.fits  hctwo_dark06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 @hctwo_dark02c61.fits  hctwo_dark03c61.fits  hctwo_dark04c61.fits  hctwo_dark05c61.fits  hctwo_dark06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouAB.py 20170710 @dark_hctwo02c61.fits  dark_hctwo03c61.fits  dark_hctwo04c61.fits  dark_hctwo05c61.fits  dark_hctwo06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 @dark_hctwo02c61.fits  dark_hctwo03c61.fits  dark_hctwo04c61.fits  dark_hctwo05c61.fits  dark_hctwo06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouAB.py 20170710 @hctwo-hctwo02c61.fits  hctwo-hctwo03c61.fits  hctwo-hctwo04c61.fits  hctwo-hctwo05c61.fits  hctwo-hctwo06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 @hctwo-hctwo02c61.fits  hctwo-hctwo03c61.fits  hctwo-hctwo04c61.fits  hctwo-hctwo05c61.fits  hctwo-hctwo06c61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouAB.py 20170710 @dark_dark_AHC202d61.fits  dark_dark_AHC203d61.fits  dark_dark_AHC204d61.fits  dark_dark_AHC205d61.fits  dark_dark_AHC206d61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 @dark_dark_AHC202d61.fits  dark_dark_AHC203d61.fits  dark_dark_AHC204d61.fits  dark_dark_AHC205d61.fits  dark_dark_AHC206d61.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouAB.py 20170710 @fp_fp02a203.fits fp_fp03a203.fits fp_fp04a203.fits
+\end{lstlisting}  
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 @fp_fp02a203.fits fp_fp03a203.fits fp_fp04a203.fits
+\end{lstlisting}  
+
+\item run the drift calculation on the `fp\_fp' files:
+\begin{lstlisting}[style=bashstyle]
+@DRS_spirou -m cal_DRIFT_RAW_spirou.py 20170710 @fp_fp02a203.fits fp_fp03a203.fits fp_fp04a203.fits
+\end{lstlisting}  
+
+
+\end{enumerate}

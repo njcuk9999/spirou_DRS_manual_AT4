@@ -1,0 +1,62 @@
+\BOOKMARK [0][-]{chapter*.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section*.2}{Notes}{chapter*.1}% 2
+\BOOKMARK [0][-]{chapter.1}{Pre-Installation}{}% 3
+\BOOKMARK [1][-]{section.1.1}{Prerequisites}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Adding variables to the system environment}{chapter.1}% 5
+\BOOKMARK [2][-]{subsection.1.2.1}{Using a setup script}{section.1.2}% 6
+\BOOKMARK [2][-]{subsection.1.2.2}{Adding variables to .bashrc file}{section.1.2}% 7
+\BOOKMARK [1][-]{section.1.3}{Setup up and check file structure}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.4}{Fortran and C back-end installation}{chapter.1}% 9
+\BOOKMARK [2][-]{subsection.1.4.1}{Checking Fortran/C back-ends}{section.1.4}% 10
+\BOOKMARK [2][-]{subsection.1.4.2}{Installing GSL back-ends without root access}{section.1.4}% 11
+\BOOKMARK [1][-]{section.1.5}{Install isolated version of Python}{chapter.1}% 12
+\BOOKMARK [2][-]{subsection.1.5.1}{Installing Miniconda}{section.1.5}% 13
+\BOOKMARK [1][-]{section.1.6}{Install required python modules}{chapter.1}% 14
+\BOOKMARK [2][-]{subsection.1.6.1}{Installation}{section.1.6}% 15
+\BOOKMARK [2][-]{subsection.1.6.2}{Checking installed module versions}{section.1.6}% 16
+\BOOKMARK [0][-]{chapter.2}{Installation}{}% 17
+\BOOKMARK [1][-]{section.2.1}{Activate environment}{chapter.2}% 18
+\BOOKMARK [1][-]{section.2.2}{Downloading the install scripts}{chapter.2}% 19
+\BOOKMARK [1][-]{section.2.3}{Running installation scripts}{chapter.2}% 20
+\BOOKMARK [1][-]{section.2.4}{Updating local version}{chapter.2}% 21
+\BOOKMARK [1][-]{section.2.5}{Adding new files to the shared DRS}{chapter.2}% 22
+\BOOKMARK [2][-]{subsection.2.5.1}{Useful links about subversion}{section.2.5}% 23
+\BOOKMARK [0][-]{chapter.3}{Using the DRS}{}% 24
+\BOOKMARK [1][-]{section.3.1}{Running the code}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.2}{Working example of the code for SPIRou}{chapter.3}% 26
+\BOOKMARK [0][-]{chapter.4}{Data Architecture}{}% 27
+\BOOKMARK [1][-]{section.4.1}{Installed file structure}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.2}{The \173INSTALL\137ROOT\175 directory}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.2.1}{The bin directory}{section.4.2}% 30
+\BOOKMARK [2][-]{subsection.4.2.2}{The DRS\137SPIROU directory}{section.4.2}% 31
+\BOOKMARK [1][-]{section.4.3}{The \173DATA\137ROOT\175 directory}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.3.1}{The raw and reduced data directories}{section.4.3}% 33
+\BOOKMARK [1][-]{section.4.4}{The calibration database directory}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.5}{The configuration files}{chapter.4}% 35
+\BOOKMARK [0][-]{chapter.5}{The Modules}{}% 36
+\BOOKMARK [1][-]{section.5.1}{The Module directory}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.2}{spirouBACK}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.3}{spirouCDB}{chapter.5}% 39
+\BOOKMARK [1][-]{section.5.4}{spirouEXTOR}{chapter.5}% 40
+\BOOKMARK [1][-]{section.5.5}{spirouFITS}{chapter.5}% 41
+\BOOKMARK [1][-]{section.5.6}{spirouLOCOR}{chapter.5}% 42
+\BOOKMARK [1][-]{section.5.7}{spirouRV}{chapter.5}% 43
+\BOOKMARK [1][-]{section.5.8}{spirouVISU}{chapter.5}% 44
+\BOOKMARK [0][-]{chapter.6}{The Recipes}{}% 45
+\BOOKMARK [1][-]{section.6.1}{The Recipe directory}{chapter.6}% 46
+\BOOKMARK [1][-]{section.6.2}{Currently used}{chapter.6}% 47
+\BOOKMARK [2][-]{subsection.6.2.1}{cal\137DARK\137spirou}{section.6.2}% 48
+\BOOKMARK [2][-]{subsection.6.2.2}{cal\137loc\137RAW\137spirou}{section.6.2}% 49
+\BOOKMARK [2][-]{subsection.6.2.3}{cal\137SLIT\137spirou}{section.6.2}% 50
+\BOOKMARK [2][-]{subsection.6.2.4}{cal\137SLIT\137spirou}{section.6.2}% 51
+\BOOKMARK [2][-]{subsection.6.2.5}{cal\137FF\137RAW\137spirou}{section.6.2}% 52
+\BOOKMARK [2][-]{subsection.6.2.6}{cal\137extract\137RAW\137spirou}{section.6.2}% 53
+\BOOKMARK [2][-]{subsection.6.2.7}{cal\137DRIFT\137RAW\137spirou}{section.6.2}% 54
+\BOOKMARK [1][-]{section.6.3}{Currently unused}{chapter.6}% 55
+\BOOKMARK [2][-]{subsection.6.3.1}{cal\137loc\137ONE\137spirou}{section.6.3}% 56
+\BOOKMARK [2][-]{subsection.6.3.2}{cal\137FF\137spirou}{section.6.3}% 57
+\BOOKMARK [2][-]{subsection.6.3.3}{cal\137WAVE\137spirou}{section.6.3}% 58
+\BOOKMARK [2][-]{subsection.6.3.4}{cal\137FP\137spirou}{section.6.3}% 59
+\BOOKMARK [2][-]{subsection.6.3.5}{cal\137FF\137spirou.py}{section.6.3}% 60
+\BOOKMARK [0][-]{chapter.7}{Quality Control}{}% 61
+\BOOKMARK [0][-]{appendix.A}{Source code for environmental setup file}{}% 62
