@@ -19,4 +19,14 @@
 #1}
 \end{shaded}
 }
+
+
+
+
+% ----------------------------------------------------------------------
+% centered hbox
+% ----------------------------------------------------------------------
+%% better: (general command to vertically center horizontal material)
+\newcommand*{\vcenteredhbox}[1]{\begingroup
+\setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}
  

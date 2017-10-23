@@ -3,7 +3,7 @@
 
 \documentclass[
 a4paper, % Stock and paper size.
-11pt, % Type size.
+10pt, % Type size.
 % article,
 % oneside, 
 onecolumn, % Only one column of text on a page.
@@ -47,14 +47,14 @@ openany, % A chapter may start on either a recto or verso page.
 %%% SECTIONAL DIVISIONS
 %%%------------------------------------------------------------------------------
 
-\maxsecnumdepth{subsection} % Subsections (and higher) are numbered
-\setsecnumdepth{subsection}
+\maxsecnumdepth{subsubsection} % Subsections (and higher) are numbered
+\setsecnumdepth{subsubsection}
 
 \makeatletter %
 \makechapterstyle{standard}{
   \setlength{\beforechapskip}{0\baselineskip}
   \setlength{\midchapskip}{1\baselineskip}
-  \setlength{\afterchapskip}{8\baselineskip}
+  \setlength{\afterchapskip}{4\baselineskip}
   \renewcommand{\chapterheadstart}{\vspace*{\beforechapskip}}
   \renewcommand{\chapnamefont}{\centering\normalfont\Large}
   \renewcommand{\printchaptername}{\chapnamefont \@chapapp}
@@ -154,7 +154,12 @@ openany, % A chapter may start on either a recto or verso page.
 \maxtocdepth{subsection} % Only parts, chapters and sections in the table of contents
 \settocdepth{subsection}
 
+% \maxtocdepth{section} % Only parts, chapters and sections in the table of contents
+% \settocdepth{section}
+
 \AtEndDocument{\addtocontents{toc}{\par}} % Add a \par to the end of the TOC
+
+\renewcommand*{\cftappendixname}{Appendix\space}
 
 %%% INTERNAL HYPERLINKS
 %%%-------------------------------------------------------------------------------
@@ -230,17 +235,19 @@ This is the guide to installing, running, and using the SPIRou DRS.
 % Chapter 4: Data Architecture
 \input{Chapters/Data_Architecture}
 
-% Chapter 5: The Modules
-\input{Chapters/The_Modules}
-
-% Chapter 6: The Recipes
+% Chapter 5: The Recipes
 \input{Chapters/The_recipes}
+
+% Chapter 6: The Modules
+\input{Chapters/The_Modules}
 
 %Chapeter 6: Quality Control
 \input{Chapters/Quality_Control}
 
 % Appendix
 \appendix
+
+% \addtocontents{toc}{\setlength\cftchapternumwidth{1em}}
 
 % Appendix A: env_setup.sh
 \input{Chapters/appendix_env_setup_sh}
