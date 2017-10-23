@@ -69,13 +69,19 @@ These are symbolically linked under \definevariable{INSTALL\_ROOT}/bin. A list o
 % ----------------------------------------------------------------------------------
 \clearpage
 \newpage
-\section{cal\_DARK\_spirou}
+\section{The cal\_DARK\_spirou recipe}
 % ----------------------------------------------------------------------------------
 \label{section:cal_DARK_spirou}
 
 Dark with short exposure time (~5min, to be defined during AT-4) to check if read-out noise, dark current and hot pixel mask are consistent with the ones obtained during technical night. Quality control is done automaticaly by the pipeline (see Section \ref{section:qc_cal_DARK_spirou}). \\
 
 \TODO{Once writen up the new version update this description} 
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item dark\_dark
+\end{itemize}
+
 
 \subsection{Summary of procedure}
 \begin{enumerate}
@@ -168,13 +174,20 @@ DRS_spirou -m cal_DARK_spirou.py 20170710 dark_dark02d406.fits
 % ----------------------------------------------------------------------------------
 \clearpage
 \newpage
-\section{cal\_loc\_RAW\_spirou}
+\section{The cal\_loc\_RAW\_spirou recipe}
 \label{section:cal_loc_RAW_spirou}
 % ----------------------------------------------------------------------------------
 
 Locates the orders on the `dark\_flat' or `flat\_dark' images.\\
 
 \TODO{Once writen up the new version update this description}
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item dark\_flat
+	\item flat\_dark
+\end{itemize}
+
 
 \subsection{Summary of procedure}
 \begin{enumerate}
@@ -215,7 +228,7 @@ DRS_spirou -m cal_loc_RAW_spirou.py 20170710 dark_flat02f10.fits dark_flat03f10.
 
 ||DRS  SPIROU   v   (interactive mode)
 16:15:58.5 -   || *****************************************
-16:15:58.5 -   || * SPIROU @(#) Geneva Observatory ()
+16:15:58.5 -   || * SPIROU \@(#) Geneva Observatory ()
 16:15:58.5 -   || *****************************************
 16:15:58.5 -   ||(dir_data_raw)      DRS_DATA_RAW=/scratch/Projects/SPIRou_Pipeline/data/raw/
 16:15:58.5 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/scratch/Projects/SPIRou_Pipeline/data/reduced/
@@ -391,18 +404,22 @@ DRS_spirou -m cal_loc_RAW_spirou.py 20170710 dark_flat02f10.fits dark_flat03f10.
 \end{center}
 \end{figure}
 
-
-
 % ----------------------------------------------------------------------------------
 \clearpage
 \newpage
-\section{cal\_SLIT\_spirou}
+\section{The cal\_SLIT\_spirou recipe}
 \label{section:cal_SLIT_spirou}
 % ----------------------------------------------------------------------------------
 
-Finds the tilt of the orders. \\
+Fabry-Perot exposures in which the three fibres are simultaneously fed by light from the Fabry-Perot filter. Each exposure is used to build the slit orientation. Finds the tilt of the orders. \\
 
 \TODO{Once writen up the new version update this description}
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item fp\_fp
+\end{itemize}
+
 
 \subsection{Summary of procedure}
 \begin{enumerate}
@@ -433,7 +450,7 @@ DRS_spirou -m cal_SLIT_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits fp_f
 
 ||DRS  SPIROU   v   (interactive mode)
 16:26:55.3 -   || *****************************************
-16:26:55.3 -   || * SPIROU @(#) Geneva Observatory ()
+16:26:55.3 -   || * SPIROU \@(#) Geneva Observatory ()
 16:26:55.3 -   || *****************************************
 16:26:55.3 -   ||(dir_data_raw)      DRS_DATA_RAW=/scratch/Projects/SPIRou_Pipeline/data/raw/
 16:26:55.3 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/scratch/Projects/SPIRou_Pipeline/data/reduced/
@@ -511,8 +528,8 @@ DRS_spirou -m cal_SLIT_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits fp_f
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=.59\textwidth]{figures/cal_SLIT_spirou_1.pdf}
-\includegraphics[width=.29\textwidth]{figures/cal_SLIT_spirou_1a.pdf}
+\vcenteredhbox{\includegraphics[width=.49\textwidth]{figures/cal_SLIT_spirou_1.pdf}}
+\vcenteredhbox{\includegraphics[width=.49\textwidth]{figures/cal_SLIT_spirou_1a.pdf}}
 \caption{Left: The full `fp\_fp' image. Right: Zoom in on a section of the `fp\_fp' image showing the tilt.\label{figure:cal_slit_spirou_1}}
 \end{center}
 \end{figure}
@@ -527,13 +544,19 @@ DRS_spirou -m cal_SLIT_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits fp_f
 % ----------------------------------------------------------------------------------
 \clearpage
 \newpage
-\section{cal\_FF\_RAW\_spirou}
+\section{The cal\_FF\_RAW\_spirou recipe}
 \label{section:cal_FF_RAW_spirou}
 % ----------------------------------------------------------------------------------
 
 Creates the flat fields. \\ 
 
 \TODO{Once writen up the new version update this description} \\
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item dark\_flat
+	\item flat\_dark
+\end{itemize}
 
 \noindent \textcolor{red}{Note: if using same files in Section \ref{section:working_example} you will get an error message when running the file}.
 \noindent To solve this open the `master\_calib\_SPIROU.txt' file located in \textcolor{blue}{\{DATA\_ROOT\_CALIB\}}. Edit the unix date in the line that begins `TILT' so that it is less than the unix date on rwos `ORDER\_PROFIL\_AB' (i.e. change it from 1499707515.0 to 1499705515.0).
@@ -594,7 +617,7 @@ dark_flat04f10.fits dark_flat05f10.fits dark_flat06f10.fits
 
 ||DRS  SPIROU   v   (interactive mode)
 16:49:40.5 -   || *****************************************
-16:49:40.5 -   || * SPIROU @(#) Geneva Observatory ()
+16:49:40.5 -   || * SPIROU \@(#) Geneva Observatory ()
 16:49:40.5 -   || *****************************************
 16:49:40.5 -   ||(dir_data_raw)      DRS_DATA_RAW=/scratch/Projects/SPIRou_Pipeline/data/raw/
 16:49:40.5 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/scratch/Projects/SPIRou_Pipeline/data/reduced/
@@ -669,8 +692,8 @@ dark_flat04f10.fits dark_flat05f10.fits dark_flat06f10.fits
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=.59\textwidth]{figures/cal_FF_RAW_spirou_1.pdf}
-\includegraphics[width=.29\textwidth]{figures/cal_FF_RAW_spirou_1.pdf}
+\vcenteredhbox{\includegraphics[width=.49\textwidth]{figures/cal_FF_RAW_spirou_1.pdf}}
+\vcenteredhbox{\includegraphics[width=.49\textwidth]{figures/cal_FF_RAW_spirou_1a.pdf}}
 \caption{Left: the full processed image with one order fit highlighted. Right: Zoom in of the highlighted order fit. \label{figure:cal_FF_RAW_spirou_1}}
 \end{center}
 \end{figure}
@@ -692,83 +715,313 @@ dark_flat04f10.fits dark_flat05f10.fits dark_flat06f10.fits
 % ----------------------------------------------------------------------------------
 \clearpage
 \newpage
-\section{cal\_extract\_RAW\_spirou}
+\section{The cal\_extract\_RAW\_spirou recipe}
 \label{section:cal_extract_RAW_spirou}
 % ----------------------------------------------------------------------------------
 
-Description here. \\ 
+Extracts orders for specific fibers and files. \\
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item fp\_fp
+	\item hcone\_dark
+	\item dark\_hcone
+	\item hcone\_hcone
+	\item dark\_dark\_AHC1
+	\item dark\_hctwo
+	\item hctwo\_hctwo
+	\item dark\_dark\_AHC2
+\end{itemize}
+
 \TODO{Once writen up the new version update this description}
 
-% \subsection{Summary of procedure}
-% \begin{enumerate}
-% \item 
-% \end{enumerate}
+\subsection{Summary of procedure}
+\begin{enumerate}
+\item adds all files together
+\item corrects for darks
+\item resizes the image
+\item checks for saturation
+\item possible background subtraction?
+\item extracts orders
+	\begin{itemize}
+		\item without tilt/weight fortran
+		\item without tilt/weight python
+		\item with tilt (no weight)
+		\item with tilt and weight
+		\item with weight (no tilt)
+	\end{itemize}
+\item saves extraction with weight (no tilt) to e2ds file
+\end{enumerate}
 
-% \subsection{Running cal\_extract\_RAW\_spirou}
+\subsection{Running cal\_extract\_RAW\_spirou}
 
-% To run cal\_extract\_RAW\_spirou type:
-% \begin{lstlisting}[language=bash, style=bashstyle]
-% cal_extract_RAW_spirou.py  night_repository  filename
-% \end{lstlisting}
+To run cal\_extract\_RAW\_spirou on fiber=AB:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_extract_RAW_spirouAB.py  night_repository  filenames
+\end{lstlisting}
+To run cal\_extract\_RAW\_spirou on fiber=C:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_extract_RAW_spirouC.py  night_repository  filenames
+\end{lstlisting}
 
-% \subsection{Example working run}
+Note: Filenames must start with `fp\_fp', `hcone\_dark', `dark\_hcone', `hcone\_hcone', `dark\_dark\_AHC1', `dark\_hctwo', `hctwo\_hctwo', or `dark\_dark\_AHC2'.
 
-% An example run where everything worked is below:
 
-% \begin{lstlisting}[style=text]
-% DRS_spirou -m cal_ 20170710 .fits
+\subsection{Example working run}
 
-% \end{lstlisting}
+An example run where everything worked is below:
 
-% \subsection{Interactive mode}
+\begin{lstlisting}[style=text]
+DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 fp_fp02a203.fits fp_fp03a203.fits
+fp_fp04a203.fits
 
-% \begin{figure}
-% \begin{center}
-% \includegraphics[width=.8\textwidth]{figures/cal_}
-% \caption{\label{figure:cal_}}
-% \end{center}
-% \end{figure}
+||DRS  SPIROU   v   (interactive mode)
+17:38:04.5 -   || *****************************************
+17:38:04.5 -   || * SPIROU \@(#) Geneva Observatory ()
+17:38:04.5 -   || *****************************************
+17:38:04.5 -   ||(dir_data_raw)      DRS_DATA_RAW=/scratch/Projects/SPIRou_Pipeline/data/raw/
+17:38:04.5 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/scratch/Projects/SPIRou_Pipeline/data/reduced/
+17:38:04.5 -   ||(dir_drs_config)    DRS_CONFIG=/scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/
+17:38:04.5 -   ||(dir_calib_db)      DRS_CALIB_DB=/scratch/Projects/SPIRou_Pipeline/data/calibDB
+17:38:04.5 -   ||(dir_data_msg)      DRS_DATA_MSG=/scratch/Projects/SPIRou_Pipeline/data/msg/
+17:38:04.5 -   ||(print_log)         DRS_LOG=1         %(0: minimum stdin-out logs)
+17:38:04.5 -   ||(plot_graph)        DRS_PLOT=NONE            %(def/undef/trigger)
+17:38:04.5 -   ||(used_date)         DRS_USED_DATE=undefined
+17:38:04.5 -   ||(working_dir)       DRS_DATA_WORKING=/scratch/Projects/SPIRou_Pipeline/data/tmp/
+17:38:04.5 -   ||                    DRS_INTERACTIVE is  set
+17:38:04.5 -   |-c:+[...]|Now running : -c on file(s):  fp_fp02a203.fits fp_fp03a203.fits
+17:38:04.5 -   |-c:+[...]|On directory /scratch/Projects/SPIRou_Pipeline/data/raw/20170710
+17:38:04.5 -   |-c:+[...]|ICDP loaded from: /scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/hadmrICDP_SPIROU.py
+17:38:04.5 - * |-c:+[...]|Now processing Image TYPE: UNKNOWN  with -c recipe
+17:38:04.6 -   |-c:+[...]|Calibration file: fp_fp02a203_tilt.fits already exists - not copied
+17:38:04.6 -   |-c:+[...]|Calibration file: dark_flat02f10_loco_C.fits already exists - not copied
+17:38:04.6 -   |-c:+[...]|Calibration file: flat_dark02f10_order_profil_AB.fits already exists - not copied
+17:38:04.6 -   |-c:+[...]|Calibration file: spirou_wave_ini3.fits already exists - not copied
+17:38:04.7 -   |-c:+[...]|Calibration file: dark_dark02d406.fits already exists - not copied
+17:38:04.7 -   |-c:+[...]|Calibration file: dark_flat02f10_flat_C.fits already exists - not copied
+17:38:04.7 -   |-c:+[...]|Calibration file: dark_flat02f10_order_profil_C.fits already exists - not copied
+17:38:04.7 -   |-c:+[...]|Calibration file: flat_dark02f10_loco_AB.fits already exists - not copied
+17:38:04.7 -   |-c:+[...]|Reading File: /scratch/Projects/SPIRou_Pipeline/data/raw/20170710/fp_fp02a203.fits
+17:38:04.7 -   |-c:+[...]|Image 2048x2048 loaded
+17:38:04.8 - * |-c:+[...]|Adding frames
+17:38:04.8 -   |-c:+[...]|Reading File: /scratch/Projects/SPIRou_Pipeline/data/raw/20170710/fp_fp03a203.fits
+17:38:04.9 -   |-c:+[...]|Doing Dark Correction using /scratch/Projects/SPIRou_Pipeline/data/calibDB/dark_dark02d406.fits
+17:38:05.1 -   |-c:+[...]|Image format changed to 2035x1930
+17:38:05.6 - * |-c:+[...]|Nb pixels morts = 568485 / 14.47 %
+17:38:05.6 - * |-c:+[...]|Maximum average flux/pixel in the spectrum: 110446.0[ADU]
+17:38:05.6 -   |-c:+[...]|Reading tilt slit 
+17:38:05.7 -   |-c:+[...]|Reading wavelength solution 
+17:38:05.7 -   |-c:+[...]C|Reading localization parameters of Fiber C
+17:38:05.7 -   |-c:+[...]C|Reading order profil of Fiber C
+17:38:07.1 -   |-c:+[...]|On fiber C  order  0: S/N= 712.0  
+17:38:08.9 -   |-c:+[...]|On fiber C  order  1: S/N= 780.2  
+17:38:10.3 -   |-c:+[...]|On fiber C  order  2: S/N= 726.0  
+17:38:12.0 -   |-c:+[...]|On fiber C  order  3: S/N= 700.3  
+17:38:13.5 -   |-c:+[...]|On fiber C  order  4: S/N= 702.3  
+17:38:14.9 -   |-c:+[...]|On fiber C  order  5: S/N= 740.0  
+17:38:16.3 -   |-c:+[...]|On fiber C  order  6: S/N= 773.4  
+17:38:17.7 -   |-c:+[...]|On fiber C  order  7: S/N= 758.5  
+17:38:19.2 -   |-c:+[...]|On fiber C  order  8: S/N= 752.0  
+17:38:20.7 -   |-c:+[...]|On fiber C  order  9: S/N= 763.0  
+17:38:22.1 -   |-c:+[...]|On fiber C  order 10: S/N= 794.5  
+17:38:23.5 -   |-c:+[...]|On fiber C  order 11: S/N= 671.5  
+17:38:25.2 -   |-c:+[...]|On fiber C  order 12: S/N= 871.4  
+17:38:26.7 -   |-c:+[...]|On fiber C  order 13: S/N= 883.0  
+17:38:28.4 -   |-c:+[...]|On fiber C  order 14: S/N= 1070.7  
+17:38:29.9 -   |-c:+[...]|On fiber C  order 15: S/N= 954.4  
+17:38:31.6 -   |-c:+[...]|On fiber C  order 16: S/N= 909.4
+17:38:33.3 -   |-c:+[...]|On fiber C  order 17: S/N= 935.8
+17:38:34.9 -   |-c:+[...]|On fiber C  order 18: S/N= 905.3
+17:38:36.4 -   |-c:+[...]|On fiber C  order 19: S/N= 888.5
+17:38:37.8 -   |-c:+[...]|On fiber C  order 20: S/N= 896.3
+17:38:39.6 -   |-c:+[...]|On fiber C  order 21: S/N= 888.1
+17:38:41.3 -   |-c:+[...]|On fiber C  order 22: S/N= 848.4
+17:38:43.0 -   |-c:+[...]|On fiber C  order 23: S/N= 860.3
+17:38:44.7 -   |-c:+[...]|On fiber C  order 24: S/N= 817.9
+17:38:46.1 -   |-c:+[...]|On fiber C  order 25: S/N= 813.0
+17:38:47.5 -   |-c:+[...]|On fiber C  order 26: S/N= 792.2
+17:38:49.0 -   |-c:+[...]|On fiber C  order 27: S/N= 836.9
+17:38:50.7 -   |-c:+[...]|On fiber C  order 28: S/N= 882.4
+17:38:52.3 -   |-c:+[...]|On fiber C  order 29: S/N= 837.6
+17:38:53.7 -   |-c:+[...]|On fiber C  order 30: S/N= 785.7
+17:38:55.1 -   |-c:+[...]|On fiber C  order 31: S/N= 434.9
+17:38:56.5 -   |-c:+[...]|On fiber C  order 32: S/N= 376.3
+17:38:58.0 -   |-c:+[...]|On fiber C  order 33: S/N= 614.3
+17:38:59.7 -   |-c:+[...]|On fiber C  order 34: S/N= 523.1
+17:39:01.2 -   |-c:+[...]|On fiber C  order 35: S/N= 343.2
+17:39:01.5 -   |-c:+[...]|Saving E2DS spectrum of Fiber C in fp_fp02a203_e2ds_C.fits
+17:39:02.1 - * |-c:+[...]|Recipe -c has been  successfully completed
+\end{lstlisting}
+
+\subsection{Interactive mode}
+
+\begin{figure}
+\begin{center}
+\vcenteredhbox{\includegraphics[width=.49\textwidth]{figures/cal_extract_RAW_spirou_1.pdf}}
+\vcenteredhbox{\includegraphics[width=.49\textwidth]{figures/cal_extract_RAW_spirou_1a.pdf}}
+\caption{Left: The full process image. Right: Zoom in on the highlighted spectral order fit. \label{figure:cal_extract_RAW_spirou_1}}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_extract_RAW_spirou_2.pdf}
+\caption{The extract spectrum from the hightlighted spectral order in \protect\ref{figure:cal_extract_RAW_spirou_1}. \label{figure:cal_extract_RAW_spirou_2}}
+\end{center}
+\end{figure}
 
 % ----------------------------------------------------------------------------------
 \clearpage
 \newpage
-\section{cal\_DRIFT\_RAW\_spirou}
+\section{The cal\_DRIFT\_RAW\_spirou recipe}
 \label{section:cal_DRIFT_RAW_spirou}
 % ----------------------------------------------------------------------------------
 
-Description here. \\
+Calculates relative (radial velocity) drift between all files and individual files. \\
 
 \TODO{Once writen up the new version update this description}
 
-% \subsection{Summary of procedure}
-% \begin{enumerate}
-% \item 
-% \end{enumerate}
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item fp\_fp
+\end{itemize}
 
-% \subsection{Running cal\_DRIFT\_RAW\_spirou}
+\subsection{Summary of procedure}
+\begin{enumerate}
+	\item first file is reference image
+	\item resizes the image
+	\item extracts with weight (no tilt)
+	\item loops around all other `fp\_fp' files in directory
+	\item calculates photon noise uncertainty and estimated RV uncertainty on spectrum
+	\begin{itemize}
+		\item uses wave file
+	\end{itemize}
+	\item calculates RV drift and mean RV drift between reference (mean of files) and other `fp\_fp' files
+	\item saves drift values to file
+\end{enumerate}
 
-% To run cal\_DRIFT\_RAW\_spirou type:
-% \begin{lstlisting}[language=bash, style=bashstyle]
-% cal_DRIFT_RAW_spirou.py  night_repository  filename
-% \end{lstlisting}
+\subsection{Running cal\_DRIFT\_RAW\_spirou}
 
-% \subsection{Example working run}
+To run cal\_DRIFT\_RAW\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_DRIFT_RAW_spirou.py  night_repository  filenames
+\end{lstlisting}
 
-% An example run where everything worked is below:
+Note: Filenames must start with `fp\_fp'.
 
-% \begin{lstlisting}[style=text]
-% DRS_spirou -m cal_ 20170710 .fits
+\subsection{Example working run}
 
-% \end{lstlisting}
+An example run where everything worked is below:
 
-% \subsection{Interactive mode}
+\begin{lstlisting}[style=text]
+DRS_spirou -m cal_DRIFT_RAW_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits
+fp_fp04a203.fits
 
-% \begin{figure}
-% \begin{center}
-% \includegraphics[width=.8\textwidth]{figures/cal_}
-% \caption{\label{figure:cal_}}
-% \end{center}
-% \end{figure}
+||DRS  SPIROU   v   (interactive mode)
+17:58:26.1 -   || *****************************************
+17:58:26.1 -   || * SPIROU \@(#) Geneva Observatory ()
+17:58:26.1 -   || *****************************************
+17:58:26.1 -   ||(dir_data_raw)      DRS_DATA_RAW=/scratch/Projects/SPIRou_Pipeline/data/raw/
+17:58:26.1 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/scratch/Projects/SPIRou_Pipeline/data/reduced/
+17:58:26.1 -   ||(dir_drs_config)    DRS_CONFIG=/scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/
+17:58:26.1 -   ||(dir_calib_db)      DRS_CALIB_DB=/scratch/Projects/SPIRou_Pipeline/data/calibDB
+17:58:26.1 -   ||(dir_data_msg)      DRS_DATA_MSG=/scratch/Projects/SPIRou_Pipeline/data/msg/
+17:58:26.1 -   ||(print_log)         DRS_LOG=1         %(0: minimum stdin-out logs)
+17:58:26.1 -   ||(plot_graph)        DRS_PLOT=NONE            %(def/undef/trigger)
+17:58:26.1 -   ||(used_date)         DRS_USED_DATE=undefined
+17:58:26.1 -   ||(working_dir)       DRS_DATA_WORKING=/scratch/Projects/SPIRou_Pipeline/data/tmp/
+17:58:26.1 -   ||                    DRS_INTERACTIVE is  set
+17:58:26.1 -   |-c:+[...]|Now running : -c on file(s):  fp_fp02a203.fits fp_fp03a203.fits
+17:58:26.1 -   |-c:+[...]|On directory /scratch/Projects/SPIRou_Pipeline/data/raw/20170710
+17:58:26.1 -   |-c:+[...]|ICDP loaded from: /scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/hadmrICDP_SPIROU.py
+17:58:26.1 - * |-c:+[...]|Now processing Image TYPE: UNKNOWN  with -c recipe
+17:58:26.2 -   |-c:+[...]|Calibration file: fp_fp02a203_tilt.fits already exists - not copied
+17:58:26.2 -   |-c:+[...]|Calibration file: dark_flat02f10_loco_C.fits already exists - not copied
+17:58:26.2 -   |-c:+[...]|Calibration file: flat_dark02f10_order_profil_AB.fits already exists - not copied
+17:58:26.2 -   |-c:+[...]|Calibration file: spirou_wave_ini3.fits already exists - not copied
+17:58:26.3 -   |-c:+[...]|Calibration file: dark_dark02d406.fits already exists - not copied
+17:58:26.3 -   |-c:+[...]|Calibration file: dark_flat02f10_flat_C.fits already exists - not copied
+17:58:26.3 -   |-c:+[...]|Calibration file: dark_flat02f10_order_profil_C.fits already exists - not copied
+17:58:26.3 -   |-c:+[...]|Calibration file: flat_dark02f10_loco_AB.fits already exists - not copied
+17:58:26.3 -   |-c:+[...]|Reading File: /scratch/Projects/SPIRou_Pipeline/data/raw/20170710/fp_fp02a203.fits
+17:58:26.3 -   |-c:+[...]|Image 2048x2048 loaded
+17:58:26.4 -   |-c:+[...]|Doing Dark Correction using /scratch/Projects/SPIRou_Pipeline/data/calibDB/dark_dark02d406.fits
+17:58:26.8 -   |-c:+[...]|Image format changed to 2035x1930
+17:58:27.2 - * |-c:+[...]|Nb pixels morts = 600284 / 15.28 %
+17:58:27.2 -   |-c:+[...]|Reading tilt slit 
+17:58:27.2 -   |-c:+[...]AB|Reading localization parameters of Fiber AB
+17:58:27.3 -   |-c:+[...]AB|Reading order profil of Fiber AB
+17:58:27.3 -   |-c:+[...]|Reading wavelength solution 
+17:58:27.3 -   |-c:+[...]|Extraction Reference file  /scratch/Projects/SPIRou_Pipeline/data/raw/20170710/fp_fp02a203.fits
+17:58:27.4 -   |-c:+[...]|On fiber AB  order  0: S/N= 513.5  
+17:58:27.6 -   |-c:+[...]|On fiber AB  order  1: S/N= 561.6  
+17:58:27.7 -   |-c:+[...]|On fiber AB  order  2: S/N= 525.8  
+17:58:27.9 -   |-c:+[...]|On fiber AB  order  3: S/N= 520.4  
+17:58:28.0 -   |-c:+[...]|On fiber AB  order  4: S/N= 518.1  
+17:58:28.1 -   |-c:+[...]|On fiber AB  order  5: S/N= 549.3  
+17:58:28.3 -   |-c:+[...]|On fiber AB  order  6: S/N= 590.9  
+17:58:28.4 -   |-c:+[...]|On fiber AB  order  7: S/N= 574.5  
+17:58:28.6 -   |-c:+[...]|On fiber AB  order  8: S/N= 582.1  
+17:58:28.7 -   |-c:+[...]|On fiber AB  order  9: S/N= 592.4  
+17:58:28.9 -   |-c:+[...]|On fiber AB  order 10: S/N= 615.4  
+17:58:29.0 -   |-c:+[...]|On fiber AB  order 11: S/N= 525.9  
+17:58:29.2 -   |-c:+[...]|On fiber AB  order 12: S/N= 697.1  
+17:58:29.3 -   |-c:+[...]|On fiber AB  order 13: S/N= 735.1  
+17:58:29.5 -   |-c:+[...]|On fiber AB  order 14: S/N= 920.8  
+17:58:29.6 -   |-c:+[...]|On fiber AB  order 15: S/N= 830.5  
+17:58:29.8 -   |-c:+[...]|On fiber AB  order 16: S/N= 818.3  
+17:58:29.9 -   |-c:+[...]|On fiber AB  order 17: S/N= 840.0  
+17:58:30.1 -   |-c:+[...]|On fiber AB  order 18: S/N= 814.2  
+17:58:30.2 -   |-c:+[...]|On fiber AB  order 19: S/N= 829.1  
+17:58:30.4 -   |-c:+[...]|On fiber AB  order 20: S/N= 836.1  
+17:58:30.5 -   |-c:+[...]|On fiber AB  order 21: S/N= 826.4  
+17:58:30.7 -   |-c:+[...]|On fiber AB  order 22: S/N= 812.6  
+17:58:30.8 -   |-c:+[...]|On fiber AB  order 23: S/N= 828.2
+17:58:31.0 -   |-c:+[...]|On fiber AB  order 24: S/N= 785.1
+17:58:31.1 -   |-c:+[...]|On fiber AB  order 25: S/N= 770.6
+17:58:31.3 -   |-c:+[...]|On fiber AB  order 26: S/N= 743.6
+17:58:31.4 -   |-c:+[...]|On fiber AB  order 27: S/N= 758.9
+17:58:31.6 -   |-c:+[...]|On fiber AB  order 28: S/N= 765.8
+17:58:31.7 -   |-c:+[...]|On fiber AB  order 29: S/N= 685.6
+17:58:31.9 -   |-c:+[...]|On fiber AB  order 30: S/N= 612.8
+17:58:32.0 -   |-c:+[...]|On fiber AB  order 31: S/N= 307.0
+17:58:32.2 -   |-c:+[...]|On fiber AB  order 32: S/N= 255.6
+17:58:32.3 -   |-c:+[...]|On fiber AB  order 33: S/N= 355.5
+17:58:32.5 -   |-c:+[...]|On fiber AB  order 34: S/N= 283.3
+17:58:32.6 -   |-c:+[...]|On fiber AB  order 35: S/N= 149.9
+17:58:32.9 - * |-c:+[...]|On fiber AB estimated RV uncertainty on spectrum is 0.028 m/s
+17:58:32.9 - * |-c:+[...]|Nb fp_fp files found on directory =  2
+17:58:32.9 -   |-c:+[...]|Reading File: /scratch/Projects/SPIRou_Pipeline/data/raw/20170710/fp_fp03a203.fits
+17:58:39.3 -   |-c:+[...]|Time from ref= 0.09 h  - Drift mean= 2.53 m/s - Flux ratio= 0.99 - Nb Cosmics= 1218
+17:58:39.3 -   |-c:+[...]|Reading File: /scratch/Projects/SPIRou_Pipeline/data/raw/20170710/fp_fp04a203.fits
+17:58:45.6 -   |-c:+[...]|Time from ref= 0.18 h  - Drift mean= -10.14 m/s - Flux ratio= 0.98 - Nb Cosmics= 1246
+17:58:45.6 -   |-c:+[...]|Total drift Peak-To-Peak= 12.607 m/s RMS= 5.201 m/s in 0.00 hour
+17:58:45.6 -   |-c:+[...]|Saving drift values of Fiber AB in fp_fp02a203_drift_AB.fits
+17:58:45.8 - * |-c:+[...]|Recipe -c has been  successfully completed
+\end{lstlisting}
+
+\subsection{Interactive mode}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_DRIFT_RAW_spirou_1}
+\caption{Extract FP spectral order. \label{figure:cal_DRIFT_RAW_spirou_1}}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_DRIFT_RAW_spirou_2}
+\caption{Photon noise uncertain against spectral order. \label{figure:cal_DRIFT_RAW_spirou_2}}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_DRIFT_RAW_spirou_3}
+\caption{Time interval against median drift. \label{figure:cal_DRIFT_RAW_spirou_3}}
+\end{center}
+\end{figure}
 
 % ---------------------------------------------------------------
 \clearpage
@@ -778,20 +1031,48 @@ Description here. \\
 
 \subsection{cal\_loc\_ONE\_spirou}
 
-Some text here
+White lamp exposures on fiber science only (A and B), on fiber C only, or on all of them (ABC). These exposures are used for order localisation and order profil (the pipeline will also need a Fabry-Perot exposure for this last point).
+
+\subsubsection{Running cal\_loc\_ONE\_spirou}
+
+To run cal\_loc\_ONE\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_loc_ONE_spirou.py  night_repository  filename
+\end{lstlisting}
+
 
 \subsection{cal\_FF\_spirou}
 
-Some text here
+A sequence of N white lamp exposures where the two fibres are simultaneously illuminated. This sequence is used by the data reduction pipeline for producing a spectral "master flat-field", monitor the ageing of detector (IR detector loose pixels during its life), monitor the fiber transmission, produce localisation and order profil (the pipeline will also need of exposure « Fabry-Perot » for this last point).
+
+\subsubsection{Running cal\_FF\_spirou}
+
+To run cal\_FF\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_FF_spirou.py  night_repository  filename1 filename2 … filenameN
+\end{lstlisting}
+
 
 \subsection{cal\_WAVE\_spirou}
 
-Some text here
+Hollow Cathode lamp exposures in which the three fibres are simultaneously fed by light from the Hollow Cathode lamps. DRS use each exposure to build a wavelength solution. The instrumental drift with respect to the previous calibration frames is measured.
+
+\subsubsection{Running cal\_WAVE\_spirou}
+
+To run cal\_WAVE\_spiroutype:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_WAVE_spirou.py  night_repository  filename
+\end{lstlisting}
+
+
 
 \subsection{cal\_FP\_spirou}
 
-Some text here
+Fabry-Perot exposures in which the three fibres are simultaneously fed by light from the Fabry-Perot filter. Each exposure is used to build a wavelength solution and the slit orientation. The instrumental drift with respect to the previous calibration frames is measured. A « super » wavelength solution will be builded in using Hollow Cathode and Fabry-Perot exposures; Hollow Cathode exposures give an absolute reference and Fabry-Perot exposures provide a signal very regularly spaced  in wavelength.
 
-\subsection{cal\_FF\_spirou.py}
+\subsubsection{Running cal\_FP\_spirou}
 
-Some text here
+To run cal\_FP\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_FP_spirou.py  night_repository  filename
+\end{lstlisting}
