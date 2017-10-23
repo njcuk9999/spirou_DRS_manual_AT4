@@ -44,13 +44,11 @@ If you followed the steps in \ref{section:using_setup_sh} please follow this sec
 
 
 % ---------------------------------------------------------
-\section{Downloading the install scripts}
+\section{Downloading the preparing the install scripts}
 \label{section:downloading_install_Scripts}
 % ---------------------------------------------------------
 
-Minor modifications need to be made to the code to allow a isolated version of GSL to be used. If and only if your GSL is installed to `/opt/gsl/' will the code install correctly with out this modification. \\
-
-\noindent The other steps are as in the original installation procedure. \\
+Minor modifications need to be made to the code to allow a isolated version of GSL to be used. If and only if your GSL is installed to `/opt/gsl/' will the code install correctly with out this modification. The other steps are as in the original installation procedure. \\
 
 \begin{enumerate}
 \item change directory to \definevariable{DIR}
@@ -117,10 +115,11 @@ run installation scripts
 \end{lstlisting}
 
 % ---------------------------------------------------------
-\section{Updating local version}
+\section{Subversion}
 \label{section:how_to_update}
 % ---------------------------------------------------------
 
+\subsection{Updating local version}
 The code currently uses `Subversion' (SVN) to monitor the different versions of the code that is under development. To update a local version of the DRS:
 
 \begin{enumerate}
@@ -151,7 +150,7 @@ You are now ready to work with the latest version.
 
 
 % ---------------------------------------------------------
-\section{Adding new files to the shared DRS}
+\subsection{Adding new files to the shared DRS}
 \label{section:how_to_add}
 % ---------------------------------------------------------
 
