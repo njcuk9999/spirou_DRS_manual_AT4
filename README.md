@@ -100,7 +100,7 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
 ### 5. Work in progress/to do
 
 #### General
-- [ ] Needs someone to read through it
+- [ ] Needs several people to read through it
 
 #### The sections
 - Introduction
@@ -108,16 +108,16 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
     - [x] Notes on syntax
 - Pre-Install
     - [x] prerequisites
-    - [ ] Check C/Fortran codes
+    - [ ] Check C/Fortran codes or just required?
     - [x] GSL for C codes
     - [x] Isolated version of python
     - [x] Required python modules
-    - [ ] Needs trying independently
+    - [ ] Needs trying to verify reproducibility
 - Installation
     - [x] activation
     - [x] downloading + installing
     - [x] updating
-    - [ ] Needs trying independently
+    - [ ] Needs trying to verify reproducibility
 - Using the DRS
     - [x] Running the code
     - [x] Working example of the code
@@ -129,20 +129,20 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
     - [ ] Needs a section on the configuration files
 - The Modules
     - [x] Needs a file tree
-    - [ ] Needs description of spirouBACK
-    - [ ] Needs description of spirouCDB
-    - [ ] Needs description of spirouEXTOR
-    - [ ] Needs description of spirouFITS
-    - [ ] Needs description of spirouLOCOR
-    - [ ] Needs description of spirouRV
-    - [ ] Needs description of spirouVISU
+    - [ ] spirouBACK
+    - [x] spirouCDB
+    - [ ] spirouEXTOR
+    - [ ] spirouFITS
+    - [ ] spirouLOCOR
+    - [ ] spirouRV
+    - [ ] spirouVISU
 - The Recipes
-    - [ ] cal_DARK_spirou
-    - [ ] cal_loc_RAW_spirou
-    - [ ] cal_SLIT_spirou
-    - [ ] cal_FF_RAW_spirou
-    - [ ] cal_extract_RAW_spirou
-    - [ ] cal_DRIFT_RAW_spirou
+    - [x] cal_DARK_spirou
+    - [x] cal_loc_RAW_spirou
+    - [x] cal_SLIT_spirou
+    - [x] cal_FF_RAW_spirou
+    - [x] cal_extract_RAW_spirou
+    - [x] cal_DRIFT_RAW_spirou
 - Quality control
     - [ ] cal_DARK_spirou
     - [ ] cal_loc_RAW_spirou
