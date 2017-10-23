@@ -59,17 +59,339 @@ This contains all the python worker files for the DRS. The file structure is as 
 .6 spirouVISU.py.
 }
 
-\section{spirouBACK}
-spirouBACK.py contains functions to calculate the detector background
-\section{spirouCDB}
-spirouCDB.py: contains functions for the calibrations database (infos for master\_calib.txt, and to coy files in the caliDB directory)
-\section{spirouEXTOR}
-spirouEXTOR.py: contains function for the ordres extraction
-\section{spirouFITS}
-spirouFITS.py: contains functions to read FITS file and copy keywords
-\section{spirouLOCOR}
-spirouLOCOR.py: contains functions for order localization
-\section{spirouRV}
-spirouRV.py: contains functions to compute radial velocity
-\section{spirouVISU}
-spirouVISU.py: contains functions for visualization
+% -----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The spirouBACK module}
+% -----------------------------------------------------------------------------------
+
+Contains functions to calculate the detector background
+
+\begin{lstlisting}[style=pythonstyle]
+@measure_bkgr@(data, order_profile, size, ccdgain, ccdsigdet)
+
+@measure_bkgr2@(data, order_profile, size, ccdgain, ccdsigdet)
+
+@measure_bkgr_FF@(data, size, ccdgain, ccdsigdet)
+
+@measure_bkgr_FF2@(data, size, ccdgain, ccdsigdet, seuil)
+\end{lstlisting}
+
+% -----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The spirouCDB module}
+% -----------------------------------------------------------------------------------
+
+Contains functions for the calibrations database (infos for master\_calib.txt, and to coy files in the caliDB directory)
+
+\subsection{filename2tunix}
+\begin{lstlisting}[style=pythonstyle]
+@filename2tunix@(cfht_name)
+    """
+    Open the fits file "cfht_name" read the header key 'DATEEND' and return
+    it as a unix timestamp
+    
+    :param cfht_name: string, the fits filename and location of file
+    :return tt: float, the unix time of "cfht_name" store in 'DATEEND' 
+    """
+\end{lstlisting}
+
+\noindent Note: Currently not used in code \\
+
+\subsection{filename2tunix2}
+\begin{lstlisting}[style=pythonstyle]
+@filename2tunix2@(cfht_name)
+    """
+    Open the fits file "cfht_name" read the header key 'ACQTIME1' and return
+    it as a unix timestamp
+
+    :param cfht_name: string, the fits filename and location of file
+    :return tt: float, the unix time of "cfht_name" store in 'ACQTIME1'
+    """
+\end{lstlisting}
+
+\subsection{filename2tuni\_old}
+\begin{lstlisting}[style=pythonstyle]
+@filename2tunix_old@(file_name)
+    """
+    Extracts the timestamp information from a filename and converts it to a 
+        unix timestamp
+
+    :param file_name: string, filename toe look for timestamp in, must contain
+                      *.YY-MM-DDThh:mm:ss_*  or *.YY-MM-DDThh:mm:ss.fits
+                      i.e. filename.17-06-12T15:32:42
+                      
+    :return tt: float, the unix time from file_name
+    """
+\end{lstlisting}
+
+\noindent Note: Currently not used in code \\
+
+\subsection{data2tunix}
+\begin{lstlisting}[style=pythonstyle]
+@date2tunix@(argdate)
+    """
+    Converts a string date in format YY-MM-DD into a unix timestamp
+
+    :param argdate: string in form YY-MM-DD
+    
+    :return tt: float, the unix time from argdate
+    """
+\end{lstlisting}
+
+\noindent Note: Is this used? \\
+
+\subsection{update\_master}
+\begin{lstlisting}[style=pythonstyle]
+@update_master@(master_file, night, key, file_name, opt_cmt)
+    """
+    Update calibration database with new row in form:
+
+    {key} {night respoitory} {filename} {human readable time} {unix time}
+    
+    Note calibration database is locked while this function is active
+    Note time comes from file_name so must have header 'ACQTIME1'
+
+    :param master_file: string, the master file to open
+    :param night: string, the night repository in form YYMMDD
+    :param key: string, the key for this database entry (e.g. 'DARK')
+    :param file_name: string, the filename for this database entry
+    :param opt_cmt: string, the program name (for logging)
+    :return None:
+    """
+\end{lstlisting}
+
+\subsection{update\_master\_onlast}
+\begin{lstlisting}[style=pythonstyle]
+@update_master_onlast@(master_file, night, key, file_name, opt_cmt)
+    """
+    Update calibration database with new row in form:
+
+    {key} {night respoitory} {filename} {human readable time} {unix time}
+    
+    Note calibration database is locked while this function is active
+    Note time comes from file_name so must have header 'ACQTIME1'
+
+    :param master_file: string, the master file to open
+    :param night: string, the night repository in form YYMMDD
+    :param key: string, the key for this database entry (e.g. 'DARK')
+    :param file_name: string, the filename for this database entry
+    :param opt_cmt: string, the program name (for logging)
+    :return None:
+    """
+\end{lstlisting}
+
+\noindent Note: exactly the same as update\_master? \\
+
+\subsection{get\_master}
+\begin{lstlisting}[style=pythonstyle]
+@get_master@(master_file, max_time, opt_cmt)
+    """
+    Gets the latest entries (less than max_time) for all unique keys 
+        (if multiple keys exist latest less than max_time is used)
+        
+    calibration database must be in the form
+    
+    {key} {night respoitory} {filename} {human readable time} {unix time}
+    
+    :param master_file: string, the calibration database file
+    :param max_time: float, the unix time to use as the latest date than can be
+                     used for calibration files
+    :param opt_cmt: string, the program name (for logging)
+    :return C_db: dictionary, dictionary database containing key value pairs
+        
+                where the C_db[key] = [night repository, calibration filename]
+    """
+\end{lstlisting}
+
+\subsection{get\_early\_last\_master}
+\begin{lstlisting}[style=pythonstyle]
+@get_early_last_master@(master_file, opt_cmt)
+    """
+    Gets the earliest and latest entries for all unique keys
+        (if multiple keys exist earliest and latest are used)
+
+    calibration database must be in the form
+
+    {key} {night respoitory} {filename} {human readable time} {unix time}
+
+    :param master_file: string, the calibration database file
+    :param opt_cmt: string, the program name (for logging)
+    
+    :return C_db_early: dictionary, dictionary database containing key value
+                        pairs for the earliest entry of each key
+    :return C_db_last: dictionary, dictionary database containing key value
+                        pairs for the latest entry of each key
+
+                where the C_db[key] = [night repository, calibration filename]
+    """
+\end{lstlisting}
+
+\subsection{cp\_db\_files}
+\begin{lstlisting}[style=pythonstyle]
+@cp_db_files@(calib_db_dir, reduc_dir, db_dict, opt_cmt)
+    """
+    Copies the calibration file if it doesn't already exist in the
+        reduced directory
+
+    :param calib_db_dir: string, the calibration database directory
+    :param reduc_dir: string, the reduced directory
+    :param db_dict: dictionary, the calibration database dictionary
+    :param opt_cmt: string, the program name (for logging)
+
+    :return None:
+    """
+\end{lstlisting}
+
+\subsection{put\_files}
+\begin{lstlisting}[style=pythonstyle]
+@put_file@(calib_db_dir, file, opt_cmt)
+    """
+    Put a calibration file in the calibration database directory
+    
+    :param calib_db_dir: string, the calibration directory 
+    :param file: string, the calibration file to put in calibration directory
+    :param opt_cmt: string, the program name (for logging)
+    
+    :return None: 
+    """
+\end{lstlisting}
+
+% -----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The spirouEXTOR module}
+% -----------------------------------------------------------------------------------
+
+Contains function for the ordres extraction
+
+\begin{lstlisting}[style=pythonstyle]
+readkeyloco(fitsfilename, kw, nbo, nbc)
+
+@cosmic_filter@(spe, window_size=128, sigma_clip=4.5)
+
+@extract0@(data, pos, sig, plage, ccdgain)
+
+@extract_weigth@(data, pos, sig, plage, order_profil, ccdgain, sigdet)
+
+@extract_tilt_weigth@(data, pos, sig, tilt, plage, order_profil, ccdgain,
+                    sigdet)
+
+@extract_weigth2@(data, pos, sig, plage1, plage2, order_profil, ccdgain,
+                sigdet)
+
+@extract_tilt_weigth2@(data, pos, sig, tilt, plage1, plage2, order_profil,
+                     ccdgain, sigdet)
+
+@extract_horne@(data, pos, sig, plage, order_profil, ccdgain, sigdet)
+
+@extract_tilt_horne@(data, pos, sig, tilt, plage, order_profil, ccdgain,
+                   sigdet)
+
+@extract_tilt@(data, pos, sig, tilt, plage, ccdgain)
+
+@extract@(data, pos, sig, opt, nbsig, ccdgain, sigdet, seuilcosmic)
+\end{lstlisting}
+
+% -----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The spirouFITS module}
+% -----------------------------------------------------------------------------------
+
+Contains functions to read FITS file and copy keywords
+
+\begin{lstlisting}[style=pythonstyle]
+@read_data@(fitsfilename)
+
+@read_data_raw@(fitsfilename)
+
+@read_data_all@(fitsfilename)
+
+@write_data@(fitsfilename, data)
+
+@read_ext@(fitsfilename)
+
+@read_key@(fitsfilename, keyname, hdu=0)
+
+@read_keys@(fitsfilename, keylist, hdu=0)
+
+@write_newkey@(fitsfilename, key)
+
+@update_key@(fitsfilename, key)
+
+@delete_key@(fitsfilename, keyname)
+
+@writekey2dlist@(fitsfilename, a, kw)
+
+@copy_key@(fits1, fits2)
+
+@copy_keys_root@(fits1, fits2, root)
+
+@readkeyloco@(fitsfilename, kw, nbo, nbc)
+\end{lstlisting}
+
+% -----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The spirouLOCOR module}
+% -----------------------------------------------------------------------------------
+
+Contains functions for order localization
+
+\begin{lstlisting}[style=pythonstyle]
+@meas_back@(y, backini, niter=3, coeff=9)
+
+@meas_top@(yc, nbslice, nbpix)
+
+@meas_minmax@(y, size)
+
+@meas_min@(yc, nbslice, nbpix)
+
+@poscolc@(ycc, seuil)
+
+@findord@(ycc, seuil, widthmin=5)
+
+@locgaus@(y, ind1, ind2, sigdet, opt=1)
+
+@loc2gaus@(y, ind1, ind2, delta, sigdet, opt=1)
+
+@fitprofil@(y, sigdet)
+
+@imaloco@(data, ac, fitsfilename)
+
+@imaloco2@(data, ac, fitsfilename)
+
+@tableloco@(tblfilename, a)
+
+@keyloco@(fitsfilename, ac, ass)
+
+@keyloco2@(fitsfilename, ac, ass)
+
+@writekeyloco3@(fitsfilename, a)
+
+@writekeyloco@(fitsfilename, a, kw)
+
+@readkeyloco@(fitsfilename, ic_locnbmaxo, ic_locdfitc)
+
+@readkeyloco3@(fitsfilename, rootkeyname)
+
+@write_fitsloco@(fitsfilename, a, dim)
+\end{lstlisting}
+
+
+\clearpage
+\newpage
+\section{The spirouRV module}
+% -----------------------------------------------------------------------------------
+
+Contains functions to compute radial velocity
+
+% -----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The spirouVISU module}
+% -----------------------------------------------------------------------------------
+
+Contains functions for visualization
