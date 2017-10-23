@@ -100,7 +100,7 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
 ### 5. Work in progress/to do
 
 #### General
-[] Needs someone to read through it
+- [ ] Needs someone to read through it
 
 #### The sections
 - Introduction
