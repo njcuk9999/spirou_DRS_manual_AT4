@@ -49,11 +49,14 @@ DRS_spirou -m cal_DARK_spirou YYMMDD Filenames*
 \end{lstlisting}
 
 % -------------------------------------------------------------------------------------------
+\newpage
 \section{Working example of the code for SPIRou}
 \label{section:working_example}
 % -------------------------------------------------------------------------------------------
 
-All files are from:
+\subsection{Overview}
+
+For this example all files are from:
 \begin{lstlisting}[style=bashstyle]
 spirou\@10.102.14.81:/data/RawImages/H2RG-AT4/AT4-04/2017-07-10_15-36-18/ramps/
 \end{lstlisting}  
@@ -63,33 +66,59 @@ Will also need current WAVE file from here:
 spirou\@10.102.14.81:/data/reduced/DATA-CALIB/spirou_wave_ini3.fits
 \end{lstlisting}  
 
+\noindent This assumes a correct setup using all variables as in previous sections i.e.:
+\begin{lstlisting}[style=text]
+<INSTRUMENT_NAME>="SPIROU"
+<DIR>="/data/spirou/drs"
+<INSTALL_ROOT>="@$DIR@/INTROOT"
+<DATA_ROOT>="@$DIR@/data"
+<DATA_RAW_ROOT>="@$DATA_ROOT@/raw/"
+<DATA_ROOT_REDUCED>="@$DATA_ROOT@/reduced/"
+<DATA_ROOT_CALIB>="@$DATA_ROOT@/calibDB"
+<DATA_ROOT_MSG>="@$DATA_ROOT@/msg/"
+<DATA_ROOT_TMP>="@$DATA_ROOT@/tmp/"
+<PYTHON_VERSION>="2.7"
+<PYTHON_DIR>="@$DIR@/python/miniconda2/"
+<GSL_DIR>="@$DIR@/c-libraries/gsl"
+\end{lstlisting}
 
-\noindent Setup as in previous sections.
+\noindent All files from 
+\begin{lstlisting}[style=bashstyle]
+spirou\@10.102.14.81:/data/RawImages/H2RG-AT4/AT4-04/2017-07-10_15-36-18/ramps/
+\end{lstlisting}  
+\noindent must be placed in a folder named `20170710' in \definevariable{DATA\_RAW\_ROOT} (\textcolor{blue}{/data/spirou/drs/data/raw}). \\
 
+\noindent Starting with RAMP files and ending with extracted orders and calculated drifts we need to run six codes:
 \begin{enumerate}
+\item cal\_DARK\_spirou.py \hfill (See Section \ref{section:cal_DARK_spirou})
+\item cal\_loc\_RAW\_spirou.py ($\times$2) \hfill (See Section \ref{section:cal_loc_RAW_spirou})
+\item cal\_SLIT\_spirou.py \hfill (See Section \ref{section:cal_SLIT_spirou})
+\item cal\_FF\_RAW\_spirou.py ($\times$2) \hfill (See Section \ref{section:cal_FF_RAW_spirou})
+\item (add spirou\_wave\_ini3.fits to calibDB) 
+\item cal\_extract\_RAW\_spirouAB.py and cal\_extract\_RAW\_spirouC.py (many times) \hfill (See Section \ref{section:cal_extract_RAW_spirou})
+\item cal\_DRIFT\_RAW\_spirou \hfill (See Section \ref{section:cal_DRIFT_RAW_spirou})
+\end{enumerate}
 
+\subsection{Command-by-command run through}
+
+\noindent We next list the exact commands used to go from the RAMPs to the extract orders and calculated drifts.
+\begin{enumerate}
 \item Change to the \textcolor{blue}{\{DIR\}} directory
 \begin{lstlisting}[style=bashstyle]
 @cd@ DIR
 \end{lstlisting}  
 
-\item Activate the environment (in bash only)
+\item Activate the environment (in bash only if not using the `.bashrc' method)
 \begin{lstlisting}[style=bashstyle]
 @source @env_setup.sh
 \end{lstlisting}  
 
-\item Check that environment is active
+\item Check that environment is active (only if using `env\_setup.sh' and if not using the `.bashrc' method).
 \begin{lstlisting}[style=bashstyle]
 @echo @$DRS_ACTIVE
 \end{lstlisting}  
 
 \noindent result should be = 1
-
-\item run the dark extraction:
-\begin{lstlisting}[style=bashstyle]
-@DRS_spirou -m cal_DARK_spirou.py 20170710 @dark_dark02d406.fits
-\end{lstlisting}  
-
 
 \item run the dark extraction on the `dark\_dark' file:
 \begin{lstlisting}[style=bashstyle]
