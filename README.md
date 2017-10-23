@@ -96,3 +96,57 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
 >>> @import@ pyfits
 \end{lstlisting}
 ```
+
+### 5. Work in progress/to do
+
+#### General
+[] Needs someone to read through it
+
+#### The sections
+- Introduction
+    - [ ] Needs writing
+    - [x] Notes on syntax
+- Pre-Install
+    - [x] prerequisites
+    - [ ] Check C/Fortran codes
+    - [x] GSL for C codes
+    - [x] Isolated version of python
+    - [x] Required python modules
+    - [ ] Needs trying independently
+- Installation
+    - [x] activation
+    - [x] downloading + installing
+    - [x] updating
+    - [ ] Needs trying independently
+- Using the DRS
+    - [x] Running the code
+    - [x] Working example of the code
+- Data Architecture
+    - [x] Installed file structure
+    - [x] The install root (bin and DRS_SPIROU)
+    - [x] The data root
+    - [x] The calib database 
+    - [ ] Needs a section on the configuration files
+- The Modules
+    - [x] Needs a file tree
+    - [ ] Needs description of spirouBACK
+    - [ ] Needs description of spirouCDB
+    - [ ] Needs description of spirouEXTOR
+    - [ ] Needs description of spirouFITS
+    - [ ] Needs description of spirouLOCOR
+    - [ ] Needs description of spirouRV
+    - [ ] Needs description of spirouVISU
+- The Recipes
+    - [ ] cal_DARK_spirou
+    - [ ] cal_loc_RAW_spirou
+    - [ ] cal_SLIT_spirou
+    - [ ] cal_FF_RAW_spirou
+    - [ ] cal_extract_RAW_spirou
+    - [ ] cal_DRIFT_RAW_spirou
+- Quality control
+    - [ ] cal_DARK_spirou
+    - [ ] cal_loc_RAW_spirou
+    - [ ] cal_SLIT_spirou
+    - [ ] cal_FF_RAW_spirou
+    - [ ] cal_extract_RAW_spirou
+    - [ ] cal_DRIFT_RAW_spirou
