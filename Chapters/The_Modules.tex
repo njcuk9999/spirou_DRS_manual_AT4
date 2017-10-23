@@ -67,15 +67,103 @@ This contains all the python worker files for the DRS. The file structure is as 
 
 Contains functions to calculate the detector background
 
+\subsection{measure\_bkgr}
+
 \begin{lstlisting}[style=pythonstyle]
 @measure_bkgr@(data, order_profile, size, ccdgain, ccdsigdet)
+    """
+    Measures the background via interpolation over many small boxes of
+         width/height="size" uses the order_profile to mask out (?) the orders
+         TODO: Is that what this is doing?
 
-@measure_bkgr2@(data, order_profile, size, ccdgain, ccdsigdet)
+    :param data: 2D numpy array, the image to measure the background of
+    :param order_profile: 2D numpy array, the smoothed image using the order
+                          fits
+    :param size: int, size of the sub-frame to measure the background in
+    :param ccdgain: float, the gain of the image
+    :param ccdsigdet: float, the sigdet of the image
 
-@measure_bkgr_FF@(data, size, ccdgain, ccdsigdet)
-
-@measure_bkgr_FF2@(data, size, ccdgain, ccdsigdet, seuil)
+    :return bkgr: 2D numpy array, the interpolated background image
+    :return xc: numpy array (size x data.shape[0]) in steps of 2*size
+    :return yc: numpy array (size x data.shape[1]) in steps of 2*size
+    :return mode: numpy array (size x size) the mode (?) of each box
+    """
 \end{lstlisting}
+
+\noindent Note: Not 100\% sure how this function works. \\
+
+\subsection{measure\_bkgr2}
+
+\begin{lstlisting}[style=pythonstyle]
+@measure_bkgr2@(data, order_profile, size, ccdgain, ccdsigdet)
+    """
+    Measures the background via interpolation over many small boxes of
+         width/height="size" uses the order_profile to mask out (?) the orders
+         TODO: Is that what this is doing?
+
+    :param data: 2D numpy array, the image to measure the background of
+    :param order_profile: 2D numpy array, the smoothed image using the order
+                          fits
+    :param size: int, size of the sub-frame to measure the background in
+    :param ccdgain: float, the gain of the image
+    :param ccdsigdet: float, the sigdet of the image
+
+    :return bkgr: 2D numpy array, the interpolated background image
+    :return xc: numpy array (size x data.shape[0]) in steps of 2*size
+    :return yc: numpy array (size x data.shape[1]) in steps of 2*size
+    :return mode: numpy array (size x size) the mode (?) of each box
+    :return binc: numpy array, the bins the histogram is binned along
+    :return histo: numpy array, the histogram of each subframe
+    """
+\end{lstlisting}
+
+\noindent Note: Not 100\% sure how this function works. \\
+
+\subsection{measure\_bkgr\_FF}
+
+\begin{lstlisting}[style=pythonstyle]
+@measure_bkgr_FF@(data, size, ccdgain, ccdsigdet)
+    """
+    Measures the background via interpolation over many small boxes of 
+         width/height="size"
+    
+    :param data: 2D numpy array, the image to measure the background of
+    :param size: int, size of the sub-frame to measure the background in
+    :param ccdgain: float, the gain of the image
+    :param ccdsigdet: float, the sigdet of the image
+    
+    :return bkgr: 2D numpy array, the interpolated background image
+    :return xc: numpy array (size x data.shape[0]) in steps of 2*size
+    :return yc: numpy array (size x data.shape[1]) in steps of 2*size
+    :return minlevel: numpy array (size x size) - the central value of each
+                      subframed box
+    """
+\end{lstlisting}
+
+
+\subsection{measure\_bkgr\_FF2}
+
+\begin{lstlisting}[style=pythonstyle]
+@measure_bkgr_FF2@(data, size, ccdgain, ccdsigdet, seuil)
+    """
+    Measures the background via interpolation over many small boxes of 
+         width/height="size" uses a threshold="seuil" above which the value is
+         set to the max value in a box
+
+    :param data: 2D numpy array, the image to measure the background of
+    :param size: int, size of the sub-frame to measure the background in
+    :param ccdgain: float, the gain of the image
+    :param ccdsigdet: float, the sigdet of the image
+    "param seuil: float, a threshold for 
+
+    :return bkgr: 2D numpy array, the interpolated background image
+    :return xc: numpy array (size x data.shape[0]) in steps of 2*size
+    :return yc: numpy array (size x data.shape[1]) in steps of 2*size
+    :return minlevel: numpy array (size x size) - the central value of each
+                      subframed box
+    """
+\end{lstlisting}
+
 
 % -----------------------------------------------------------------------------------
 \clearpage
