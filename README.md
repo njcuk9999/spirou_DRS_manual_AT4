@@ -129,7 +129,7 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
     - [ ] Needs a section on the configuration files
 - The Modules
     - [x] Needs a file tree
-    - [ ] spirouBACK
+    - [x] spirouBACK
     - [x] spirouCDB
     - [ ] spirouEXTOR
     - [ ] spirouFITS
