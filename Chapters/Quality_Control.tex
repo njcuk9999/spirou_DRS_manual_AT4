@@ -4,6 +4,21 @@
 \section{cal\_DARK\_spirou}
 \label{section:qc_cal_DARK_spirou}
 
+There are currently two quality control checks for cal\_DARK\_spirou
+\begin{itemize}
+\item Unexpected dark level: $\text{Median Flux} < QC_{\text{Max Dark Level}}$
+\item Unexpected Fraction of dead pixels: $\text{Number of dead pixels} < QC_{\text{Max Dead Pixels}}$
+\end{itemize}
+
+where $QC_{\text{Max Dark Level}}$ and $QC_{\text{Max Dead Pixels}}$ are constants currently defined in cal\_DARK\_spirou.py
+\begin{lstlisting}[style=pythonstyle]
+##########################
+#   Quality control      #
+##########################
+
+qc_max_darklevel=1.0  # Max dark median level [ADU/s]  
+qc_maxdead=25.0       # Fraction Max of dead pixel [%]
+\end{lstlisting}
 
 \section{cal\_loc\_RAW\_spirou}
 \label{section:qc_cal_loc_RAW_spirou}
