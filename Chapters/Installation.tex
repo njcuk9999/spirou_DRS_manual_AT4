@@ -69,10 +69,16 @@ svn co https://svn.lam.fr/repos/spirou/trunk spirou
 cd {DIR}/spirou/src
 \end{lstlisting}
 
+
+\TODO{The rest of this section shouldn't be needed in a fixed version}
 \item find and change \definevariable{DIR}/spirou/src/C/setup.py
 
 \begin{enumerate}
-\item Below the line \definevariable{PYTHON\_INCLUDE\_DIR} = os.getenv(`\definevariable{PYTHON\_INCLUDE\_DIR}') add the following:
+\item Below the line
+\begin{lstlisting}[style=text]
+python_include_dir = os.getenv('PYTHON\_INCLUDE\_DIR') 
+\end{lstlisting}
+add the following:
 \begin{lstlisting}[style=text]
 <gsl_include_dir> = os.getenv('GSL_INCLUDE_DIR')
 <gsl_library_dir> = os.getenv('GSL_LIBRARY_DIR')
@@ -114,6 +120,12 @@ run installation scripts
 ./scriptInstall SPIROU 2.7
 \end{lstlisting}
 
+\noindent Note: you may need to run chmod on these script in order to run them
+\begin{lstlisting}[style=bashstyle]
+chmod +x hardrsInstall
+chmod +x scriptInstall
+\end{lstlisting}
+
 % ---------------------------------------------------------
 \section{Subversion}
 \label{section:how_to_update}
@@ -135,14 +147,69 @@ svn update
 
 You will then receive information on the DRS version.
 
+
+\TODO{The next two steps shouldn't be needed in fixed version}
+
 \item Then you need to re-install the DRS. \textcolor{red}{This will rewrite all codes in the \{INSTALL\_ROOT\} folder}.
 
-Reinstall the DRS using:
+\begin{enumerate}
+\item change directory to source files
+\begin{lstlisting}[style=bashstyle]
+cd {DIR}/spirou/src
+\end{lstlisting}
+
+\item verify that the following lines are in \definevariable{DIR}/spirou/src/C/setup.py
+\begin{lstlisting}[style=text]
+gsl_include_dir = os.getenv('GSL_INCLUDE_DIR')    # default: '/opt/gsl/include'
+gsl_library_dir = os.getenv('GSL_LIBRARY_DIR')    # default: '/opt/gsl/lib'
+\end{lstlisting}
+
+
+if they are not do the following steps:
+
+\begin{enumerate}
+\item Below the line
+\begin{lstlisting}[style=text]
+python_include_dir = os.getenv('PYTHON\_INCLUDE\_DIR') 
+\end{lstlisting}
+add the following:
+\begin{lstlisting}[style=text]
+<gsl_include_dir> = os.getenv('GSL_INCLUDE_DIR')
+<gsl_library_dir> = os.getenv('GSL_LIBRARY_DIR')
+\end{lstlisting}
+
+\item Find and replace all instances of
+\begin{lstlisting}[style=text]
+include_dirs = [python_include_dir,@'/opt/gsl/include'@],
+\end{lstlisting}
+
+with
+\begin{lstlisting}[style=text]
+include_dirs = [python_include_dir, @gsl_include_dir@],
+\end{lstlisting}
+
+\item Find and replace all instances of 
+\begin{lstlisting}[style=text]
+library_dirs = [@'/opt/gsl/lib'@],  
+\end{lstlisting}
+
+with
+\begin{lstlisting}[style=text]
+library_dirs = [@gsl_library_dir@],
+\end{lstlisting}
+
+\end{enumerate}
+
+
+\item Reinstall the DRS using:
 \begin{lstlisting}[style=bashstyle]
 cd src
 ./hardrsInstall SPIROU 2.7
 ./scriptInstall SPIROU 2.7
 \end{lstlisting}
+
+\end{enumerate}
+
 
 \end{enumerate}
 

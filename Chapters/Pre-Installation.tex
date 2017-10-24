@@ -93,6 +93,13 @@ Add the following to it:
   @export@ GSL_INCLUDE_DIR={GSL_DIR}/include
   @export@ GSL_LIBRARY_DIR={GSL_DIR}/lib
 
+  @chmod@ +x "$PYTHON_DIR/bin/conda"
+  @alias@ conda="$PYTHON_DIR/bin/conda"
+  @chmod@ +x "$PYTHON_DIR/bin/pip"
+  @alias@ pip="$PYTHON_DIR/bin/pip"
+  @chmod@ +x "$PYTHON_DIR/bin/f2py"
+  @alias@ f2py="$PYTHON_DIR/bin/f2py"
+
 \end{lstlisting}
 
 where:
@@ -111,6 +118,8 @@ where:
 \item \definevariable{PYTHON\_DIR} = Define python directory (i.e. result of command "which python")
 \item \definevariable{GSL\_DIR} = Define GSL path (default paths if installed may be /usr/local/include/gsl or /opt/gsl)
 \end{itemize}
+
+\noindent Note: you will have to remove all these environmental variables/aliases to use any other version of python on your system.
 
 % ---------------------------------------------------------------------
 \section{Setup up and check file structure}
