@@ -390,34 +390,241 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
 
 Contains functions to read FITS file and copy keywords
 
+\subsection{read\_data}
 \begin{lstlisting}[style=pythonstyle]
 @read_data@(fitsfilename)
+    """
+    Reads "fitsfilename" using pyfits and returns array containing the data
+    only uses data from the first header
 
+    :param fitsfilename: string, file location and file name
+
+    :return data: numpy array (2D), the image
+    :return nx: int, the shape in the first dimension, i.e. data.shape[0]
+    :return ny: int, the shape in the second dimension, i.e. data.shape[1]
+    """
+\end{lstlisting}
+
+\noindent Note: currently not used?
+
+\subsection{read\_data\_raw}
+\begin{lstlisting}[style=pythonstyle]
 @read_data_raw@(fitsfilename)
+    """
+    Reads "fitsfilename" using pyfits and returns array containing the data
 
+    If there is one extension it is used
+    If there are two extensions the second is used
+
+    :param fitsfilename: string, file location and file name
+
+    :return data: numpy array (2D), the image
+    :return nx: int, the shape in the first dimension, i.e. data.shape[0]
+    :return ny: int, the shape in the second dimension, i.e. data.shape[1]
+    """
+\end{lstlisting}
+
+\noindent Note: Essentially the same as `read\_data' function
+
+\subsection{read\_data\_all}
+\begin{lstlisting}[style=pythonstyle]
 @read_data_all@(fitsfilename)
+    """
+    Reads "fitsfilename" using pyfits and returns array containing the data
 
+    If there is one extension it is used
+    If there are two extensions the second is used
+    If there are multiple extensions (1 or 2 extensions) the are joined in form:
+
+    x = [[3, 3, 3],
+         [3, 3, 3],
+         [3, 3, 3]])
+
+    y = [[5, 5, 5],
+         [5, 5, 5],
+         [5, 5, 5]])
+
+    returned array is = [[3, 3, 3, 5, 5, 5],
+                         [3, 3, 3, 5, 5, 5],
+                         [3, 3, 3, 5, 5, 5]])
+
+    :param fitsfilename: string, file location and file name
+
+    :return data: numpy array (2D), the image
+    :return nx: int, the shape in the first dimension, i.e. data.shape[0]
+    :return ny: int, the shape in the second dimension, i.e. data.shape[1]
+    """
+
+\end{lstlisting}
+
+\subsection{write\_data}
+\begin{lstlisting}[style=pythonstyle]
 @write_data@(fitsfilename, data)
+    """
+    Create the FITS file and write data
 
+    :param filename: string, filename to save the fits file to
+    :param data: numpy array (2D), the image
+
+    :return None:
+    """
+\end{lstlisting}
+
+\subsection{read\_ext}
+\begin{lstlisting}[style=pythonstyle]
 @read_ext@(fitsfilename)
+    """
+    Opens the FITS file and reads the number of extensions
 
+    :param fitsfilename: string, filename to read
+    :return length: the length of the extention -1
+    """
+\end{lstlisting}
+
+\subsection{read\_key}
+\begin{lstlisting}[style=pythonstyle]
 @read_key@(fitsfilename, keyname, hdu=0)
+    """
+    Reads the "keyname" from the header of "fitsfilename" and returns
+    the value of the "keyname"
 
+    :param fitsfilename: string, filename to read
+    :param keyname: string, the keyword to look for in the header,
+                    returns 'UNKNOWN' if not found
+    :param hdu: int, the extention to read the header from (default = 0)
+
+    :return None:
+    """
+\end{lstlisting}
+
+\subsection{read\_keys}
+\begin{lstlisting}[style=pythonstyle]
 @read_keys@(fitsfilename, keylist, hdu=0)
+    """
+    Reads the "keyname" from the header of "fitsfilename" and returns
+    the value of the "keyname"
 
+    :param fitsfilename: string, filename to read
+    :param keylist: string, the keyword to look for in the header,
+                    returns 'UNKNOWN' if not found
+    :param hdu: int, the extention to read the header from (default = 0)
+
+    :return None:
+\end{lstlisting}
+
+\noindent Note: currently identical to `read\_key'
+
+\subsection{write\_newkey}
+\begin{lstlisting}[style=pythonstyle]
 @write_newkey@(fitsfilename, key)
+    """
+    Writes a new keyword "key[0]" to the FITS file header (extension = 0)
+    :param fitsfilename: string, filename to write to
+    :param key: list of string, the key to write, must be in form:
 
+            key = [KEYWORD NAME, VALUE, COMMENT]
+
+    :return None:
+    """
+\end{lstlisting}
+
+\subsection{update\_key}
+\begin{lstlisting}[style=pythonstyle]
 @update_key@(fitsfilename, key)
+    """
+    Modifies a keyword "key[0]" in the FITS file header (extension = 0)
+    
+    :param fitsfilename: string, filename to read/write to
+    :param key: string, the key to write, must be in form:
 
+            key = [KEYWORD NAME, VALUE, COMMENT]
+
+    :return None :
+    """
+\end{lstlisting}
+
+\subsection{delete\_key}
+\begin{lstlisting}[style=pythonstyle]
 @delete_key@(fitsfilename, keyname)
+    """
+    Deletes a keyword "keyname" in the FITS file header (extension = 0)
 
+    :param fitsfilename: string, filename to read/write to
+    :param keyname: string, the key to write, must be in form:
+
+    :return None:
+    """
+\end{lstlisting}
+
+\subsection{writekey2dlist}
+\begin{lstlisting}[style=pythonstyle]
 @writekey2dlist@(fitsfilename, a, kw)
+    """
+    Writes a 2D list of values (in "a") to FITs file "fitsfilename" with
+    keyword = "kw" + number
 
+    where number = (row number * number of columns) + column number
+
+    :param fitsfilename: string, filename to read/write to
+    :param a: 2D list of values, the values to write
+    :param kw: string, the prefix of the key to write, key will be in form:
+                "kw" + number
+
+    :return None:
+    """
+\end{lstlisting}
+
+\subsection{copy\_key}
+\begin{lstlisting}[style=pythonstyle]
 @copy_key@(fits1, fits2)
+    """
+    Writes the header keys from one FITS fits (fits1) to another (fits2)
+    
+    Does not include FITS keywords:
+    
+            'SIMPLE', 'BITPIX', 'NAXIS', 'NAXIS1', 'NAXIS2',
+            'EXTEND', 'COMMENT', 'CRVAL1', 'CRPIX1', 'CDELT1',
+            'CRVAL2', 'CRPIX2', 'CDELT2', 'BSCALE', 'BZERO',
+            'PHOT_IM', 'FRAC_OBJ', 'FRAC_SKY', 'FRAC_BB'
+    
+    :param fits1: string, filename to read from 
+    :param fits2: string, filename to write to
+    
+    :return None: 
+    """
+\end{lstlisting}
 
+\subsection{copy\_keys\_root}
+\begin{lstlisting}[style=pythonstyle]
 @copy_keys_root@(fits1, fits2, root)
+    """
+    Copies all keywords with prefix "root" from "fits1" to "fits2"
+    
+    :param fits1: string, filename to read from
+    :param fits2: string, filename to write to
+    :param root: string, prefix - start of the keyword to read/write to
+    
+    :return None: 
+    """
+\end{lstlisting}
 
+\subsection{readkeyloco}
+\begin{lstlisting}[style=pythonstyle]
 @readkeyloco@(fitsfilename, kw, nbo, nbc)
+    """
+    Read a key from generated from a 2D list
+
+    :param fitsfilename: string, filename to read/write to
+    :param kw: string, the prefix of the key to write, key will be in form:
+                "kw" + number
+                
+                where number = (row number * number of columns) + column number
+                
+    :param nbo: int, the row number
+    :param nbc: int, the columns number
+    
+    :return None:
+    """
 \end{lstlisting}
 
 % -----------------------------------------------------------------------------------
@@ -428,43 +635,129 @@ Contains functions to read FITS file and copy keywords
 
 Contains functions for order localization
 
+\subsection{meas\_back}
 \begin{lstlisting}[style=pythonstyle]
 @meas_back@(y, backini, niter=3, coeff=9)
+\end{lstlisting}
 
+\subsection{meas\_top}
+\begin{lstlisting}[style=pythonstyle]
 @meas_top@(yc, nbslice, nbpix)
+\end{lstlisting}
 
+\subsection{meas\_minmax}
+\begin{lstlisting}[style=pythonstyle]
 @meas_minmax@(y, size)
+    """
+    Measure the minimum and maximum pixel value for each row using a box which
+    contains all pixels for rows:  row-size to row+size and all columns.
 
+    Edge pixels (0-->size and (image.shape[0]-size)-->image.shape[0] are
+    set to the values for row=size and row=(image.shape[0]-size)
+
+    :param y: numpy array (2D), the image
+    :param size: int, the half size of the box to use (half height)
+                 so box is defined from  row-size to row+size
+
+    :return min_image: numpy array (1D length = image.shape[0]), the row values
+                       for minimum pixel defined by a box of row-size to
+                       row+size for all columns
+    :retrun max_image: numpy array (1D length = image.shape[0]), the row values
+                       for maximum pixel defined by a box of row-size to
+                       row+size for all columns
+    """
+\end{lstlisting}
+
+\subsection{meas\_min}
+\begin{lstlisting}[style=pythonstyle]
 @meas_min@(yc, nbslice, nbpix)
+\end{lstlisting}
 
+\subsection{poscolc}
+\begin{lstlisting}[style=pythonstyle]
 @poscolc@(ycc, seuil)
+    """
+    Takes the central pixel values and finds orders by looking for the start
+    and end above threshold
+    
+    :param ycc: numpy array (1D) size = number of rows, 
+                the central pixel values
+    :param seuil: float, the threshold above which to find pixels as being
+                  part of an order
+                      
+    :return positions: numpy array (1D), size= number of rows,
+                       the pixel positions in cvalues where the centers of each
+                       order should be 
+    """
+\end{lstlisting}
 
+\subsection{findord}
+\begin{lstlisting}[style=pythonstyle]
 @findord@(ycc, seuil, widthmin=5)
+\end{lstlisting}
 
+\subsection{locgaus}
+\begin{lstlisting}[style=pythonstyle]
 @locgaus@(y, ind1, ind2, sigdet, opt=1)
+\end{lstlisting}
 
+\subsection{loc2gaus}
+\begin{lstlisting}[style=pythonstyle]
 @loc2gaus@(y, ind1, ind2, delta, sigdet, opt=1)
+\end{lstlisting}
 
+\subsection{fitprofil}
+\begin{lstlisting}[style=pythonstyle]
 @fitprofil@(y, sigdet)
+\end{lstlisting}
 
+\subsection{imaloco}
+\begin{lstlisting}[style=pythonstyle]
 @imaloco@(data, ac, fitsfilename)
+\end{lstlisting}
 
+\subsection{imaloco2}
+\begin{lstlisting}[style=pythonstyle]
 @imaloco2@(data, ac, fitsfilename)
+\end{lstlisting}
 
+\subsection{tableloco}
+\begin{lstlisting}[style=pythonstyle]
 @tableloco@(tblfilename, a)
+\end{lstlisting}
 
+\subsection{keyloco}
+\begin{lstlisting}[style=pythonstyle]
 @keyloco@(fitsfilename, ac, ass)
+\end{lstlisting}
 
+\subsection{keyloco2}
+\begin{lstlisting}[style=pythonstyle]
 @keyloco2@(fitsfilename, ac, ass)
+\end{lstlisting}
 
+\subsection{writekeyloco3}
+\begin{lstlisting}[style=pythonstyle]
 @writekeyloco3@(fitsfilename, a)
+\end{lstlisting}
 
+\subsection{writekeyloco}
+\begin{lstlisting}[style=pythonstyle]
 @writekeyloco@(fitsfilename, a, kw)
+\end{lstlisting}
 
+\subsection{readkeyloco}
+\begin{lstlisting}[style=pythonstyle]
 @readkeyloco@(fitsfilename, ic_locnbmaxo, ic_locdfitc)
+\end{lstlisting}
 
+\subsection{readkeyloco3}
+\begin{lstlisting}[style=pythonstyle]
 @readkeyloco3@(fitsfilename, rootkeyname)
+\end{lstlisting}
 
+\subsection{write\_fitsloco}
+\begin{lstlisting}[style=pythonstyle]
 @write_fitsloco@(fitsfilename, a, dim)
 \end{lstlisting}
 
