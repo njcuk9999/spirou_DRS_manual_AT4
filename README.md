@@ -125,15 +125,29 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
     - [x] Installed file structure
     - [x] The install root (bin and DRS_SPIROU)
     - [x] The data root
-    - [x] The calib database 
-    - [ ] Needs a section on the configuration files
+    - [x] The calib database
+- Constants and Keywords
+    - Constants
+        - [x] cal_dark
+        - [x] cal_loc
+        - [ ] cal_slit
+        - [ ] cal_ff
+        - [ ] cal_extract
+        - [ ] cal_drift
+    - Keywords
+        - [ ] cal_dark
+        - [ ] cal_loc
+        - [ ] cal_slit
+        - [ ] cal_ff
+        - [ ] cal_extract
+        - [ ] cal_drift
 - The Modules
     - [x] Needs a file tree
     - [x] spirouBACK
     - [x] spirouCDB
     - [ ] spirouEXTOR
     - [ ] spirouFITS
-    - [ ] spirouLOCOR
+    - [x] spirouLOCOR
     - [ ] spirouRV
     - [ ] spirouVISU
 - The Recipes
@@ -144,8 +158,8 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
     - [x] cal_extract_RAW_spirou
     - [x] cal_DRIFT_RAW_spirou
 - Quality control
-    - [ ] cal_DARK_spirou
-    - [ ] cal_loc_RAW_spirou
+    - [x] cal_DARK_spirou
+    - [x] cal_loc_RAW_spirou
     - [ ] cal_SLIT_spirou
     - [ ] cal_FF_RAW_spirou
     - [ ] cal_extract_RAW_spirou
