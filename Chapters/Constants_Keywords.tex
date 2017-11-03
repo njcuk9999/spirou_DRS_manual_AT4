@@ -1,0 +1,303 @@
+\chapter{Constants and Keywords}
+
+% ------------------------------------------------------------------------
+\section{The configuration files}
+\label{section:the_config_files}
+% ------------------------------------------------------------------------
+
+The configurations files are found in the \definevariable{INSTALL\_ROOT}/DRS\_\definevariable{INSTRUMENT\_NAME}/config folder i.e. for our example in Section \ref{section:edit_env_setup} this would be `/data/spirou/drs/INTROOT/DRS\_SPIROU/config/'
+
+The file structure should look as follows:
+\customdirtree{%
+.1 \{DIR\}.
+.2 \{INSTALL\_ROOT\}.
+.3 config.
+.4 compute\_CaII\_HARPS.py.
+.4 correct\_geom\_coralie.py.
+.4 correct\_geom\_elodie.py.
+.4 correct\_geom\_harpn.py.
+.4 correct\_meanpondref\_CORALIE.py.
+.4 correct\_meanpondref\_EGGS.py.
+.4 correct\_meanpondref\_ELODIE.py.
+.4 correct\_meanpondref\_HARPS.py.
+.4 db\_filter\_CORALIE.py.
+.4 db\_filter\_EGGS.py.
+.4 db\_filter\_HARPN.py.
+.4 db\_filter\_HARPS.py.
+.4 dic\_recipes\_CORALIE.py.
+.4 dic\_recipes\_EGGS.py.
+.4 dic\_recipes\_ELODIE-S.py.
+.4 dic\_recipes\_HARPN.py.
+.4 dic\_recipes\_HARPS.py.
+.4 hadmrICDP\_CORALIE07.py.
+.4 hadmrICDP\_CORALIE14.py.
+.4 hadmrICDP\_CORALIE98\_dec04.py.
+.4 hadmrICDP\_CORALIE98\_jun99.py.
+.4 hadmrICDP\_CORALIE98\_oct98.py.
+.4 hadmrICDP\_CORALIE98\_sep02.py.
+.4 hadmrICDP\_EGGS.py.
+.4 hadmrICDP\_ELODIE.py.
+.4 hadmrICDP\_ELODIE-S.py.
+.4 hadmrICDP\_HARPN\_may12.py.
+.4 hadmrICDP\_HARPN.py.
+.4 hadmrICDP\_HARPN\_sep12.py.
+.4 hadmrICDP\_HARPS.py.
+.4 hadmrICDP\_SOPHIE.py.
+.4 hadmrICDP\_SPIROU\_H2RG.py.
+.4 hadmrICDP\_SPIROU\_H4RG.py.
+.4 hadmrICDP\_SPIROU.py.
+.4 kw\_allocate\_CORALIE.py.
+.4 kw\_allocate\_ELODIE.py.
+.4 kw\_allocate\_HARPN.py.
+.4 kw\_allocate\_HARPS.py.
+.4 kw\_allocate\_SOPHIE.py.
+.4 kw\_allocate\_SPIROU.py.
+.4 KW\_CORALIE14.py.
+.4 KW\_CORALIE.py.
+.4 kw\_display\_CORALIE.py.
+.4 kw\_display\_ELODIE.py.
+.4 kw\_display\_HARPN.py.
+.4 kw\_display\_HARPS.py.
+.4 kw\_display\_SOPHIE.py.
+.4 kw\_display\_SPIROU.py.
+.4 KW\_DRS.py.
+.4 KW\_ELODIE.py.
+.4 KW\_HARPN.py.
+.4 KW\_HARPS.py.
+.4 kw\_lamp\_CORALIE.py.
+.4 kw\_list\_CORALIE.py.
+.4 kw\_list\_ELODIE.py.
+.4 kw\_list\_HARPN.py.
+.4 kw\_list\_HARPS.py.
+.4 kw\_list\_SOPHIE.py.
+.4 kw\_list\_SPIROU.py.
+.4 kw\_pol.py.
+.4 KW\_SOPHIE.py.
+.4 KW\_SPIROU.py.
+.4 special\_config\_CORALIE98.py.
+.4 special\_config\_ELODIE-S.py.
+.4 special\_config\_HARPN.py.
+.4 special\_wave\_CORALIE\_initial.py.
+}
+
+\noindent These files contain most the variables that are used throughout the DRS (unfortunately hard-coded into the program files). The descriptions of used constants and keywords, the recipe(s) that use them and their location (or locations) are defined below.
+
+
+
+% ------------------------------------------------------------------------
+\section{Environmental variables}
+\label{section:the_env_variables}
+% ------------------------------------------------------------------------
+
+Some constants are set via the environmental variables (Section \ref{section:edit_env_setup}), they are set either via sourcing a shell scripted (Section \ref{section:edit_env_setup}) or manually adding them (i.e. via the `.bashrc' file, see Section \ref{section:using_bashrc}).
+
+\begin{itemize}
+\item \definevariable{INSTRUMENT\_NAME} = Set the instrument name
+\item \definevariable{DATA\_ROOT}= Directory in which all SPIROU files go
+\item \definevariable{INSTALL\_ROOT} = Define installation folder name
+\item \definevariable{DATA\_ROOT} = Define data folder name
+\item \definevariable{DATA\_ROOT\_RAW} = Define raw path
+\item \definevariable{DATA\_ROOT\_REDUCED} Define reduced path
+\item \definevariable{DATA\_ROOT\_CALIB} = Define calibDB path
+\item \definevariable{DATA\_ROOT\_MSG} = Define msg path
+\item \definevariable{DATA\_ROOT\_TMP} = Define tmp path
+\item \definevariable{PYTHON\_VERSION} = Define python version
+\item \definevariable{PYTHON\_DIR} = Define python directory (i.e. result of command "which python")
+\item \definevariable{GSL\_DIR} = Define GSL path (default paths if installed may be /usr/local/include/gsl or /opt/gsl)
+\end{itemize}
+
+In addition some other environmental variables are set (or need to be set).
+\begin{itemize}
+	\item \definevariable{DRS\_VERSION} = The current version of the DRS
+	\item \definevariable{DRS\_PLOT} = If `1' then plots will be shown, if undefined then plot will not be shown, if `trigger' will send commands to a file for later plotting.
+	\item \definevariable{DRS\_DEBUG} = The current debug level, default = undefined or = 0, depending on the integer value will print/plot various parts of debugging code.
+	\item \definevariable{DRS\_CONFIG} = Define the config path (defaults to \definevariable{DATA\_ROOT}/config)
+	\item \definevariable{DRS\_MAN} = Define the manual path (defaults to \definevariable{DATA\_ROOT}/man)
+	\item \definevariable{DRS\_DATA\_WORKING} = Defines the current working directory (defaults to \definevariable{DATA\_ROOT\_TMP}) ?
+\end{itemize} 
+
+% ------------------------------------------------------------------------
+\section{Constants}
+\label{section:the_constants}
+% ------------------------------------------------------------------------
+
+\newcommand{\calloc}{cal\_loc\_RAW\_spirou.py}
+\newcommand{\caldark}{cal\_DARK\_spirou.py}
+\newcommand{\hadmricdp}{hadmrICDP\_SPIROU.py}
+\newcommand{\kwdrs}{KW\_DRS.py}
+
+Below are the listed currently used constants in table format. The `Name' column refers to the name of the constant (and what to search for), the `Value' column is the default value, the `Description' column provides a brief description of what the variable controls, the `Used in' column shows which recipes use this variable and the `Location' column defines the file or files in which this variable is located (they may be hardcoded in recipe files thus the location may not be a config file), order of precedence is indicated but may be wrong (probably best to change call instances). These are split into catagories for ease of reading.
+
+\noindent Note: This section is currently updated for `\caldark' and `\calloc' only.
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{General constants}
+
+\ParamList{ic\_disptimeout}{0.5}{Interval between plots (for certain iteractive graphs)}{\calloc}{\hadmricdp}
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Image Variables}
+
+\ParamListCode{ic\_ccdx\_blue}{\lstinline[style=pythonstyle]{2048-arange(200,1500)}}{Resize blue window x array}{\caldark}{\caldark}
+% future ic_ccdx_blue_low, ic_ccdx_blue_high
+
+
+\ParamListCode{ic\_ccdy\_blue}{\lstinline[style=pythonstyle]{2048-arange(20,350)}}{Resize blue window y array}{\caldark}{\caldark}
+% future ic_ccdy_blue_low, ic_ccdy_blue_high
+
+\ParamListCode{ic\_ccdx\_red}{\lstinline[style=pythonstyle]{2048-arange(20,1750}}{Resize red window x array}{\caldark}{\caldark}
+% future ic_ccdx_red_low, ic_ccdx_red_high
+
+\ParamListCode{ic\_ccdy\_red}{\lstinline[style=pythonstyle]{2048-arange(1570,1910)}}{Resize red window y array}{\caldark}{\caldark}
+% future ic_ccdy_red_low, ic_ccdy_red_high
+
+\ParamListCode{ic\_ccdx}{\lstinline[style=pythonstyle]{arange(5,2040)}}{Resize array for x}{\caldark}{\caldark, \hadmricdp}
+% future ic_ccdx_low, ic_ccdx_high
+
+\ParamListCode{ic\_ccdy}{\lstinline[style=pythonstyle]{arange(5,1935)}}{Resize array for y}{\caldark}{\caldark, \hadmricdp}
+% future ic_ccdy_low, ic_ccdy_high
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Fiber variables}
+
+% future = need "fiber_params"
+
+Note: these variables depend on prefix of input file. First entry is for `flat\_dark' second is for `dark\_flat'
+
+\ParamList{fiber}{AB, C}{Fiber Name}{\calloc}{\calloc}
+% future = define _AB and _C for each
+
+\ParamList{nbfiber}{2, 1}{Number of fibers}{\calloc}{\calloc}
+% future = define _AB and _C for each
+
+\ParamList{ic\_first\_ord\_jump}{2, 0}{Number of orders to skip at start of image}{\calloc}{\calloc, \hadmricdp}
+% future = define _AB and _C for each
+
+\ParamList{ic\_locnbmaxo}{72, 36}{Maximum number of order to use}{\calloc}{\calloc, \hadmricdp}
+% future = define _AB and _C for each
+
+\ParamList{qc\_loc\_nbo}{72, 36}{Quality control "normal" number of orders on fiber}{\calloc}{\calloc, \hadmricdp}
+% future = define _AB and _C for each
+
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Dark Variables}
+
+\ParamList{cutlimit}{100}{Define a bad pixel cut limit (in ADU/s)}{\caldark}{\caldark}
+% Future = dark_cutlimit
+
+\ParamList{qmin, qmin2, qmin3}{5}{The lower percentile (0 - 100) for dead pixels}{\caldark}{\caldark}
+% Future dark_qmin
+\ParamList{qmax, qmax2, qmax3}{95}{The upper percentile (0 - 100) for dead pixels}{\caldark}{\caldark}
+% Future dark_qmax
+
+% Future histo_bins
+% Future histo_range_low
+% Future histo_range_high
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Localisation parameters}
+
+\ParamList{size}{10}{Size of the order\_profile smoothed box (from pixel - size to pixel + size)}{\calloc}{\calloc}
+% Future loc_box_size
+
+\ParamList{ic\_offset}{40}{row number of image to start processing at}{\calloc}{\calloc}
+
+\ParamList{ic\_ccdcolc}{1000}{Definition of the central column}{\calloc}{\calloc, \hadmricdp}
+% Future ic_cent_col
+
+\ParamList{ic\_ext\_window}{12}{Definition of the extraction window size (half size)}{\calloc}{\calloc}
+
+\ParamList{ic\_ccdgap}{0}{Definition of the gap index in the selected area}{\calloc}{\hadmricdp}
+% Future ic_image_gap
+
+\ParamList{ic\_locstepc}{20}{Define the column separation for fitting orders }{\calloc}{\calloc, \hadmricdp}
+
+\ParamList{ic\_widthmin}{5}{Define minimum width of order to be accepted}{\calloc}{\calloc}
+
+\ParamList{ic\_locnbpix}{45}{Half spacing between orders}{\calloc}{\calloc, \hadmricdp}
+
+\ParamList{ic\_min\_amplitude}{100}{Minimum amplitude to accept (in e-)}{\calloc}{\hadmricdp}
+
+\ParamList{ic\_locseuil}{0.2}{Normalised amplitude threshold to accept pixels for background calculation}{\calloc}{\calloc}
+
+\ParamListCode{satseuil}{\lstinline[style=pythonstyle]{64536 * ccdgain * nbframes}}{Saturation threshold on order profile plot}{\calloc}{\calloc}
+% Future ic_satseuil
+
+\ParamList{ic\_locdfitc}{5}{Order of polynomial to fit for positions}{\calloc,\kwdrs}{\calloc, \hadmricdp}
+
+\ParamList{ic\_locdfitw}{5}{Order of polynomial to fit for widths}{\calloc,\kwdrs}{\calloc, \hadmricdp}
+
+\ParamList{ic\_locdfitp}{3}{Order of polynomial to fit for position error }{\kwdrs}{\hadmricdp}
+
+\ParamList{ic\_max\_rms\_center}{0.2}{Maximum rms for sigma-clip order fit (center positions)}{\calloc}{\hadmricdp}
+
+\ParamList{ic\_max\_ptp\_center}{0.200}{Maximum ptp for sigma-clip order fit (center positions)}{\calloc}{\hadmricdp}
+
+\ParamList{ic\_ptporms\_center}{0.200}{Maximum frac ptp/rms for sigma-clip order fit}{\calloc}{\hadmricdp}
+
+\ParamList{ic\_max\_rms\_width}{1.0}{Maximum rms for sigma-clip order fit (width)}{\calloc}{\hadmricdp}
+% Future ic_max_rms_fwhm
+
+\ParamList{ic\_max\_ptp\_fracfwhm}{10.0}{Maximum ptp for sigma-clip order fit (width)}{\calloc}{\hadmricdp}
+
+\ParamList{ic\_loc\_delta\_width}{1.85}{Delta width (pix) for 3 convol shape model}{\kwdrs}{\hadmricdp}
+
+\ParamList{ic\_locopt1}{1}{Localisation option 1: Option for archiving the location image}{\calloc}{\hadmricdp}
+
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Quality Control Variables}
+
+\ParamList{qc\_max\_darklevel}{1.0}{Max dark median level [ADU/s]}{\caldark}{\caldark, \hadmricdp}
+
+\ParamList{qc\_maxdead}{25.0}{Max fraction of dead pixels }{\caldark}{\caldark}
+
+\ParamList{qc\_dark\_time}{1.0}{Min dark exposure time}{\caldark}{\hadmricdp}
+
+\ParamList{qc\_loc\_maxlocfit\_removed\_ctr}{1500}{Maximum points removed in location fit }{\calloc}{\hadmricdp}
+
+\ParamList{qc\_loc\_maxlocfit\_removed\_wid}{105}{Maximum points removed in width fit }{\calloc}{\hadmricdp}
+
+\ParamList{qc\_loc\_rmsmax\_center}{100}{Maximum rms allowed in fitting location    }{\calloc}{\hadmricdp}
+
+\ParamList{qc\_loc\_rmsmax\_fwhm }{500}{Maximum rms allowed in fitting width }{\calloc}{\hadmricdp}
+
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Calib DB settings}
+
+\ParamList{ic\_calib\_db\_master\_file}{\definevariable{DATA\_ROOT\_CALIB}/master\_calib\_SPIROU.txt}{Define calibd DB master filename  }{\caldark, \calloc}{\hadmricdp}
+% Future ic_calibDB_filename
+
+% ----------------------------------------------------------
+% \vspace{0.5cm}
+% \subsection{}
+
+% \ParamList{}{}{}{}{}
+
+% ------------------------------------------------------------------------
+\section{Keywords}
+\label{section:the_keywords}
+% ------------------------------------------------------------------------
+
+Some text here.
+
+
+
+
+
+
+
+
+
+
+
+
