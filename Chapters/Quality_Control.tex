@@ -6,25 +6,47 @@
 
 There are currently two quality control checks for cal\_DARK\_spirou
 \begin{itemize}
-\item Unexpected dark level: $\text{Median Flux} < QC_{\text{Max Dark Level}}$
-\item Unexpected Fraction of dead pixels: $\text{Number of dead pixels} < QC_{\text{Max Dead Pixels}}$
+\item Unexpected dark level: 
+	\begin{equation}
+	\text{Median Flux} < \text{qc\_max\_darklevel}
+	\end{equation}
+
+\item Unexpected Fraction of dead pixels: 
+	\begin{equation}
+	\text{Number of dead pixels} < \text{qc\_maxdead}
+	\end{equation}
 \end{itemize}
 
-\noindent where $QC_{\text{Max Dark Level}}$ and $QC_{\text{Max Dead Pixels}}$ are constants currently defined in cal\_DARK\_spirou.py
-
-\begin{lstlisting}[style=pythonstyle]
-##########################
-#   Quality control      #
-##########################
-
-qc_max_darklevel=1.0  # Max dark median level [ADU/s]  
-qc_maxdead=25.0       # Fraction Max of dead pixel [%]
-\end{lstlisting}
+\noindent where qc\_max\_darklevel and qc\_maxdead are constants (see Section \ref{section:the_constants}).
 
 \section{cal\_loc\_RAW\_spirou}
 \label{section:qc_cal_loc_RAW_spirou}
 
-Some text here
+There are currently five quality control checks for cal\_loc\_RAW\_spirou
+\begin{itemize}
+\item Too many rejected orders in center position fit: 
+	\begin{equation}
+	\text{Number of rejected orders in center fit} >\text{qc\_loc\_maxlocfit\_removed\_ctr}
+	\end{equation}
+\item Too many rejected orders in width fit: 
+	\begin{equation}
+	\text{Number of rejected orders in width fit} >\text{qc\_loc\_maxlocfit\_removed\_width}
+	\end{equation}
+\item RMS on center fit too high: 
+	\begin{equation}
+	\text{Mean rms center fit} > \text{qc\_loc\_rmsmax\_center}
+	\end{equation}
+\item RMS on width fit too high: 
+	\begin{equation}
+	\text{Mean rms width fit} > \text{qc\_loc\_rmsmax\_fwhm}
+	\end{equation}
+\item Abnormal number of identified orders: 
+	\begin{equation}
+	\text{Number of orders found} \neq \text{qc\_loc\_nbo}
+	\end{equation}
+\end{itemize}
+
+\noindent where c\_loc\_maxlocfit\_removed\_ctr, qc\_loc\_maxlocfit\_removed\_width, qc\_loc\_rmsmax\_center, qc\_loc\_rmsmax\_fwhm and qc\_loc\_nbo are constants (see Section \ref{section:the_constants}).
 
 \section{cal\_SLIT\_spirou}
 \label{section:qc_cal_SLIT_spirou}
