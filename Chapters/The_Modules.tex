@@ -199,6 +199,7 @@ Contains functions for the calibrations database (infos for master\_calib.txt, a
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{filename2tuni\_old}
 \begin{lstlisting}[style=pythonstyle]
 @filename2tunix_old@(file_name)
@@ -250,6 +251,7 @@ Contains functions for the calibrations database (infos for master\_calib.txt, a
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{update\_master\_onlast}
 \begin{lstlisting}[style=pythonstyle]
 @update_master_onlast@(master_file, night, key, file_name, opt_cmt)
@@ -293,6 +295,7 @@ Contains functions for the calibrations database (infos for master\_calib.txt, a
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{get\_early\_last\_master}
 \begin{lstlisting}[style=pythonstyle]
 @get_early_last_master@(master_file, opt_cmt)
@@ -316,6 +319,7 @@ Contains functions for the calibrations database (infos for master\_calib.txt, a
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{cp\_db\_files}
 \begin{lstlisting}[style=pythonstyle]
 @cp_db_files@(calib_db_dir, reduc_dir, db_dict, opt_cmt)
@@ -332,6 +336,7 @@ Contains functions for the calibrations database (infos for master\_calib.txt, a
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{put\_files}
 \begin{lstlisting}[style=pythonstyle]
 @put_file@(calib_db_dir, file, opt_cmt)
@@ -457,6 +462,7 @@ Contains functions to read FITS file and copy keywords
 
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{write\_data}
 \begin{lstlisting}[style=pythonstyle]
 @write_data@(fitsfilename, data)
@@ -470,6 +476,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{read\_ext}
 \begin{lstlisting}[style=pythonstyle]
 @read_ext@(fitsfilename)
@@ -481,6 +488,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{read\_key}
 \begin{lstlisting}[style=pythonstyle]
 @read_key@(fitsfilename, keyname, hdu=0)
@@ -497,6 +505,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{read\_keys}
 \begin{lstlisting}[style=pythonstyle]
 @read_keys@(fitsfilename, keylist, hdu=0)
@@ -528,6 +537,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{update\_key}
 \begin{lstlisting}[style=pythonstyle]
 @update_key@(fitsfilename, key)
@@ -543,6 +553,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{delete\_key}
 \begin{lstlisting}[style=pythonstyle]
 @delete_key@(fitsfilename, keyname)
@@ -556,6 +567,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{writekey2dlist}
 \begin{lstlisting}[style=pythonstyle]
 @writekey2dlist@(fitsfilename, a, kw)
@@ -574,6 +586,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{copy\_key}
 \begin{lstlisting}[style=pythonstyle]
 @copy_key@(fits1, fits2)
@@ -594,6 +607,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{copy\_keys\_root}
 \begin{lstlisting}[style=pythonstyle]
 @copy_keys_root@(fits1, fits2, root)
@@ -608,6 +622,7 @@ Contains functions to read FITS file and copy keywords
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{readkeyloco}
 \begin{lstlisting}[style=pythonstyle]
 @readkeyloco@(fitsfilename, kw, nbo, nbc)
@@ -635,16 +650,49 @@ Contains functions to read FITS file and copy keywords
 
 Contains functions for order localization
 
+\vspace{0.5cm}
 \subsection{meas\_back}
 \begin{lstlisting}[style=pythonstyle]
 @meas_back@(y, backini, niter=3, coeff=9)
+    """
+    Measure and subtract the background from a column, iterative background fit
+    by a polynomial and cut off high values
+    
+    :param y: 1D numpy array, column to use for background measurement
+    :param backini: float, cut level
+    :param niter: int, number of fits to perform
+    :param coeff: int, polynomial order to fit
+    :return yc: 1D numpy array, the image column with background subtracted
+    :return f: 1D numpy array, the background fit data
+    """
 \end{lstlisting}
 
+\noindent Note: Currently not used?
+\noindent Note: required FORTRAN `fitpoly' function
+
+\vspace{0.5cm}
 \subsection{meas\_top}
 \begin{lstlisting}[style=pythonstyle]
 @meas_top@(yc, nbslice, nbpix)
+    """
+    Measure and normalize the top level of a column, seach for maximum on
+    "nbslice" slices of "nbpix" pixels. Should consist of 1 or 2 orders. A 
+    polynomial fit of order 9 is then divided through the original column
+
+    :param yc: 1D numpy array, the image column
+    :param nbslice: int, the number slices to use?
+    :param nbpix: int, the number of pixels to use?
+    
+    :return ycc: 1D numpy array, the image column normalised by the fit
+    :return f: 1D numpy array, the background fit data
+    """
 \end{lstlisting}
 
+\noindent Note: Not sure exactly what this function is doing
+\noindent Note: Currently not used?
+\noindent Note: required FORTRAN `fitpoly' function
+
+\vspace{0.5cm}
 \subsection{meas\_minmax}
 \begin{lstlisting}[style=pythonstyle]
 @meas_minmax@(y, size)
@@ -668,94 +716,237 @@ Contains functions for order localization
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{meas\_min}
 \begin{lstlisting}[style=pythonstyle]
 @meas_min@(yc, nbslice, nbpix)
+    """
+    Measure and subtract the minimum level of a column, search for minimum on
+    "nbslice" slices of "nbpix" pixels. Should consist of 1 or 2 orders. A
+    polynomial fit of order 9 is then subtracted from the original column
+
+    :param yc: 1D numpy array, the image column
+    :param nbslice: int, the number slices to use?
+    :param nbpix: int, the number of pixels to use?
+
+    :return ycc: 1D numpy array, the image column subtracted by the fit
+    :return f: 1D numpy array, the background fit data
+    """
 \end{lstlisting}
 
+\noindent Note: Not sure exactly what this function is doing
+\noindent Note: Currently not used?
+\noindent Note: required FORTRAN `fitpoly' function
+
+\vspace{0.5cm}
 \subsection{poscolc}
 \begin{lstlisting}[style=pythonstyle]
 @poscolc@(ycc, seuil)
     """
-    Takes the central pixel values and finds orders by looking for the start
-    and end above threshold
-    
-    :param ycc: numpy array (1D) size = number of rows, 
+    Takes the central pixel values and finds the order centers by looking for
+    the start and end above threshold
+
+    :param ycc: numpy array (1D) size = number of rows,
                 the central pixel values
     :param seuil: float, the threshold above which to find pixels as being
                   part of an order
-                      
+
     :return positions: numpy array (1D), size= number of rows,
                        the pixel positions in cvalues where the centers of each
-                       order should be 
+                       order should be
     """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{findord}
 \begin{lstlisting}[style=pythonstyle]
 @findord@(ycc, seuil, widthmin=5)
+    """
+    Takes a set of pixel values and finds the order center and width by 
+    looking for the start and end above threshold "seuil"
+
+    :param ycc: numpy array (1D) size = number of rows,
+                an array of pixel values (across one order)
+    :param seuil: float, the threshold above which to find pixels as being
+                  part of an order
+    :param widthmin" int, the minimum width of an order to be a valid, accepted
+                     order
+
+    :return position: float, the central pixel positions in ycc where the 
+                      centers of this order should be
+    :return width: float, the width in pixels of this order
+    """
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{locgaus}
 \begin{lstlisting}[style=pythonstyle]
 @locgaus@(y, ind1, ind2, sigdet, opt=1)
+    """
+    Find the position and the FWHM of one order using a gaussian using
+    weights
+
+    Non-Linear Fit of a Gaussian with 4 Parameters by the Method
+    from Levenberg-Marquardt. Uses the subroutines MRQMIN, MRQCOF,
+    COVSRT and GAUSSJ.
+
+    :param y: 1D numpy array, the pixel values between ind1 and ind2
+    :param ind1: float, the start point of this order
+    :param ind2: float, the end point of this order
+    :param sigdet: float, the ccdsigdet for the image
+    :param opt: int, whether to use weights
+                if opt=1 weights are used in the form:
+                    weights = 1/(sqrt(y + sigdet^2))
+                if opt=2 weights are used in the form:
+                    weights = y 
+                    
+    :return center: float, the center of the order from the fit 
+                    (set to zero if difference in y is less than 20*sigdet)
+    :return fity: 1D numpy array, size=image size, the gaussian fit for y
+    :return sigma: float, the FWHM of the order from the fit
+                    (set to zero if difference in y is less than 20*sigdet)
+    """
 \end{lstlisting}
 
+\noindent Note: Currently not used?
+\noindent Note: required FORTRAN `fitgaus' function
+
+\vspace{0.5cm}
 \subsection{loc2gaus}
 \begin{lstlisting}[style=pythonstyle]
 @loc2gaus@(y, ind1, ind2, delta, sigdet, opt=1)
+    """
+    Find the position and the FWHM of one order using a two gaussian model with
+    fixed widths (delta) using weights
+
+    Non-Linear Fit of a Gaussian with 4 Parameters by the Method
+    from Levenberg-Marquardt. Uses the subroutines MRQMIN, MRQCOF,
+    COVSRT and GAUSSJ.
+
+    :param y: 1D numpy array, the pixel values between ind1 and ind2
+    :param ind1: float, the start point of this order
+    :param ind2: float, the end point of this order
+    :param delta: int
+    :param sigdet: float, the ccdsigdet for the image
+    :param opt: int, whether to use weights
+                if opt=1 weights are used in the form:
+                    weights = 1/(sqrt(y + sigdet^2))
+                if opt=2 weights are used in the form:
+                    weights = y
+
+    :return center: float, the center of the order from the fit
+                    (set to zero if difference in y is less than 20*sigdet)
+    :return fity: 1D numpy array, size=image size, the gaussian fit for y
+    :return fwhm: float, the FWHM of the order from the fit
+                    (set to zero if difference in y is less than 20*sigdet)
+    :return profile_error: float, the standard deviation of the residuals
+                           between fit and data
+    """
 \end{lstlisting}
 
+\noindent Note: Currently not used?
+\noindent Note: required FORTRAN `fit2gaus' function
+
+\vspace{0.5cm}
 \subsection{fitprofil}
 \begin{lstlisting}[style=pythonstyle]
 @fitprofil@(y, sigdet)
+    """
+    Determine the profile of one order using a Gaussian model 
+    (weights = 1/sqrt((y + sigdet^2)/max(y)))
+    
+    :param y: 1D numpy array, the pixel values of one order
+    :param sigdet: float, the ccdsigdet for the image
+    
+    :return fw: float, the FWHM?
+    :return fity: 1D numpy array, the gaussian fit to the data
+    """
 \end{lstlisting}
 
+\noindent Note: Currently not used?
+\noindent Note: required FORTRAN `fitgaus' function
+
+\vspace{0.5cm}
 \subsection{imaloco}
 \begin{lstlisting}[style=pythonstyle]
 @imaloco@(data, ac, fitsfilename)
+    """
+    Creates and save the image with the superposistion of the center of orders
+    (set to zero)
+
+    :param data: numpy array (2D), the image
+    :param ac: numpy array (2D), size=(number of orders x polynomial fit level)
+               the coefficient matrix (coefficients for all orders
+    :param fitsfilename: string, file location and file name to save the file
+    
+    :return None:
+    """
 \end{lstlisting}
 
+\noindent Note: Currently not used?
+
+\vspace{0.5cm}
 \subsection{imaloco2}
 \begin{lstlisting}[style=pythonstyle]
 @imaloco2@(data, ac, fitsfilename)
+    """
+    Creates and save the image with the superposistion of the center of orders
+    (set to zero)
+
+    :param data: numpy array (2D), the image
+    :param ac: numpy array (2D), size=(number of orders x polynomial fit level)
+               the coefficient matrix (coefficients for all orders
+    :param fitsfilename: string, file location and file name to save the file
+    
+    :return None:
+    """
 \end{lstlisting}
 
+\noindent Note: Exactly the same as imaloco?
+
+\vspace{0.5cm}
 \subsection{tableloco}
 \begin{lstlisting}[style=pythonstyle]
 @tableloco@(tblfilename, a)
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{keyloco}
 \begin{lstlisting}[style=pythonstyle]
 @keyloco@(fitsfilename, ac, ass)
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{keyloco2}
 \begin{lstlisting}[style=pythonstyle]
 @keyloco2@(fitsfilename, ac, ass)
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{writekeyloco3}
 \begin{lstlisting}[style=pythonstyle]
 @writekeyloco3@(fitsfilename, a)
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{writekeyloco}
 \begin{lstlisting}[style=pythonstyle]
 @writekeyloco@(fitsfilename, a, kw)
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{readkeyloco}
 \begin{lstlisting}[style=pythonstyle]
 @readkeyloco@(fitsfilename, ic_locnbmaxo, ic_locdfitc)
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{readkeyloco3}
 \begin{lstlisting}[style=pythonstyle]
 @readkeyloco3@(fitsfilename, rootkeyname)
 \end{lstlisting}
 
+\vspace{0.5cm}
 \subsection{write\_fitsloco}
 \begin{lstlisting}[style=pythonstyle]
 @write_fitsloco@(fitsfilename, a, dim)
