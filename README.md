@@ -40,7 +40,7 @@ One can define keywords (that the user should change) similarly to defined varia
 ```
 
 #### \customdirtree
-USing the `dirtree` package one can create directory trees, the shading, spacing and style is controlled by a custom command:
+Using the `dirtree` package one can create directory trees, the shading, spacing and style is controlled by a custom command:
 ```tex
 \customdirtree{%
 .1 Outer folder.
@@ -50,6 +50,22 @@ USing the `dirtree` package one can create directory trees, the shading, spacing
 }
 ```
 Note: comments can be added with `\DTcomment{ COMMENT }` and every line must end with a period `.`
+
+#### \ParamList and \ParamListCode
+
+Create param list entry (all formatted the same)
+```tex
+\ParamList{Name}{Default Value}{Description}{Used in}{Defined in}
+\ParamListCode{Name}{Code}{Description}{Used in}{Defined in}
+```
+
+Where:
+    - `Name` is the name of the constant, variable or keyword
+    - `Default Value` is the default value currently assigned wherever it is defined
+    - `Code` is python code as a default value (highlighted blue)
+    - `Description` is a description of the variable
+    - `Used in` is the program/recipe the variable is used in
+    - `Defined in` is the place where it is defined (put all locations in, with the top overrider first to show precedence)
 
 ### 4. Code highlighting
 
