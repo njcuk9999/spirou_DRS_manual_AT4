@@ -1,5 +1,15 @@
 \chapter{Constants and Keywords}
 
+% shortcuts to oftenly used variables
+\newcommand{\calloc}{cal\_loc\_RAW\_spirou.py}
+\newcommand{\caldark}{cal\_DARK\_spirou.py}
+\newcommand{\hadmricdp}{hadmrICDP\_SPIROU.py}
+\newcommand{\kwdrs}{KW\_DRS.py}
+\newcommand{\rootdrsloc}{\definevariable{kw\_root\_drs\_loc}}
+\newcommand{\locofiber}{\*\_LOCO\_\definevariable{fiber}\*}
+\newcommand{\fwhmfiber}{\*\_fwhm-order\_\definevariable{fiber}\*}
+
+
 % ------------------------------------------------------------------------
 \section{The configuration files}
 \label{section:the_config_files}
@@ -121,12 +131,7 @@ In addition some other environmental variables are set (or need to be set).
 \label{section:the_constants}
 % ------------------------------------------------------------------------
 
-\newcommand{\calloc}{cal\_loc\_RAW\_spirou.py}
-\newcommand{\caldark}{cal\_DARK\_spirou.py}
-\newcommand{\hadmricdp}{hadmrICDP\_SPIROU.py}
-\newcommand{\kwdrs}{KW\_DRS.py}
-
-Below are the listed currently used constants in table format. The `Name' column refers to the name of the constant (and what to search for), the `Value' column is the default value, the `Description' column provides a brief description of what the variable controls, the `Used in' column shows which recipes use this variable and the `Location' column defines the file or files in which this variable is located (they may be hardcoded in recipe files thus the location may not be a config file), order of precedence is indicated but may be wrong (probably best to change call instances). These are split into catagories for ease of reading.
+Below are the listed currently used constants in table format. The `Name' column refers to the name of the constant (and what to search for), the `Value' column is the default value, the `Description' column provides a brief description of what the variable controls, the `Used in' column shows which recipes use this variable and the `Location' column defines the file or files in which this variable is located (they may be hardcoded in recipe files thus the location may not be a config file), order of precedence is indicated but may be wrong (probably best to change call instances). These are split into catagories for ease of reading. \\
 
 \noindent Note: This section is currently updated for `\caldark' and `\calloc' only.
 
@@ -288,9 +293,73 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 \label{section:the_keywords}
 % ------------------------------------------------------------------------
 
-Some text here.
+Below are a list of keywords that are used in FITS rec header files. Most are
+defined in a few files, specific FITS rec files that these are used in are listed in []. These are split into catagories for ease of reading. \\
+
+\noindent Note: This section is currently updated for `\caldark' and `\calloc' only.
 
 
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{General keywords}
+
+\KWList{VERSION}{kw\_version}{DRS version}{\calloc}{\kwdrs}
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{cal\_dark keywords}
+
+\KWList{DADEAD}{kw\_DARK\_dead}{Fraction dead pixels [\%]}{\caldark [Dark Frame]}{\caldark}
+
+\KWList{DAMED}{kw\_DARK\_MED}{median dark level [ADU/s]}{\caldark [Dark Frame]}{\caldark}
+
+\KWList{DABDEAD}{kw\_DARKBLUE\_dead}{Fraction dead pixels blue part [\%]}{\caldark [Dark Frame]}{\caldark}
+
+\KWList{DABMED}{kw\_DARKBLUE\_med}{median dark level blue part [ADU/s]}{\caldark [Dark Frame]}{\caldark}
+
+\KWList{DARDEAD}{kw\_DARKRED\_dead}{Fraction dead pixels red part [\%]}{\caldark [Dark Frame]}{\caldark}
+
+\KWList{DARMED}{kw\_DARKRED\_med}{median dark level red part [ADU/s]}{\caldark [Dark Frame]}{\caldark}
+
+\KWList{DACUT}{kw\_DARK\_cut}{Threshold of dark level retain [ADU/s]}{\caldark [Dark Frame, Bad Pixel Map]}{\caldark}
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{cal\_loc keywords}
+
+\KWList{LO}{kw\_root\_drs\_loc}{Used in keywords below}{\kwdrs}{\kwdrs}
+
+\KWList{\rootdrsloc NBO}{kw\_LOCO\_NBO}{nb orders localise}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc BCKGRD}{kw\_LOCO\_BCKGRD}{mean background [\%]}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc DEGCTR}{kw\_LOCO\_DEG\_C}{degree fit ctr ord}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc DEGFWH}{kw\_LOCO\_DEGW}{degree fit width ord}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc DEGERR}{kw\_LOCO\_DEGE}{degree fit profile error}{\calloc [\locofiber, \fwhmfiber] but not used}{\kwdrs}
+
+\KWList{\rootdrsloc PRODEL}{kw\_LOCO\_DELTA}{param model 3gau}{\calloc [\locofiber, \fwhmfiber]  but not used}{\kwdrs}
+
+\KWList{\rootdrsloc CTR[row, col]}{kw\_LOCO\_CTR\_COEFF}{Coeff center order}{\calloc [\locofiber, \fwhmfiber], used on a 2D list of coefficients size=(number of orders x number of fit coefficients)}{\kwdrs}
+
+\KWList{\rootdrsloc FW[row, col]}{kw\_LOCO\_FWHM\_COEFF)}{Coeff fwhm order}{\calloc [\locofiber, \fwhmfiber], used on a 2D list of coefficients size=(number of orders x number of fit coefficients)}{\kwdrs}
+
+\KWList{SIGDET}{kw\_CCD\_SIGDET}{CCD Readout Noise [e-]}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{CONAD}{kw\_CCD\_CONAD}{CCD conv factor [e-/ADU]}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc FLXMAX}{kw\_LOC\_maxflx}{max flux in order [ADU]}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc CTRMAX}{kw\_LOC\_Smaxpts\_ctr}{max rm pts ctr}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc WIDMAX}{kw\_LOC\_Smaxpts\_width}{max rm pts width}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc RMSCTR}{kw\_LOC\_rms\_ctr}{max rms ctr}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{\rootdrsloc RMSWID}{kw\_LOC\_rms\_fwhm}{max rms width}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
+
+\KWList{QC}{kw\_drs\_QC)}{QCcontr}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
 
 
 
