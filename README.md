@@ -72,6 +72,7 @@ Where:
 ### 4. Code highlighting
 
 There are 3 custom code highlights "text", "bash" and "python" use as following:
+The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@` symbol natively).
 
 #### text file code (i.e. to write in a text file)
 ```tex
