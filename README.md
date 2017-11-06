@@ -151,8 +151,8 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
         - [ ] cal_extract
         - [ ] cal_drift
     - Keywords
-        - [ ] cal_dark
-        - [ ] cal_loc
+        - [x] cal_dark
+        - [x] cal_loc
         - [ ] cal_slit
         - [ ] cal_ff
         - [ ] cal_extract
@@ -162,7 +162,7 @@ There are 3 custom code highlights "text", "bash" and "python" use as following:
     - [x] spirouBACK
     - [x] spirouCDB
     - [ ] spirouEXTOR
-    - [ ] spirouFITS
+    - [x] spirouFITS
     - [x] spirouLOCOR
     - [ ] spirouRV
     - [ ] spirouVISU
