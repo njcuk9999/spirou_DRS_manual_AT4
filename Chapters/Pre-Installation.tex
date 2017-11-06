@@ -162,9 +162,15 @@ Make sure the following folders are created:
 \label{section:checking for Fortran/C}
 % --------------------------------------------------------------------
 
-\TODO{design checks for Fortran and C, or do we just say that \\ installation requires Fortran and C to be install \\(Installing Fortran and C will require root access).}
+Fortran and C compiling is taken care of via python (f2py and distutils respectively).
 
-Please check whether Fortran and C are installed. In addition to C you will need the C package `GSL', check that it is installed (default paths may be: /usr/local/include/gsl or /opt/gsl). If it is not installed please follow the instructions in Section \ref{section:install-gsl}.
+\noindent f2py is installed with miniconda and thus needs to be aliased (as stated above). This is done automatically with the env_setup script or manaully with the following commands added to the `.bashrc' file:
+\begin{lstlisting}[style=text]
+  @chmod@ +x "$PYTHON_DIR/bin/f2py"
+  @alias@ f2py="$PYTHON_DIR/bin/f2py"
+\end{lstlisting}
+
+In addition you will need the C package `GSL', check that it is installed (default paths may be: /usr/local/include/gsl or /opt/gsl). If it is not installed please follow the instructions in Section \ref{section:install-gsl}. Note that the \definevariable{GSL\_DIR} environmental variable must be set and some of the installation files must be modified (currently) in order to point the installation scripts to the correct location (see Section \ref{section:downloading_install_Scripts}).
 
 % ---------------------------------------------------------------------
 \subsection{Installing GSL back-ends without root access}
