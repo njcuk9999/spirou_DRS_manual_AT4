@@ -127,7 +127,7 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [x] Notes on syntax
 - Pre-Install
     - [x] prerequisites
-    - [ ] Check C/Fortran codes or just required?
+    - [x] Check C/Fortran codes or just required?
     - [x] GSL for C codes
     - [x] Isolated version of python
     - [x] Required python modules
