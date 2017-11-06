@@ -51,16 +51,18 @@ Using the `dirtree` package one can create directory trees, the shading, spacing
 ```
 Note: comments can be added with `\DTcomment{ COMMENT }` and every line must end with a period `.`
 
-#### \ParamList and \ParamListCode
+#### \ParamList, \ParamListCode and \KWlist
 
-Create param list entry (all formatted the same)
+Create parameter or keyword entry (all formatted the same)
 ```tex
 \ParamList{Name}{Default Value}{Description}{Used in}{Defined in}
 \ParamListCode{Name}{Code}{Description}{Used in}{Defined in}
+\KWList{Name}{Variable Name}{Description}{Used in}{Defined in}
 ```
 
 Where:
     - `Name` is the name of the constant, variable or keyword
+    - `Variable Name` is the name given in the code (for keywords)
     - `Default Value` is the default value currently assigned wherever it is defined
     - `Code` is python code as a default value (highlighted blue)
     - `Description` is a description of the variable
