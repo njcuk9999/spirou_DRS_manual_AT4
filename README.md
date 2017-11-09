@@ -204,62 +204,62 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
 ### 5.2 The sections
 - Introduction
     - [ ] Needs writing
-    - [x] Notes on syntax
+    - [x] ~~Notes on syntax~~
 - Pre-Install
-    - [x] prerequisites
-    - [x] Check C/Fortran codes or just required?
-    - [x] GSL for C codes
-    - [x] Isolated version of python
-    - [x] Required python modules
+    - [x] ~~prerequisites~~
+    - [x] ~~Check C/Fortran codes or just required?~~
+    - [x] ~~GSL for C codes~~
+    - [x] ~~Isolated version of python~~
+    - [x] ~~Required python modules~~
     - [ ] Needs trying to verify reproducibility
 - Installation
-    - [x] activation
-    - [x] downloading + installing
-    - [x] updating
+    - [x] ~~activation~~
+    - [x] ~~downloading + installing~~
+    - [x] ~~updating~~
     - [ ] Needs trying to verify reproducibility
 - Using the DRS
-    - [x] Running the code
-    - [x] Working example of the code
+    - [x] ~~Running the code~~
+    - [x] ~~Working example of the code~~
 - Data Architecture
-    - [x] Installed file structure
-    - [x] The install root (bin and DRS_SPIROU)
-    - [x] The data root
-    - [x] The calib database
+    - [x] ~~Installed file structure~~
+    - [x] ~~The install root (bin and DRS_SPIROU)~~
+    - [x] ~~The data root~~
+    - [x] ~~The calib database~~
 - Constants and Keywords
     - Constants
-        - [x] cal_dark
-        - [x] cal_loc
-        - [x] cal_slit
+        - [x] ~~cal_dark~~
+        - [x] ~~cal_loc~~
+        - [x] ~~cal_slit~~
         - [ ] cal_ff
         - [ ] cal_extract
         - [ ] cal_drift
     - Keywords
-        - [x] cal_dark
-        - [x] cal_loc
-        - [x] cal_slit
+        - [x] ~~cal_dark~~
+        - [x] ~~cal_loc~~
+        - [x] ~~cal_slit~~
         - [ ] cal_ff
         - [ ] cal_extract
         - [ ] cal_drift
 - The Modules
-    - [x] Needs a file tree
-    - [x] spirouBACK
-    - [x] spirouCDB
+    - [x] ~~Needs a file tree~~
+    - [x] ~~spirouBACK~~
+    - [x] ~~spirouCDB~~
     - [ ] spirouEXTOR
-    - [x] spirouFITS
-    - [x] spirouLOCOR
+    - [x] ~~spirouFITS~~
+    - [x] ~~spirouLOCOR~~
     - [ ] spirouRV
     - [ ] spirouVISU
 - The Recipes
-    - [x] cal_DARK_spirou
-    - [x] cal_loc_RAW_spirou
-    - [x] cal_SLIT_spirou
-    - [x] cal_FF_RAW_spirou
-    - [x] cal_extract_RAW_spirou
-    - [x] cal_DRIFT_RAW_spirou
+    - [x] ~~cal_DARK_spirou~~
+    - [x] ~~cal_loc_RAW_spirou~~
+    - [x] ~~cal_SLIT_spirou~~
+    - [x] ~~cal_FF_RAW_spirou~~
+    - [x] ~~cal_extract_RAW_spirou~~
+    - [x] ~~cal_DRIFT_RAW_spirou~~
 - Quality control
-    - [x] cal_DARK_spirou
-    - [x] cal_loc_RAW_spirou
-    - [x] cal_SLIT_spirou
+    - [x] ~~cal_DARK_spirou~~
+    - [x] ~~cal_loc_RAW_spirou~~
+    - [x] ~~cal_SLIT_spirou~~
     - [ ] cal_FF_RAW_spirou
     - [ ] cal_extract_RAW_spirou
     - [ ] cal_DRIFT_RAW_spirou
