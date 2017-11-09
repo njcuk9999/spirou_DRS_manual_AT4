@@ -310,20 +310,20 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 \ParamList{qc\_dark\_time}{1.0}{Min dark exposure time}{\caldark}{\hadmricdp}
 
-\ParamList{qc\_loc\_maxlocfit\_removed\_ctr}{1500}{Maximum points removed in location fit }{\calloc}{\hadmricdp}
+\ParamList{qc\_loc\_maxlocfit\_removed\_ctr}{1500}{Maximum points removed in location fit}{\calloc}{\hadmricdp}
 
-\ParamList{qc\_loc\_maxlocfit\_removed\_wid}{105}{Maximum points removed in width fit }{\calloc}{\hadmricdp}
+\ParamList{qc\_loc\_maxlocfit\_removed\_wid}{105}{Maximum points removed in width fit}{\calloc}{\hadmricdp}
 
-\ParamList{qc\_loc\_rmsmax\_center}{100}{Maximum rms allowed in fitting location    }{\calloc}{\hadmricdp}
+\ParamList{qc\_loc\_rmsmax\_center}{100}{Maximum rms allowed in fitting location}{\calloc}{\hadmricdp}
 
-\ParamList{qc\_loc\_rmsmax\_fwhm }{500}{Maximum rms allowed in fitting width }{\calloc}{\hadmricdp}
+\ParamList{qc\_loc\_rmsmax\_fwhm }{500}{Maximum rms allowed in fitting width}{\calloc}{\hadmricdp}
 
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Calib DB settings}
 
-\ParamList{ic\_calib\_db\_master\_file}{\definevariable{DATA\_ROOT\_CALIB}/master\_calib\_SPIROU.txt}{Define calibd DB master filename  }{\caldark, \calloc}{\hadmricdp}
+\ParamList{ic\_calib\_db\_master\_file}{master\_calib\_SPIROU.txt}{Define calibd DB master filename  }{\caldark, \calloc}{\hadmricdp}
 % Future ic_calibDB_filename
 
 % ----------------------------------------------------------
@@ -334,7 +334,7 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 % ------------------------------------------------------------------------
 \section{Input Keywords}
-\label{section:the_keywords}
+\label{section:the_in_keywords}
 
 
 % For consistency use:
@@ -356,7 +356,7 @@ Last updated version 21 Nov 2014.
 \subsection{Standard FITS Keywords}
 
 \begin{table}[H]
-\begin{tabular}{lcrcl}
+\begin{tabular}{>{\color{red}}l c r c l}
 BITPIX  & = &                   16 & / & 16bit \\
 NAXIS   & = &                    2 & / & Number of axes \\
 NAXIS1  & = &                 4096 & / & Number of pixel columns \\
@@ -373,7 +373,7 @@ INSTRUME& = & `SPIROU'           & / & Instrument Name \\
 \subsection{FITS keywords related to the detector}
 
 \begin{table}[H]
-\begin{tabular}{lcrcl}
+\begin{tabular}{>{\color{red}}l c r c l}
 EXPTIME & = &                800.0 & / &  Integration time (seconds) \\
 DARKTIME& = &            800.0 & / & Dark current time (seconds) \\
 GAIN    & = &                 1.30 & / & gain (electrons/ADU) \\
@@ -389,7 +389,7 @@ EMCNTS  & = & 	444578   & / & exposure meter counts at end \\
 \vspace{0.5cm}
 \subsection{FITS keywords related to the target}
 \begin{table}[H]
-\begin{tabular}{lcrcl}
+\begin{tabular}{>{\color{red}}l c r c l}
 OBJNAME & = &  Gl9999   & / &  Target name \\
 OBJRA   & = &  `5:35:09.87'         & / & Target right ascension \\
 OBJDEC  & = &  `-5:27:53.3'        & / & Target declination \\
@@ -409,7 +409,7 @@ OBJKMAG & = &        10.0 & / & Target K magnitude  \\
 \subsection{FITS keywords related to the telescope}
 
 \begin{table}[H]
-\begin{tabular}{lcrcl}
+\begin{tabular}{>{\color{red}}l c r c l}
 DATE\_OBS& = & `2013-11-26T09 :06 :14.858'       & / & Date at start of observation (UTC) \\
 EQUINOX & = &               2000.0 & / &Equinox of coordinates \\
 EPOCH   & = &            2000.0 & / & Epoch of coordinates \\
@@ -427,7 +427,7 @@ SEEING & = &    1.0 & / & Seeing at start of observation \\
 \vspace{0.5cm}
 \subsection{FITS keywords related to the instrument}
 \begin{table}[H]
-\begin{tabular}{lcrcl}
+\begin{tabular}{>{\color{red}}l c r c l}
 TPL\_NAME & = & `SPIROU\_POL\_WAVE'   & / & template Name  \\
 TPL\_NEXP & = &    1    & / & \# of exposure within template  \\
 TPL\_EXPN & = & 1   & / & exposure \# within template  \\
@@ -440,7 +440,7 @@ INS\_RHB2 & = &  180           & / & SPIROU rhomb 2 position deg) \\
 
 % ------------------------------------------------------------------------
 \section{Output Keywords}
-\label{section:the_keywords}
+\label{section:the_out_keywords}
 
 
 % For consistency use:
