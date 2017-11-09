@@ -199,11 +199,11 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
 - - - -
 
 ### 5.1 General
-- [ ] Needs several people to read through it
+- [] Needs several people to read through it
 
 ### 5.2 The sections
 - Introduction
-    - [ ] Needs writing
+    - [] Needs writing
     - [x] Notes on syntax
 - Pre-Install
     - [x] prerequisites
@@ -211,12 +211,12 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [x] GSL for C codes
     - [x] Isolated version of python
     - [x] Required python modules
-    - [ ] Needs trying to verify reproducibility
+    - [] Needs trying to verify reproducibility
 - Installation
     - [x] activation
     - [x] downloading + installing
     - [x] updating
-    - [ ] Needs trying to verify reproducibility
+    - [] Needs trying to verify reproducibility
 - Using the DRS
     - [x] Running the code
     - [x] Working example of the code
@@ -230,25 +230,25 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
         - [x] cal_dark
         - [x] cal_loc
         - [x] cal_slit
-        - [ ] cal_ff
-        - [ ] cal_extract
-        - [ ] cal_drift
+        - [] cal_ff
+        - [] cal_extract
+        - [] cal_drift
     - Keywords
         - [x] cal_dark
         - [x] cal_loc
         - [x] cal_slit
-        - [ ] cal_ff
-        - [ ] cal_extract
-        - [ ] cal_drift
+        - [] cal_ff
+        - [] cal_extract
+        - [] cal_drift
 - The Modules
     - [x] Needs a file tree
     - [x] spirouBACK
     - [x] spirouCDB
-    - [ ] spirouEXTOR
+    - [] spirouEXTOR
     - [x] spirouFITS
     - [x] spirouLOCOR
-    - [ ] spirouRV
-    - [ ] spirouVISU
+    - [] spirouRV
+    - [] spirouVISU
 - The Recipes
     - [x] cal_DARK_spirou
     - [x] cal_loc_RAW_spirou
@@ -260,9 +260,9 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [x] cal_DARK_spirou
     - [x] cal_loc_RAW_spirou
     - [x] cal_SLIT_spirou
-    - [ ] cal_FF_RAW_spirou
-    - [ ] cal_extract_RAW_spirou
-    - [ ] cal_DRIFT_RAW_spirou
+    - [] cal_FF_RAW_spirou
+    - [] cal_extract_RAW_spirou
+    - [] cal_DRIFT_RAW_spirou
     
     
 [Back to top](#table-of-contents)
