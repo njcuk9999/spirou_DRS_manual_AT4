@@ -20,40 +20,75 @@
 \end{shaded}
 }
 
+% \newcommand{\ParamList}[5]{
+% \vspace{0.5cm}
+% \noindent\textcolor{red}{\textbf{#1:}}
+% \begin{itemize}
+% 	\item \textcolor{gray}{\textbf{Default Value:}} #2
+% 	\item \textcolor{gray}{\textbf{Description:}} #3
+% 	\item \textcolor{gray}{\textbf{Used in:}} #4
+% 	\item \textcolor{gray}{\textbf{Defined in:}} #5
+% \end{itemize}
+% }
+
 \newcommand{\ParamList}[5]{
-\vspace{0.5cm}
-\noindent\textcolor{red}{\textbf{#1:}}
 \begin{itemize}
-	\item \textcolor{gray}{\textbf{Default Value:}} #2
-	\item \textcolor{gray}{\textbf{Description:}} #3
-	\item \textcolor{gray}{\textbf{Used in:}} #4
-	\item \textcolor{gray}{\textbf{Defined in:}} #5
+	\item \textbf{#1:}
+    
+    \hspace*{2em} \begin{tabular}{lcrcl}
+	#1 & = & #2 & / & #3 \\
+	\multicolumn{5}{l}{\textcolor{gray}{Used in:} #4} \\
+	\multicolumn{5}{l}{\textcolor{gray}{Defined in:} #5} \\
+	\end{tabular}
 \end{itemize}
 }
+
+% \newcommand{\ParamListCode}[5]{
+% \vspace{0.5cm}
+% \noindent\textcolor{red}{\textbf{#1:}}
+% \begin{itemize}
+% 	\item \textcolor{gray}{\textbf{Default Value:}} 
+% 	\textcolor{blue}{#2}
+% 	\item \textcolor{gray}{\textbf{Description:}} #3
+% 	\item \textcolor{gray}{\textbf{Used in:}} #4
+% 	\item \textcolor{gray}{\textbf{Defined in:}} #5
+% \end{itemize}
+% }
 
 \newcommand{\ParamListCode}[5]{
-\vspace{0.5cm}
-\noindent\textcolor{red}{\textbf{#1:}}
 \begin{itemize}
-	\item \textcolor{gray}{\textbf{Default Value:}} 
-	\textcolor{blue}{#2}
-	\item \textcolor{gray}{\textbf{Description:}} #3
-	\item \textcolor{gray}{\textbf{Used in:}} #4
-	\item \textcolor{gray}{\textbf{Defined in:}} #5
+	\item \textbf{#1:}
+    
+    \hspace*{2em} \begin{tabular}{lcrcl}
+	#1 & = & \textcolor{blue}{#2} & / & #3 \\
+	\multicolumn{5}{l}{\textcolor{gray}{Used in:} #4} \\
+	\multicolumn{5}{l}{\textcolor{gray}{Defined in:} #5} \\
+	\end{tabular}
 \end{itemize}
 }
+
+% \newcommand{\KWList}[5]{
+% \vspace{0.5cm}
+% \noindent\textcolor{red}{\textbf{#1:}}
+% \begin{itemize}
+% 	\item \textcolor{gray}{\textbf{Variable name:}} #2
+% 	\item \textcolor{gray}{\textbf{Description:}} #3
+% 	\item \textcolor{gray}{\textbf{Used in:}} #4
+% 	\item \textcolor{gray}{\textbf{Defined in:}} #5
+% \end{itemize}
+% }
 
 \newcommand{\KWList}[5]{
-\vspace{0.5cm}
-\noindent\textcolor{red}{\textbf{#1:}}
 \begin{itemize}
-	\item \textcolor{gray}{\textbf{Variable name:}} #2
-	\item \textcolor{gray}{\textbf{Description:}} #3
-	\item \textcolor{gray}{\textbf{Used in:}} #4
-	\item \textcolor{gray}{\textbf{Defined in:}} #5
+	\item \textbf{#2:}
+    
+    \hspace*{2em} \begin{tabular}{lcrcl}
+	#1 & = & 0 & / & #3 \\
+	\multicolumn{5}{l}{\textcolor{gray}{Used in:} #4} \\
+	\multicolumn{5}{l}{\textcolor{gray}{Defined in:} #5} \\
+	\end{tabular}
 \end{itemize}
 }
-
 
 % ----------------------------------------------------------------------
 % centered hbox
