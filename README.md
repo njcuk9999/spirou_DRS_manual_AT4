@@ -161,14 +161,14 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - Constants
         - [x] cal_dark
         - [x] cal_loc
-        - [ ] cal_slit
+        - [x] cal_slit
         - [ ] cal_ff
         - [ ] cal_extract
         - [ ] cal_drift
     - Keywords
         - [x] cal_dark
         - [x] cal_loc
-        - [ ] cal_slit
+        - [x] cal_slit
         - [ ] cal_ff
         - [ ] cal_extract
         - [ ] cal_drift
@@ -191,7 +191,7 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
 - Quality control
     - [x] cal_DARK_spirou
     - [x] cal_loc_RAW_spirou
-    - [ ] cal_SLIT_spirou
+    - [x] cal_SLIT_spirou
     - [ ] cal_FF_RAW_spirou
     - [ ] cal_extract_RAW_spirou
     - [ ] cal_DRIFT_RAW_spirou
