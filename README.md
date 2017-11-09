@@ -5,19 +5,32 @@
 ## Table of Contents
 
 1. [Structure](#1-structure)
+
 2. [Constants definitions](#2-constants-definitions)
+
 3. [Custom commands](#3-custom-commands)
-3.1 [\definevariable](#31-definevariable)
-3.2 [\definekeyword](#32-definekeyword)
-3.3 [\customdirtree](#33-customdirtree)
-3.4 [\ParamList, \ParamListCode and \KWlist](#34-paramlist-paramlistcode-and-kwlist)
+
+    3.1 [\definevariable](#31-definevariable)
+    
+    3.2 [\definekeyword](#32-definekeyword)
+    
+    3.3 [\customdirtree](#33-customdirtree)
+    
+    3.4 [\ParamList, \ParamListCode and \KWlist](#34-paramlist-paramlistcode-and-kwlist)
+
 4. [Code highlighting](#4-code-highlighting)
-4.1 [text file code](#41-text-file-code)
-4.2 [bash code](#42-bash-code)
-4.3 [python code](#43-python-code)
+
+    4.1 [text file code](#41-text-file-code)
+    
+    4.2 [bash code](#42-bash-code)
+    
+    4.3 [python code](#43-python-code)
+
 5. [Work in progress/to do](#5-work-in-progressto-do)
-5.1 [General](#51-general)
-5.2 [The sections](#52-the-sections)
+
+    5.1 [General](#51-general)
+    
+    5.2 [The sections](#52-the-sections)
 
 
 - - - -
