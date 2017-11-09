@@ -1,6 +1,6 @@
 # SPIRou DRS Manual for AT-4
 
-![picture alt](./documentation/figures/Logo_SPIRou-22.jpg "SPIRou DRS Manual for AT-4")
+![picture alt](./figures/Logo_SPIRou-22.jpg "SPIRou DRS Manual for AT-4")
 
 ## Table of Contents
 
