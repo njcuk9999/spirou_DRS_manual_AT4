@@ -1,6 +1,31 @@
 # SPIRou DRS Manual for AT-4
 
-### 1. Structure
+![picture alt](./documentation/figures/Logo_SPIRou-22.jpg "SPIRou DRS Manual for AT-4")
+
+## Table of Contents
+
+1. [Structure](#1-structure)
+2. [Constants definitions](#2-constants-definitions)
+3. [Custom commands](#3-custom-commands)
+3.1 [\definevariable](#31-definevariable)
+3.2 [\definekeyword](#32-definekeyword)
+3.3 [\customdirtree](#33-customdirtree)
+3.4 [\ParamList, \ParamListCode and \KWlist](#34-paramlist-paramlistcode-and-kwlist)
+4. [Code highlighting](#4-code-highlighting)
+4.1 [text file code](#41-text-file-code)
+4.2 [bash code](#42-bash-code)
+4.3 [python code](#43-python-code)
+5. [Work in progress/to do](#5-work-in-progressto-do)
+5.1 [General](#51-general)
+5.2 [The sections](#52-the-sections)
+
+
+- - - -
+
+## 1. Structure
+
+- - - -
+
 
 Main .tex file is `SPIRou_DRS_USERManual.tex`, this file contains all the usepackage imports and is the file that should be built by:
 
@@ -24,7 +49,13 @@ Chapters are as follows:
 
 Figures should be placed in the "figures" folder.
 
-### 2. Constants definitions
+[Back to top](#table-of-contents)
+
+- - - -
+
+## 2. Constants definitions
+
+- - - -
 
 As some variables may change (i.e. HEADER keys) we can add these as functions in `/config/constants.tex` i.e.currently defined commands:
 
@@ -37,21 +68,27 @@ As some variables may change (i.e. HEADER keys) we can add these as functions in
 
 ```
 
-### 3. Custom commands
+[Back to top](#table-of-contents)
 
-#### \definevariable
+- - - -
+
+## 3. Custom commands
+
+- - - -
+
+### 3.1 \definevariable
 One can define variables that are changed by the user in the set-up process and then refered to later (i.e. the install path or the data path) by {VARIABLE_NAME} - highlighted in blue - this is wrapped into a custom command:
 ```tex
 \definevariable{VARIABLE NAME}
 ```
 
-#### \definekeyword
+### 3.2 \definekeyword
 One can define keywords (that the user should change) similarly to defined variables but highlighted in red - these are wrapped into a custom command:
 ```tex
 \definekeyword{KEYWORD}
 ```
 
-#### \customdirtree
+### 3.3 \customdirtree
 Using the `dirtree` package one can create directory trees, the shading, spacing and style is controlled by a custom command:
 ```tex
 \customdirtree{%
@@ -63,7 +100,7 @@ Using the `dirtree` package one can create directory trees, the shading, spacing
 ```
 Note: comments can be added with `\DTcomment{ COMMENT }` and every line must end with a period `.`
 
-#### \ParamList, \ParamListCode and \KWlist
+### 3.4 \ParamList, \ParamListCode and \KWlist
 
 Create parameter or keyword entry (all formatted the same)
 ```tex
@@ -81,12 +118,21 @@ Where:
 * `Used in` is the program/recipe the variable is used in
 * `Defined in` is the place where it is defined (put all locations in, with the top overrider first to show precedence)
 
-### 4. Code highlighting
+
+[Back to top](#table-of-contents)
+
+- - - -
+
+## 4. Code highlighting
+
+- - - -
 
 There are 3 custom code highlights "text", "bash" and "python" use as following:
 The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@` symbol natively).
 
-#### text file code (i.e. to write in a text file)
+### 4.1 text file code 
+
+(i.e. to write in a text file)
 ```tex
 \begin{lstlisting}[style=text]
 <INSTRUMENT_NAME>="SPIROU"
@@ -96,7 +142,9 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
 \end{lstlisting}
 ```
 
-#### bash code (i.e. to write in command line)
+### 4.2 bash code 
+
+(i.e. to write in command line)
 ```tex
 \begin{lstlisting}[style=bashstyle]
   =========================================
@@ -118,7 +166,8 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
 \end{lstlisting}
 ```
 
-#### python code (i.e. to write in python)
+### 4.3 python code 
+(i.e. to write in python)
 ```tex
 \begin{lstlisting}[style=pythonstyle]
 >>> @import@ numpy
@@ -128,12 +177,18 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
 \end{lstlisting}
 ```
 
-### 5. Work in progress/to do
+[Back to top](#table-of-contents)
 
-#### General
+- - - -
+
+## 5. Work in progress/to do
+
+- - - -
+
+### 5.1 General
 - [ ] Needs several people to read through it
 
-#### The sections
+### 5.2 The sections
 - Introduction
     - [ ] Needs writing
     - [x] Notes on syntax
@@ -195,3 +250,6 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [ ] cal_FF_RAW_spirou
     - [ ] cal_extract_RAW_spirou
     - [ ] cal_DRIFT_RAW_spirou
+    
+    
+[Back to top](#table-of-contents)
