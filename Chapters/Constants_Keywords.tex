@@ -3,11 +3,12 @@
 % shortcuts to oftenly used variables
 \newcommand{\calloc}{cal\_loc\_RAW\_spirou.py}
 \newcommand{\caldark}{cal\_DARK\_spirou.py}
+\newcommand{\calslit}{cal\_SLIT\_spirou.py}
 \newcommand{\hadmricdp}{hadmrICDP\_SPIROU.py}
 \newcommand{\kwdrs}{KW\_DRS.py}
 \newcommand{\rootdrsloc}{\definevariable{kw\_root\_drs\_loc}}
-\newcommand{\locofiber}{\*\_LOCO\_\definevariable{fiber}\*}
-\newcommand{\fwhmfiber}{\*\_fwhm-order\_\definevariable{fiber}\*}
+\newcommand{\locofiber}{*\_LOCO\_\definevariable{fiber}*}
+\newcommand{\fwhmfiber}{*\_fwhm-order\_\definevariable{fiber}*}
 
 
 % ------------------------------------------------------------------------
@@ -129,11 +130,35 @@ In addition some other environmental variables are set (or need to be set).
 % ------------------------------------------------------------------------
 \section{Constants}
 \label{section:the_constants}
+
+
+% For consistency use:
+% \ParamList{1}{2}{3}{4}{5}
+% Where:
+%        1 = Name of variable used in code (as written in code)
+%        2 = Default value of the variable
+%        3 = Description of the keyword
+%        4 = Where keyword is used (code and or file)
+%        5 = Where keyword is defined (code)
+
+%  If default value is python code one can use the slightly modified command:
+
+% \ParamListCode{1}{\lstinline[style=pythonstyle]{2}}{3}{4}{5}
+% Where:
+%        1 = Name of variable used in code (as written in code)
+%        2 = Code using lstinline
+%
+%        i.e.     2 = \lstinline[style=pythonstyle]{Some python code here}
+%
+%        3 = Description of the keyword
+%        4 = Where keyword is used (code and or file)
+%        5 = Where keyword is defined (code)
+
 % ------------------------------------------------------------------------
 
 Below are the listed currently used constants in table format. The `Name' column refers to the name of the constant (and what to search for), the `Value' column is the default value, the `Description' column provides a brief description of what the variable controls, the `Used in' column shows which recipes use this variable and the `Location' column defines the file or files in which this variable is located (they may be hardcoded in recipe files thus the location may not be a config file), order of precedence is indicated but may be wrong (probably best to change call instances). These are split into catagories for ease of reading. \\
 
-\noindent Note: This section is currently updated for `\caldark' and `\calloc' only.
+\noindent Note: This section is currently updated for `\caldark',`\calloc' and `\calslit' only.
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
@@ -144,6 +169,7 @@ Below are the listed currently used constants in table format. The `Name' column
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Image Variables}
+
 
 \ParamListCode{ic\_ccdx\_blue}{\lstinline[style=pythonstyle]{2048-arange(200,1500)}}{Resize blue window x array}{\caldark}{\caldark}
 % future ic_ccdx_blue_low, ic_ccdx_blue_high
@@ -213,7 +239,7 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 \ParamList{ic\_offset}{40}{row number of image to start processing at}{\calloc}{\calloc}
 
-\ParamList{ic\_ccdcolc}{1000}{Definition of the central column}{\calloc}{\calloc, \hadmricdp}
+\ParamList{ic\_ccdcolc}{1000}{Definition of the central column}{\calloc, \calslit}{\calloc, \hadmricdp}
 % Future ic_cent_col
 
 \ParamList{ic\_ext\_window}{12}{Definition of the extraction window size (half size)}{\calloc}{\calloc}
@@ -258,6 +284,24 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
+\subsection{Tilt calculation parameters}
+
+\ParamList{ic\_extopt}{0}{Extraction option in tilt calculation}{\calslit}{\calslit, \hadmricdp}
+
+\ParamList{ic\_extnbsig}{2.5}{Distance away from center to extract out to +/- }{\calslit}{\calslit, \hadmricdp}
+
+\ParamList{ic\_facdec}{1.6}{Offset multiplicative factor (for width)}{\calslit}{\calslit}
+
+\ParamList{coi}{10}{Oversampling factor (for tilt finding)}{\calslit}{\calslit}
+
+
+% Future uc_tilt_fit
+
+% ic_slit_order_plot
+
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
 \subsection{Quality Control Variables}
 
 \ParamList{qc\_max\_darklevel}{1.0}{Max dark median level [ADU/s]}{\caldark}{\caldark, \hadmricdp}
@@ -288,15 +332,30 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 % \ParamList{}{}{}{}{}
 
+
+
+
+
 % ------------------------------------------------------------------------
 \section{Keywords}
 \label{section:the_keywords}
+
+
+% For consistency use:
+% \KWList{1}{2}{3}{4}{5}
+% Where:
+%        1 = Name of variable in header
+%        2 = Name of keyword, used in code
+%        3 = Description of the keyword
+%        4 = Where keyword is used (code and or file)
+%        5 = Where keyword is defined (code)
+
 % ------------------------------------------------------------------------
 
 Below are a list of keywords that are used in FITS rec header files. Most are
 defined in a few files, specific FITS rec files that these are used in are listed in []. These are split into catagories for ease of reading. \\
 
-\noindent Note: This section is currently updated for `\caldark' and `\calloc' only.
+\noindent Note: This section is currently updated for `\caldark', `\calloc' and `\calslit' only.
 
 
 % ----------------------------------------------------------
@@ -361,7 +420,11 @@ defined in a few files, specific FITS rec files that these are used in are liste
 
 \KWList{QC}{kw\_drs\_QC)}{QCcontr}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
 
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{cal\_slit keywords}
 
+\KWList{\rootdrsloc TILT}{kw\_TILT}{Tilt order}{\calslit [*\_tilt.fits]}{\kwdrs}
 
 
 
