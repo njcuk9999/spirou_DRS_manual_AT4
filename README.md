@@ -79,6 +79,15 @@ As some variables may change (i.e. HEADER keys) we can add these as functions in
 % This sets the folder name date format
 \newcommand{\constantFolderDateFormat}{YYYYMMDD}
 
+% This sets the version
+\newcommand{\MyVersion}{0.0.0}
+
+% This sets the most recent edit date
+\newcommand{\MyDate}{2017-09-03}
+
+% This sets the Author list
+\newcommand{\MyAuthors}{N. Cook}
+
 ```
 
 [Back to top](#table-of-contents)
