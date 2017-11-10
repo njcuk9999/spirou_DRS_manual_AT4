@@ -75,7 +75,7 @@ These are symbolically linked under \definevariable{INSTALL\_ROOT}/bin. A list o
 
 Dark with short exposure time (~5min, to be defined during AT-4) to check if read-out noise, dark current and hot pixel mask are consistent with the ones obtained during technical night. Quality control is done automaticaly by the pipeline (see Section \ref{section:qc_cal_DARK_spirou}). \\
 
-\TODO{Once writen up the new version update this description} 
+% \TODO{Once writen up the new version update this description} 
 
 \noindent File prefixes allowed:
 \begin{itemize}
@@ -109,7 +109,7 @@ cal_DARK_spirou.py  night_repository  filenames
 An example run where everything worked is below:
 
 \begin{lstlisting}[style=text]
-DRS_spirou -m cal_DARK_spirou.py 20170710 dark_dark02d406.fits
+cal_DARK_spirou.py 20170710 dark_dark02d406.fits
 
 
 20:44:08.3 -   ||DRS  SPIROU   v   (interactive mode)
@@ -180,7 +180,7 @@ DRS_spirou -m cal_DARK_spirou.py 20170710 dark_dark02d406.fits
 
 Locates the orders on the `dark\_flat' or `flat\_dark' images.\\
 
-\TODO{Once writen up the new version update this description}
+% \TODO{Once writen up the new version update this description}
 
 \noindent File prefixes allowed:
 \begin{itemize}
@@ -224,7 +224,7 @@ cal_loc_RAW_spirou.py  night_repository  filenames
 An example run where everything worked is below (for `dark\_flat' files):
 
 \begin{lstlisting}[style=text]
-DRS_spirou -m cal_loc_RAW_spirou.py 20170710 dark_flat02f10.fits dark_flat03f10.fits
+cal_loc_RAW_spirou.py 20170710 dark_flat02f10.fits dark_flat03f10.fits
 
 ||DRS  SPIROU   v   (interactive mode)
 16:15:58.5 -   || *****************************************
@@ -413,7 +413,7 @@ DRS_spirou -m cal_loc_RAW_spirou.py 20170710 dark_flat02f10.fits dark_flat03f10.
 
 Fabry-Perot exposures in which the three fibres are simultaneously fed by light from the Fabry-Perot filter. Each exposure is used to build the slit orientation. Finds the tilt of the orders. \\
 
-\TODO{Once writen up the new version update this description}
+% \TODO{Once writen up the new version update this description}
 
 \noindent File prefixes allowed:
 \begin{itemize}
@@ -446,7 +446,7 @@ cal_SLIT_spirou.p  night_repository  filenames
 An example run where everything worked is below:
 
 \begin{lstlisting}[style=text]
-DRS_spirou -m cal_SLIT_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits fp_fp04a203.fits
+cal_SLIT_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits fp_fp04a203.fits
 
 ||DRS  SPIROU   v   (interactive mode)
 16:26:55.3 -   || *****************************************
@@ -550,7 +550,7 @@ DRS_spirou -m cal_SLIT_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits fp_f
 
 Creates the flat fields. \\ 
 
-\TODO{Once writen up the new version update this description} \\
+% \TODO{Once writen up the new version update this description} \\
 
 \noindent File prefixes allowed:
 \begin{itemize}
@@ -612,7 +612,7 @@ cal_FF_RAW_spirou.py  night_repository  filenames
 An example run where everything worked is below:
 
 \begin{lstlisting}[style=text]
-DRS_spirou -m cal_FF_RAW_spirou.py 20170710 dark_flat02f10.fits dark_flat03f10.fits
+cal_FF_RAW_spirou.py 20170710 dark_flat02f10.fits dark_flat03f10.fits
 dark_flat04f10.fits dark_flat05f10.fits dark_flat06f10.fits
 
 ||DRS  SPIROU   v   (interactive mode)
@@ -733,7 +733,7 @@ Extracts orders for specific fibers and files. \\
 	\item dark\_dark\_AHC2
 \end{itemize}
 
-\TODO{Once writen up the new version update this description}
+% \TODO{Once writen up the new version update this description}
 
 \subsection{Summary of procedure}
 \begin{enumerate}
@@ -772,7 +772,7 @@ Note: Filenames must start with `fp\_fp', `hcone\_dark', `dark\_hcone', `hcone\_
 An example run where everything worked is below:
 
 \begin{lstlisting}[style=text]
-DRS_spirou -m cal_extract_RAW_spirouC.py 20170710 fp_fp02a203.fits fp_fp03a203.fits
+cal_extract_RAW_spirouC.py 20170710 fp_fp02a203.fits fp_fp03a203.fits
 fp_fp04a203.fits
 
 ||DRS  SPIROU   v   (interactive mode)
@@ -879,7 +879,7 @@ fp_fp04a203.fits
 
 Calculates relative (radial velocity) drift between all files and individual files. \\
 
-\TODO{Once writen up the new version update this description}
+% \TODO{Once writen up the new version update this description}
 
 \noindent File prefixes allowed:
 \begin{itemize}
@@ -914,7 +914,7 @@ Note: Filenames must start with `fp\_fp'.
 An example run where everything worked is below:
 
 \begin{lstlisting}[style=text]
-DRS_spirou -m cal_DRIFT_RAW_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits
+cal_DRIFT_RAW_spirou.py 20170710 fp_fp02a203.fits fp_fp03a203.fits
 fp_fp04a203.fits
 
 ||DRS  SPIROU   v   (interactive mode)
