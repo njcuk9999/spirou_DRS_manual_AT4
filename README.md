@@ -40,7 +40,7 @@
 - - - -
 
 
-Main .tex file is `SPIRou_DRS_USERManual.tex`, this file contains all the usepackage imports and is the file that should be built by:
+The main `.tex` file is `SPIRou_DRS_USERManual.tex`, this file contains all the usepackage imports and is the file that should be built by:
 
 `pdflatex SPURou_DRS_UserManual.tex`
 
@@ -48,17 +48,17 @@ Main .tex file is `SPIRou_DRS_USERManual.tex`, this file contains all the usepac
 
 The individual chapters are located in "Chapters" folder
 
-Chapters are as follows:
-* Introduction
-* 1 Pre-Installation
-* 2 Installation
-* 3 Using the DRS
-* 4 Data Architecture
-* 5 Constants and Keywords
-* 6 The Recipes
-* 7 The Modules
-* 8 Quality Control
-* Appendix A Source code for env\_setup.sh
+- Chapters are as follows:
+    - Introduction
+    - 1 Pre-Installation
+    - 2 Installation
+    - 3 Using the DRS
+    - 4 Data Architecture
+    - 5 Constants and Keywords
+    - 6 The Recipes
+    - 7 The Modules
+    - 8 Quality Control
+    - Appendix A Source code for env\_setup.sh
 
 Figures should be placed in the "figures" folder.
 
