@@ -1023,6 +1023,358 @@ fp_fp04a203.fits
 \end{center}
 \end{figure}
 
+
+
+%----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The cal\_HC\_E2DS\_spirou recipe}
+\label{section:cal_HC_E2DS}
+% ----------------------------------------------------------------------------------
+
+Wavelength calibration. \\
+
+% % \TODO{Once writen up the new version update this description}
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item hc\_hc*AB.fits
+	\item hc\_hc*C.fits
+\end{itemize}
+
+\subsection{Summary of procedure}
+\begin{enumerate}
+	\item Reads lamp line file
+	\item Tries to identify lines using guess solution
+	\item Cleans list of identified lines
+	\item Fits wavelength solution on identified lines
+	\item Performs a Littrow test
+	\item Writes wavelength solution for fibers
+	\item Computes CCF
+\end{enumerate}
+
+\subsection{Running cal\_HC\_E2DS\_spirou}
+
+To run cal\_HC\_E2DS\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_HC_E2DS_spirou.py  night_repository  hc_hc*.fits
+\end{lstlisting}
+
+\noindent Note: Filenames must start with hc\_hc
+\noindent Note: Filenames must include either AB or C
+
+% \subsection{Example working run}
+
+% An example run where everything worked is below:
+
+% \begin{lstlisting}[style=text]
+% cal_ .py 20170710 
+% \end{lstlisting}
+
+% \subsection{Interactive mode}
+
+% \begin{figure}
+% \begin{center}
+% \includegraphics[width=.8\textwidth]{figures/}
+% \caption{ \label{}}
+% \end{center}
+% \end{figure}
+
+% ----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The cal\_DRIFT-PEAK\_E2DS\_spirou recipe}
+\label{section:cal_}
+% ----------------------------------------------------------------------------------
+
+Calculates relative (radial velocity) drift between all files and individual files using a gaussian fitting process to fit the FP peaks. \\
+
+% \TODO{Once writen up the new version update this description}
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item fp\_fp
+\end{itemize}
+
+\subsection{Summary of procedure}
+\begin{enumerate}
+	\item first file is reference image
+	\item resizes the image
+	\item background correction
+	\item Identifies FP peaks in reference file
+	\item Creates a reference ascii file that contains the positions of the FP peaks
+	\item Removes lines with suspicious widths
+	\item loops around all other *\_e2ds\_\definevariable{fiber}.fits files
+	\item Gets the centroid of all peaks using Gaussian fitting
+	\item Performs a Pearson R test to look for issues with extraction and/or illumination
+	\item Performs sigma clipping on measured drift
+	\item Saves drifts to file
+\end{enumerate}
+
+\subsection{Running cal\_DRIFT-PEAK\_E2DS\_spirou}
+
+To run cal\_DRIFT-PEAK\_E2DS\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_DRIFT-PEAK_E2DS_spirou.py  night_repository fp_fp*.fits
+\end{lstlisting}
+
+\noindent Note: Filenames must start with fp\_fp.
+
+% \subsection{Example working run}
+
+% An example run where everything worked is below:
+
+% \begin{lstlisting}[style=text]
+% cal_DRIFT-PEAK_E2DS_spirou.py  20170710 
+% \end{lstlisting}
+
+% \subsection{Interactive mode}
+
+% \begin{figure}
+% \begin{center}
+% \includegraphics[width=.8\textwidth]{figures/}
+% \caption{ \label{}}
+% \end{center}
+% \end{figure}
+
+
+% ----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The cal\_WAVE\_E2DS\_spirou recipe}
+\label{section:cal_WAVE_E2DS_spirou}
+% ----------------------------------------------------------------------------------
+
+New wavelength solution combining Hollow-Cathode + FP E2DS spectra. \\
+
+% % \TODO{Once writen up the new version update this description}
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item hc\_hc (first file)
+	\item fp\_fp (second file)
+\end{itemize}
+
+\subsection{Summary of procedure}
+\begin{enumerate}
+	\item Reads lamp line file
+	\item Performs instrumental drift computation
+	\item Writes drift to e2ds fits file
+	\item Calculates initial wavelength solution
+	\item Tries to identify lines using guess solution (x2) 
+	\item Cleans list of identified lines (x2)
+	\item Fits wavelength solution on identified lines (x2)
+	\item Performs a Littrow test (x2)
+	\item Writes wavelength solution for fibers
+	\item Computes CCF
+\end{enumerate}
+
+\subsection{Running cal\_WAVE\_E2DS\_spirou}
+
+To run cal\_WAVE\_E2DS\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_WAVE_E2DS_spirou.py night_repository  hc_hc_*_e2ds_AB.fits    fp_fp_*_e2ds_AB.fits 
+\end{lstlisting}
+
+\noindent Note: First file must start with hc\_hc and contain AB or C
+\noindent Note: Second file must start with fp\_fp and contain AB or C
+
+% \subsection{Example working run}
+
+% An example run where everything worked is below:
+
+% \begin{lstlisting}[style=text]
+% cal_ .py 20170710 
+% \end{lstlisting}
+
+% \subsection{Interactive mode}
+
+% \begin{figure}
+% \begin{center}
+% \includegraphics[width=.8\textwidth]{figures/}
+% \caption{ \label{}}
+% \end{center}
+% \end{figure}
+
+
+% ----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The cal\_BADPIX\_spirou recipe}
+\label{section:cal_BADPIX_spirou}
+% ----------------------------------------------------------------------------------
+
+Recipe to generate the bad pixel map. \\
+
+% \TODO{Once writen up the new version update this description}
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item flat\_flat (first file)
+	\item dark\_dark (second file)
+\end{itemize}
+
+\subsection{Summary of procedure}
+\begin{enumerate}
+	\item Normalise the flats
+	\item Look for isolated hot pixels
+	\item Calculate how much pixels deviate compared to expected values
+	\item Select hot pixels compared to neighbours
+	\item Combine bad pixel map
+	\item Save bad pixel mask to file
+\end{enumerate}
+
+\subsection{Running cal\_DRIFT\_RAW\_spirou}
+
+To run cal\_DRIFT\_RAW\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_BADPIX_spirou.py night_repository flat_flat*.fits dark_dark*.fits
+\end{lstlisting}
+
+\noindent Note: Filenames must start with flat\_flat (first file) and dark\_dark (second file)
+
+\noindent Note: only two files allowed (one flat plus one dark)
+
+\subsection{Example working run}
+
+An example run where everything worked is below:
+
+\begin{lstlisting}[style=text]
+cal_BADPIX_spirou.py 20170710 flat_flat02f10.fits dark_dark02d406.fits
+||DRS  SPIROU   v   (interactive mode)
+15:49:54.7 -   || *****************************************
+15:49:54.7 -   || * SPIROU \@(#) Geneva Observatory ()
+15:49:54.7 -   || *****************************************
+15:49:54.7 -   ||(dir_data_raw)      DRS_DATA_RAW=/scratch/Projects/SPIRou_Pipeline/data/raw/
+15:49:54.7 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/scratch/Projects/SPIRou_Pipeline/data/reduced/
+15:49:54.7 -   ||(dir_drs_config)    DRS_CONFIG=/scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/
+15:49:54.7 -   ||(dir_calib_db)      DRS_CALIB_DB=/scratch/Projects/SPIRou_Pipeline/data/calibDB
+15:49:54.7 -   ||(dir_data_msg)      DRS_DATA_MSG=/scratch/Projects/SPIRou_Pipeline/data/msg/
+15:49:54.7 -   ||(print_log)         DRS_LOG=1         %(0: minimum stdin-out logs)
+15:49:54.7 -   ||(plot_graph)        DRS_PLOT=1            %(def/undef/trigger)
+15:49:54.7 -   ||(used_date)         DRS_USED_DATE=undefined
+15:49:54.7 -   ||(working_dir)       DRS_DATA_WORKING=/scratch/Projects/SPIRou_Pipeline/data/tmp/
+15:49:54.7 -   ||                    DRS_INTERACTIVE is  set
+15:49:54.7 -   |cal_BADPIX_spirou:+[...]|Now running : cal_BADPIX_spirou on file(s):  flat_flat02f10.fits dark_dark02d406.fits
+15:49:54.7 -   |cal_BADPIX_spirou:+[...]|On directory /scratch/Projects/SPIRou_Pipeline/data/raw/20170710
+15:49:54.7 -   |cal_BADPIX_spirou:+[...]|ICDP loaded from: /scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/hadmrICDP_SPIROU.py
+15:49:54.7 - * |cal_BADPIX_spirou:+[...]|Now processing Image TYPE FLAT with cal_BADPIX_spirou recipe
+15:49:54.7 - * |cal_BADPIX_spirou:+[...]|Now processing Image TYPE DARK with cal_BADPIX_spirou recipe
+15:49:54.7 -   |cal_BADPIX_spirou:+[...]|Reading Flat Image /scratch/Projects/SPIRou_Pipeline/data/raw/20170710/flat_flat02f10.fits
+15:49:54.7 -   |cal_BADPIX_spirou:+[...]|Flat Image 2048x2048 loaded
+15:49:54.7 -   |cal_BADPIX_spirou:+[...]|Reading Dark Image /scratch/Projects/SPIRou_Pipeline/data/raw/20170710/flat_flat02f10.fits
+15:49:54.8 -   |cal_BADPIX_spirou:+[...]|Dark Image 2048x2048 loaded
+15:49:54.8 -   |cal_BADPIX_spirou:+[...]|Normalising the flat image
+15:49:55.9 -   |cal_BADPIX_spirou:+[...]|Looking for bad pixels
+15:49:56.9 -   |cal_BADPIX_spirou:+[...]|Fraction of hot pixels from dark: 3.01 %
+15:49:56.9 -   |cal_BADPIX_spirou:+[...]|Fraction of bad pixels from flat: 1.32 %
+15:49:56.9 -   |cal_BADPIX_spirou:+[...]|Fraction of NaN pixels in dark: 20.76 %
+15:49:56.9 -   |cal_BADPIX_spirou:+[...]|Fraction of NaN pixels in flat: 14.66 %
+15:49:56.9 -   |cal_BADPIX_spirou:+[...]|Fraction of bad pixels with all criteria: 24.66 %
+15:49:56.9 - * |cal_BADPIX_spirou:+[...]|QUALITY CONTROL SUCCESSFUL - Well Done -
+15:49:56.9 -   |cal_BADPIX_spirou:+[...]|Saving Bad Pixel Mask in flat_flat02f10_badpixel.fits
+15:49:57.5 - * |cal_BADPIX_spirou:+[...]|Updating Calib Data Base with BADPIX
+15:49:57.5 - * |cal_BADPIX_spirou:+[...]|Recipe cal_BADPIX_spirou has been succesfully completed
+\end{lstlisting}
+
+
+% ----------------------------------------------------------------------------------
+\clearpage
+\newpage
+\section{The cal\_CCF\_E2DS\_spirou recipe}
+\label{section:cal_CCF_E2DS_spirou}
+% ----------------------------------------------------------------------------------
+
+Cross correlation function computation on a E2DS spectra. \\
+
+% \TODO{Once writen up the new version update this description}
+
+\noindent File suffixes allowed:
+\begin{itemize}
+	\item *e2ds\_AB.fits
+\end{itemize}
+
+\subsection{Summary of procedure}
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\subsection{Running cal\_DRIFT\_RAW\_spirou}
+
+To run cal\_DRIFT\_RAW\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_CCF_E2DS_spirou.py  night_repository  *e2ds_AB.fits  mask.mas  RV  RANGE  STEP 
+\end{lstlisting}
+
+\noindent Note: First argument is a file with suffix *e2ds\_AB.fits
+\noindent Note: The mask (Ex : UrNe.mas) is presently loaded locally (in the working directory) 
+\noindent Note: RV, RANGE, STEP are the central velocity, half range in velocity and step in km/s of the CCF 
+
+% \subsection{Example working run}
+
+% An example run where everything worked is below:
+
+% \begin{lstlisting}[style=text]
+% cal_ .py 20170710 
+% \end{lstlisting}
+
+% \subsection{Interactive mode}
+
+% \begin{figure}
+% \begin{center}
+% \includegraphics[width=.8\textwidth]{figures/}
+% \caption{ \label{}}
+% \end{center}
+% \end{figure}
+
+
+% % ----------------------------------------------------------------------------------
+% \clearpage
+% \newpage
+% \section{The cal\_ recipe}
+% \label{section:cal_}
+% % ----------------------------------------------------------------------------------
+
+
+
+% % \TODO{Once writen up the new version update this description}
+
+% \noindent File prefixes allowed:
+% \begin{itemize}
+% 	\item 
+% \end{itemize}
+
+% \subsection{Summary of procedure}
+% \begin{enumerate}
+% 	\item 
+% \end{enumerate}
+
+% \subsection{Running cal\_DRIFT\_RAW\_spirou}
+
+% To run cal\_DRIFT\_RAW\_spirou type:
+% \begin{lstlisting}[language=bash, style=bashstyle]
+% cal_ .py  night_repository  filenames
+% \end{lstlisting}
+
+% Note: Filenames must start with 
+
+% \subsection{Example working run}
+
+% An example run where everything worked is below:
+
+% \begin{lstlisting}[style=text]
+% cal_ .py 20170710 
+% \end{lstlisting}
+
+% \subsection{Interactive mode}
+
+% \begin{figure}
+% \begin{center}
+% \includegraphics[width=.8\textwidth]{figures/}
+% \caption{ \label{}}
+% \end{center}
+% \end{figure}
+
 % ---------------------------------------------------------------
 \clearpage
 \newpage
