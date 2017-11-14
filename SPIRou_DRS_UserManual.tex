@@ -37,6 +37,7 @@ openany, % A chapter may start on either a recto or verso page.
 \usepackage{framed} % shade in a region of the page
 \usepackage{multirow}  % use rows spanning multiple columns in tables
 \usepackage{float}
+\usepackage[all]{background}
 
 %%% PAGE LAYOUT 
 %%%------------------------------------------------------------------------------
@@ -151,6 +152,15 @@ openany, % A chapter may start on either a recto or verso page.
 % Not mine
 \newcommand{\p}{\partial} %Partial
 % Or what ever you want
+
+
+%%% MARGIN
+%%%------------------------------------------------------------------------------
+\SetBgContents{\MyID}% Set contents
+\SetBgPosition{-0.75cm,-0.3\textheight}% Select location
+\SetBgOpacity{1.0}% Select opacity
+\SetBgAngle{90.0}% Select rotation of logo
+\SetBgScale{1.25}% Select scale factor of logo
 
 %%% TABLE OF CONTENTS
 %%%------------------------------------------------------------------------------
