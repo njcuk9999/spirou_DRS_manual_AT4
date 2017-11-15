@@ -91,7 +91,26 @@ Section needs writing
 \section{cal\_WAVE\_E2DS\_spirou}
 \label{section:qc_cal_WAVE_E2DS_spirou}
 
-Section needs writing
+There are currently three quality control checks for cal\_WAVE\_E2DS\_spirou:
+
+\begin{itemize}
+\item `FINAL\_xfit\_moy' must be a real number
+	\begin{equation}
+	\text{FINAL\_xfit\_moy} \neq \infty \text{ and }
+	\text{FINAL\_xfit\_moy} \neq \text{NaN}
+	\end{equation}
+\item the RMS of each of the three Littrow polynomials fitted across the orders at x=(500,1000,1500) must be lower than qc\_rms\_littrow\_max: 
+	\begin{equation}
+	\text{rms\_Littrow}_i > \text{qc\_rms\_littrow\_max}
+	\end{equation}
+\item the absolute value of their minimum and maximum must be lower than qc\_dev\_littrow\_max for each of the three Littrow polynomials fitted across the orders at x=(500,1000,1500)
+	\begin{equation}
+	max(|\text{maxdev\_Littrow}_i|, |\text{mindev\_Littrow}_i|) > \text{qc\_rms\_littrow\_max}
+	\end{equation}
+\end{itemize}
+
+\noindent where qc\_rms\_littrow\_max = 300 m/s and qc\_rms\_littrow\_max = 900 m/s.
+
 
 \section{cal\_BADPIX\_spirou}
 \label{section:qc_cal_BADPIX_spirou}
