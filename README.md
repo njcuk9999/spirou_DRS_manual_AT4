@@ -289,8 +289,8 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [ ] cal_DRIFT_RAW_spirou
     - [ ] cal_HC_e2DS
     - [ ] cal_DRIFT-PEAK_E2DS
-    - [ ] cal_WAVE_E2DS
-    - [ ] cal_BADPIX
+    - [x] ~~cal_WAVE_E2DS~~
+    - [x] ~~cal_BADPIX~~
     - [ ] cal_CCF_E2DS
     
 [Back to top](#table-of-contents)
