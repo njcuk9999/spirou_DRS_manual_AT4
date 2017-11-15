@@ -4,9 +4,11 @@
 \newcommand{\calloc}{cal\_loc\_RAW\_spirou.py}
 \newcommand{\caldark}{cal\_DARK\_spirou.py}
 \newcommand{\calslit}{cal\_SLIT\_spirou.py}
+\newcommand{\calff}{cal\_ff\_RAW\_spirou.py}
 \newcommand{\hadmricdp}{hadmrICDP\_SPIROU.py}
 \newcommand{\kwdrs}{KW\_DRS.py}
 \newcommand{\rootdrsloc}{\definevariable{kw\_root\_drs\_loc}}
+\newcommand{\rootdrsflat}{\definevariable{kw\_root\_drs\_flat}}
 \newcommand{\locofiber}{*\_LOCO\_\definevariable{fiber}*}
 \newcommand{\fwhmfiber}{*\_fwhm-order\_\definevariable{fiber}*}
 
@@ -158,7 +160,7 @@ In addition some other environmental variables are set (or need to be set).
 
 Below are the listed currently used constants in table format. The `Name' column refers to the name of the constant (and what to search for), the `Value' column is the default value, the `Description' column provides a brief description of what the variable controls, the `Used in' column shows which recipes use this variable and the `Location' column defines the file or files in which this variable is located (they may be hardcoded in recipe files thus the location may not be a config file), order of precedence is indicated but may be wrong (probably best to change call instances). These are split into catagories for ease of reading. \\
 
-\noindent Note: This section is currently updated for `\caldark',`\calloc' and `\calslit' only.
+\noindent Note: This section is currently updated for `\caldark',`\calloc', `\calslit' and `\calff' only.
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
@@ -299,6 +301,28 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 % ic_slit_order_plot
 
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Flat-fielding parameters}
+
+\ParamList{ic\_do\_bkgr\_subtraction}{0}{Do background measurement (True = 1, False = 0)}{\calff}{\hadmricdp}
+
+\ParamList{ic\_bkgr\_window}{100}{Half-size of window for background measurements}{\calff}{\hadmricdp}
+
+\ParamList{nbo}{36}{Number of orders in tilt file}{\calff}{\calff}
+% Future ic_tilt_nbo
+
+\ParamList{ccdsigdet}{100}{Manually set the sigdet to use in weighted tilt extraction}{\calff}{\calff}
+% Future ic_ff_sigdet
+
+\ParamList{ic\_extfblaz}{50}{Half size blaze smoothing window}{\calff}{\hadmricdp}
+
+
+\ParamList{ic\_order\_plot}{5}{Order to plot on ff image plot}{\calff}{\calff, \hadmricdp}
+% Future ic_ff_order_plot
+
+% Future ic_blaze_fitn
+
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
@@ -318,13 +342,18 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 \ParamList{qc\_loc\_rmsmax\_fwhm }{500}{Maximum rms allowed in fitting width}{\calloc}{\hadmricdp}
 
+\ParamList{qc\_max\_signal}{65500}{Maximum signal allowed (set saturation limit)}{\calff}{\hadmricdp}
+
+\ParamList{qc\_loc\_flumax}{64500}{Saturation level reached warning}{\calff}{\hadmricdp}
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Calib DB settings}
 
-\ParamList{ic\_calib\_db\_master\_file}{master\_calib\_SPIROU.txt}{Define calibd DB master filename  }{\caldark, \calloc}{\hadmricdp}
+\ParamList{ic\_calib\_db\_master\_file}{master\_calib\_SPIROU.txt}{Define calibd DB master filename}{\caldark, \calloc}{\hadmricdp}
 % Future ic_calibDB_filename
+
+% Future calib_max_wait
 
 % ----------------------------------------------------------
 % \vspace{0.5cm}
@@ -457,7 +486,7 @@ INS\_RHB2 & = &  180           & / & SPIROU rhomb 2 position deg) \\
 Below are a list of keywords that are used in FITS rec header files. Most are
 defined in a few files, specific FITS rec files that these are used in are listed in []. These are split into catagories for ease of reading. \\
 
-\noindent Note: This section is currently updated for `\caldark', `\calloc' and `\calslit' only.
+\noindent Note: This section is currently updated for `\caldark',`\calloc', `\calslit' and `\calff' only.
 
 
 % ----------------------------------------------------------
@@ -465,6 +494,14 @@ defined in a few files, specific FITS rec files that these are used in are liste
 \subsection{General keywords}
 
 \KWList{VERSION}{kw\_version}{DRS version}{\calloc}{\kwdrs}
+
+\KWList{LO}{kw\_root\_drs\_loc}{Used in keywords below}{\kwdrs}{\kwdrs}
+
+\KWList{FF}{kw\_root\_drs\_flat}{Used in keywords below}{\kwdrs}{\kwdrs}
+
+% Future kw_RDNOISE
+% Future kw_GAIN
+% Future kw_EXPTIME
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
@@ -484,11 +521,11 @@ defined in a few files, specific FITS rec files that these are used in are liste
 
 \KWList{DACUT}{kw\_DARK\_cut}{Threshold of dark level retain [ADU/s]}{\caldark [Dark Frame, Bad Pixel Map]}{\caldark}
 
+
+
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{cal\_loc keywords}
-
-\KWList{LO}{kw\_root\_drs\_loc}{Used in keywords below}{\kwdrs}{\kwdrs}
 
 \KWList{\rootdrsloc NBO}{kw\_LOCO\_NBO}{nb orders localise}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
 
@@ -522,11 +559,28 @@ defined in a few files, specific FITS rec files that these are used in are liste
 
 \KWList{QC}{kw\_drs\_QC)}{QCcontr}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
 
+
+
+
+
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{cal\_slit keywords}
 
 \KWList{\rootdrsloc TILT}{kw\_TILT}{Tilt order}{\calslit [*\_tilt.fits]}{\kwdrs}
+
+
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{cal\_ff keywords}
+
+\KWList{EXTSN}{kw\_EXTRA\_SN}{Signal to noise traio for order center}{\calff [*\_blaze\_\definevariable{fiber}.fits, *\_flat\_\definevariable{fiber}.fits]}{\kwdrs}
+
+\KWList{\rootdrsflat RMS}{kw\_FLAT\_RMS}{FF RMS order}{\calff [*\_flat\_\definevariable{fiber}.fits]}{\kwdrs}
+
+
+
 
 
 
