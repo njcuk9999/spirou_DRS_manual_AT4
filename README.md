@@ -239,16 +239,26 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
         - [x] ~~cal_dark~~
         - [x] ~~cal_loc~~
         - [x] ~~cal_slit~~
-        - [ ] cal_ff
+        - [x] ~~cal_ff~~
         - [ ] cal_extract
         - [ ] cal_drift
+        - [ ] cal_HC_e2DS
+        - [ ] cal_DRIFT-PEAK_E2DS
+        - [ ] cal_WAVE_E2DS
+        - [ ] cal_BADPIX
+        - [ ] cal_CCF_E2DS
     - Keywords
         - [x] ~~cal_dark~~
         - [x] ~~cal_loc~~
         - [x] ~~cal_slit~~
-        - [ ] cal_ff
+        - [x] ~~cal_ff~~
         - [ ] cal_extract
         - [ ] cal_drift
+        - [ ] cal_HC_e2DS
+        - [ ] cal_DRIFT-PEAK_E2DS
+        - [ ] cal_WAVE_E2DS
+        - [ ] cal_BADPIX
+        - [ ] cal_CCF_E2DS
 - The Modules
     - [x] ~~Needs a file tree~~
     - [x] ~~spirouBACK~~
@@ -274,9 +284,13 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [x] ~~cal_DARK_spirou~~
     - [x] ~~cal_loc_RAW_spirou~~
     - [x] ~~cal_SLIT_spirou~~
-    - [ ] cal_FF_RAW_spirou
+    - [x] ~~cal_FF_RAW_spirou~~
     - [ ] cal_extract_RAW_spirou
     - [ ] cal_DRIFT_RAW_spirou
-    
+    - [ ] cal_HC_e2DS
+    - [ ] cal_DRIFT-PEAK_E2DS
+    - [ ] cal_WAVE_E2DS
+    - [ ] cal_BADPIX
+    - [ ] cal_CCF_E2DS
     
 [Back to top](#table-of-contents)
