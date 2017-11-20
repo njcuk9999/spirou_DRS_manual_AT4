@@ -5,6 +5,8 @@
 \newcommand{\caldark}{cal\_DARK\_spirou.py}
 \newcommand{\calslit}{cal\_SLIT\_spirou.py}
 \newcommand{\calff}{cal\_ff\_RAW\_spirou.py}
+\newcommand{\calext}{cal\_extract\_RAW\_spirou\definevariable{fiber}.py}
+\newcommand{\calextall}{cal\_extract\_RAW\_spirouALL.py}
 \newcommand{\hadmricdp}{hadmrICDP\_SPIROU.py}
 \newcommand{\kwdrs}{KW\_DRS.py}
 \newcommand{\rootdrsloc}{\definevariable{kw\_root\_drs\_loc}}
@@ -133,6 +135,8 @@ In addition some other environmental variables are set (or need to be set).
 \section{Constants}
 \label{section:the_constants}
 
+%----------------------------------------------------------------
+
 
 % For consistency use:
 % \ParamList{1}{2}{3}{4}{5}
@@ -160,17 +164,21 @@ In addition some other environmental variables are set (or need to be set).
 
 Below are the listed currently used constants in table format. The `Name' column refers to the name of the constant (and what to search for), the `Value' column is the default value, the `Description' column provides a brief description of what the variable controls, the `Used in' column shows which recipes use this variable and the `Location' column defines the file or files in which this variable is located (they may be hardcoded in recipe files thus the location may not be a config file), order of precedence is indicated but may be wrong (probably best to change call instances). These are split into catagories for ease of reading. \\
 
-\noindent Note: This section is currently updated for `\caldark',`\calloc', `\calslit' and `\calff' only.
+\noindent Note: This section is currently updated for `\caldark',`\calloc', `\calslit', `\calff', `\callext', `\callextall' only.
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{General constants}
+
+%----------------------------------------------------------------
 
 \ParamList{ic\_disptimeout}{0.5}{Interval between plots (for certain iteractive graphs)}{\calloc}{\hadmricdp}
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Image Variables}
+
+%----------------------------------------------------------------
 
 
 \ParamListCode{ic\_ccdx\_blue}{\lstinline[style=pythonstyle]{2048-arange(200,1500)}}{Resize blue window x array}{\caldark}{\caldark}
@@ -186,15 +194,17 @@ Below are the listed currently used constants in table format. The `Name' column
 \ParamListCode{ic\_ccdy\_red}{\lstinline[style=pythonstyle]{2048-arange(1570,1910)}}{Resize red window y array}{\caldark}{\caldark}
 % future ic_ccdy_red_low, ic_ccdy_red_high
 
-\ParamListCode{ic\_ccdx}{\lstinline[style=pythonstyle]{arange(5,2040)}}{Resize array for x}{\caldark}{\caldark, \hadmricdp}
+\ParamListCode{ic\_ccdx}{\lstinline[style=pythonstyle]{arange(5,2040)}}{Resize array for x}{\caldark, \calloc, \calslit, \calff, \callext, \callextall}{\caldark, \calloc, \calslit, \calff, \callext, \callextall, \hadmricdp}
 % future ic_ccdx_low, ic_ccdx_high
 
-\ParamListCode{ic\_ccdy}{\lstinline[style=pythonstyle]{arange(5,1935)}}{Resize array for y}{\caldark}{\caldark, \hadmricdp}
+\ParamListCode{ic\_ccdy}{\lstinline[style=pythonstyle]{arange(5,1935)}}{Resize array for y}{\caldark, \calloc, \calslit, \calff, \callext, \callextall}{\caldark, \calloc, \calslit, \calff, \callext, \callextall, \hadmricdp}
 % future ic_ccdy_low, ic_ccdy_high
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Fiber variables}
+
+%----------------------------------------------------------------
 
 % future = need "fiber_params"
 
@@ -215,10 +225,24 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 \ParamList{qc\_loc\_nbo}{72, 36}{Quality control "normal" number of orders on fiber}{\calloc}{\calloc, \hadmricdp}
 % future = define _AB and _C for each
 
+% Future: fib_type_fpall
+
+% Future: ic_ext_range1_fpall
+
+% Future: ic_ext_range2_fpall
+
+% Future: ic_ext_range_fpall
+
+% Future: loc_file_fpall
+
+% Future: order_file_fpall
+
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Dark Variables}
+
+%----------------------------------------------------------------
 
 \ParamList{cutlimit}{100}{Define a bad pixel cut limit (in ADU/s)}{\caldark}{\caldark}
 % Future = dark_cutlimit
@@ -235,6 +259,8 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Localisation parameters}
+
+%----------------------------------------------------------------
 
 \ParamList{size}{10}{Size of the order\_profile smoothed box (from pixel - size to pixel + size)}{\calloc}{\calloc}
 % Future loc_box_size
@@ -288,6 +314,8 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 \vspace{0.5cm}
 \subsection{Tilt calculation parameters}
 
+%----------------------------------------------------------------
+
 \ParamList{ic\_extopt}{0}{Extraction option in tilt calculation}{\calslit}{\calslit, \hadmricdp}
 
 \ParamList{ic\_extnbsig}{2.5}{Distance away from center to extract out to +/- }{\calslit}{\calslit, \hadmricdp}
@@ -305,6 +333,8 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 \vspace{0.5cm}
 \subsection{Flat-fielding parameters}
 
+%----------------------------------------------------------------
+
 \ParamList{ic\_do\_bkgr\_subtraction}{0}{Do background measurement (True = 1, False = 0)}{\calff}{\hadmricdp}
 
 \ParamList{ic\_bkgr\_window}{100}{Half-size of window for background measurements}{\calff}{\hadmricdp}
@@ -312,21 +342,34 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 \ParamList{nbo}{36}{Number of orders in tilt file}{\calff}{\calff}
 % Future ic_tilt_nbo
 
-\ParamList{ccdsigdet}{100}{Manually set the sigdet to use in weighted tilt extraction}{\calff}{\calff}
+\ParamList{ccdsigdet}{100}{Manually set the sigdet to use in weighted tilt extraction}{\calff, \calext, \calextall}{\calff}
 % Future ic_ff_sigdet
 
-\ParamList{ic\_extfblaz}{50}{Half size blaze smoothing window}{\calff}{\hadmricdp}
+\ParamList{ic\_extfblaz}{50}{Half size blaze smoothing window}{\calff, \calext, \calextall}{\hadmricdp}
 
 
-\ParamList{ic\_order\_plot}{5}{Order to plot on ff image plot}{\calff}{\calff, \hadmricdp}
+\ParamList{ic\_order\_plot}{5}{Order to plot on ff image plot}{\calff, \calext, \calextall}{\calff, \hadmricdp}
 % Future ic_ff_order_plot
 
 % Future ic_blaze_fitn
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Extraction parameters}
+
+%----------------------------------------------------------------
+
+\ParamList{ic\_extmeanzone}{16}{Mean window of extraction }{\calext, \calextall}{\hadmricdp}
+
+\ParamList{satseuil}{64536}{Saturation threshold on order profile plot}{\calext, \calextall}{\calext, \calextall}
+
 
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Quality Control Variables}
+
+%----------------------------------------------------------------
 
 \ParamList{qc\_max\_darklevel}{1.0}{Max dark median level [ADU/s]}{\caldark}{\caldark, \hadmricdp}
 
@@ -342,13 +385,15 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 \ParamList{qc\_loc\_rmsmax\_fwhm }{500}{Maximum rms allowed in fitting width}{\calloc}{\hadmricdp}
 
-\ParamList{qc\_max\_signal}{65500}{Maximum signal allowed (set saturation limit)}{\calff}{\hadmricdp}
+\ParamList{qc\_max\_signal}{65500}{Maximum signal allowed (set saturation limit)}{\calff, \calext, \calextall}{\hadmricdp}
 
 \ParamList{qc\_loc\_flumax}{64500}{Saturation level reached warning}{\calff}{\hadmricdp}
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Calib DB settings}
+
+%----------------------------------------------------------------
 
 \ParamList{ic\_calib\_db\_master\_file}{master\_calib\_SPIROU.txt}{Define calibd DB master filename}{\caldark, \calloc}{\hadmricdp}
 % Future ic_calibDB_filename
@@ -384,6 +429,8 @@ Last updated version 21 Nov 2014.
 \vspace{0.5cm}
 \subsection{Standard FITS Keywords}
 
+%----------------------------------------------------------------
+
 \begin{table}[H]
 \begin{tabular}{>{\color{red}}l c r c l}
 BITPIX  & = &                   16 & / & 16bit \\
@@ -401,6 +448,8 @@ INSTRUME& = & `SPIROU'           & / & Instrument Name \\
 \vspace{0.5cm}
 \subsection{FITS keywords related to the detector}
 
+%----------------------------------------------------------------
+
 \begin{table}[H]
 \begin{tabular}{>{\color{red}}l c r c l}
 EXPTIME & = &                800.0 & / &  Integration time (seconds) \\
@@ -417,6 +466,9 @@ EMCNTS  & = & 	444578   & / & exposure meter counts at end \\
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{FITS keywords related to the target}
+
+%----------------------------------------------------------------
+
 \begin{table}[H]
 \begin{tabular}{>{\color{red}}l c r c l}
 OBJNAME & = &  Gl9999   & / &  Target name \\
@@ -437,6 +489,8 @@ OBJKMAG & = &        10.0 & / & Target K magnitude  \\
 \vspace{0.5cm}
 \subsection{FITS keywords related to the telescope}
 
+%----------------------------------------------------------------
+
 \begin{table}[H]
 \begin{tabular}{>{\color{red}}l c r c l}
 DATE\_OBS& = & `2013-11-26T09 :06 :14.858'       & / & Date at start of observation (UTC) \\
@@ -455,6 +509,9 @@ SEEING & = &    1.0 & / & Seeing at start of observation \\
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{FITS keywords related to the instrument}
+
+%----------------------------------------------------------------
+
 \begin{table}[H]
 \begin{tabular}{>{\color{red}}l c r c l}
 TPL\_NAME & = & `SPIROU\_POL\_WAVE'   & / & template Name  \\
@@ -470,6 +527,8 @@ INS\_RHB2 & = &  180           & / & SPIROU rhomb 2 position deg) \\
 % ------------------------------------------------------------------------
 \section{Output Keywords}
 \label{section:the_out_keywords}
+
+%----------------------------------------------------------------
 
 
 % For consistency use:
@@ -493,6 +552,8 @@ defined in a few files, specific FITS rec files that these are used in are liste
 \vspace{0.5cm}
 \subsection{General keywords}
 
+%----------------------------------------------------------------
+
 \KWList{VERSION}{kw\_version}{DRS version}{\calloc}{\kwdrs}
 
 \KWList{LO}{kw\_root\_drs\_loc}{Used in keywords below}{\kwdrs}{\kwdrs}
@@ -506,6 +567,8 @@ defined in a few files, specific FITS rec files that these are used in are liste
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{cal\_dark keywords}
+
+%----------------------------------------------------------------
 
 \KWList{DADEAD}{kw\_DARK\_dead}{Fraction dead pixels [\%]}{\caldark [Dark Frame]}{\caldark}
 
@@ -526,6 +589,8 @@ defined in a few files, specific FITS rec files that these are used in are liste
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{cal\_loc keywords}
+
+%----------------------------------------------------------------
 
 \KWList{\rootdrsloc NBO}{kw\_LOCO\_NBO}{nb orders localise}{\calloc [\locofiber, \fwhmfiber]}{\kwdrs}
 
@@ -567,6 +632,8 @@ defined in a few files, specific FITS rec files that these are used in are liste
 \vspace{0.5cm}
 \subsection{cal\_slit keywords}
 
+%----------------------------------------------------------------
+
 \KWList{\rootdrsloc TILT}{kw\_TILT}{Tilt order}{\calslit [*\_tilt.fits]}{\kwdrs}
 
 
@@ -575,12 +642,21 @@ defined in a few files, specific FITS rec files that these are used in are liste
 \vspace{0.5cm}
 \subsection{cal\_ff keywords}
 
+%----------------------------------------------------------------
+
 \KWList{EXTSN}{kw\_EXTRA\_SN}{Signal to noise traio for order center}{\calff [*\_blaze\_\definevariable{fiber}.fits, *\_flat\_\definevariable{fiber}.fits]}{\kwdrs}
 
 \KWList{\rootdrsflat RMS}{kw\_FLAT\_RMS}{FF RMS order}{\calff [*\_flat\_\definevariable{fiber}.fits]}{\kwdrs}
 
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{cal\_extract keywords}
 
+%----------------------------------------------------------------
 
+\KWList{\rootdrsloc FILE}{kw\_LOCO\_FILE}{Localization file used in extraction process}{\calext, \calextall [*\_e2ds\_\definevariable{fiber}.fits}{\kwdrs}
+
+\noindent Note all cal\_loc keywords are also copied to ``\calext, \calextall [*\_e2ds\_\definevariable{fiber}.fits'' files
 
 
 
