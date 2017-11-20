@@ -240,7 +240,7 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
         - [x] ~~cal_loc~~
         - [x] ~~cal_slit~~
         - [x] ~~cal_ff~~
-        - [ ] cal_extract
+        - [x] ~~cal_extract~~
         - [ ] cal_drift
         - [ ] cal_HC_e2DS
         - [ ] cal_DRIFT-PEAK_E2DS
@@ -252,7 +252,7 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
         - [x] ~~cal_loc~~
         - [x] ~~cal_slit~~
         - [x] ~~cal_ff~~
-        - [ ] cal_extract
+        - [x] ~~cal_extract~~
         - [ ] cal_drift
         - [ ] cal_HC_e2DS
         - [ ] cal_DRIFT-PEAK_E2DS
