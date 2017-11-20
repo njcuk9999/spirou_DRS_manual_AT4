@@ -1,8 +1,12 @@
  \chapter{Quality Control}
 
 
+%----------------------------------------------------------------
+
 \section{cal\_DARK\_spirou}
 \label{section:qc_cal_DARK_spirou}
+
+%----------------------------------------------------------------
 
 There are currently two quality control checks for cal\_DARK\_spirou
 \begin{itemize}
@@ -19,8 +23,12 @@ There are currently two quality control checks for cal\_DARK\_spirou
 
 \noindent where qc\_max\_darklevel and qc\_maxdead are constants (see Section \ref{section:the_constants}).
 
+%----------------------------------------------------------------
+
 \section{cal\_loc\_RAW\_spirou}
 \label{section:qc_cal_loc_RAW_spirou}
+
+%----------------------------------------------------------------
 
 There are currently five quality control checks for cal\_loc\_RAW\_spirou
 \begin{itemize}
@@ -48,8 +56,13 @@ There are currently five quality control checks for cal\_loc\_RAW\_spirou
 
 \noindent where c\_loc\_maxlocfit\_removed\_ctr, qc\_loc\_maxlocfit\_removed\_width, qc\_loc\_rmsmax\_center, qc\_loc\_rmsmax\_fwhm and qc\_loc\_nbo are constants (see Section \ref{section:the_constants}).
 
+
+%----------------------------------------------------------------
+
 \section{cal\_SLIT\_spirou}
 \label{section:qc_cal_SLIT_spirou}
+
+%----------------------------------------------------------------
 
 No quality control performed yet.
 
@@ -67,26 +80,54 @@ There is currently one quality control check for cal\_FF\_RAW\_spirou
 
 \noindent where qc\_max\_signal is a constant defined in Section \ref{section:the_constants}.
 
+%----------------------------------------------------------------
 
 \section{cal\_extract\_RAW\_spirou}
 \label{section:qc_cal_extract_RAW_spirou}
 
-Section needs writing
+%----------------------------------------------------------------
+There is currently one quality control check for cal\_FF\_RAW\_spirou
+\begin{itemize}
+\item Too much flux in the image: 
+	\begin{equation}
+	\text{maximum signal} > \text{qc\_max\_signal} * nbframes
+	\end{equation}
+	\noindent Note: This check does not currently lead to a failed run and all files are processed as passing quality checks
+\end{itemize}
+
+\noindent where qc\_max\_signal is a constant defined in Section \ref{section:the_constants}.
+
+
+%----------------------------------------------------------------
 
 \section{cal\_DRIFT\_RAW\_spirou}
 \label{section:qc_cal_DRIFT_RAW_spirou}
 
+%----------------------------------------------------------------
+
 Section needs writing
+
+
+%----------------------------------------------------------------
 
 \section{cal\_HC\_E2DS\_spirou}
 \label{section:qc_cal_HC_E2DS_spirou}
 
+%----------------------------------------------------------------
+
 Section needs writing
+
+
+%----------------------------------------------------------------
 
 \section{cal\_DRIFT-PEAK\_E2DS\_spirou}
 \label{section:qc_cal_DRIFT-PEAK_E2DS}
 
+%----------------------------------------------------------------
+
 Section needs writing
+
+%----------------------------------------------------------------
 
 \section{cal\_WAVE\_E2DS\_spirou}
 \label{section:qc_cal_WAVE_E2DS_spirou}
@@ -112,13 +153,21 @@ There are currently three quality control checks for cal\_WAVE\_E2DS\_spirou:
 \noindent where qc\_rms\_littrow\_max = 300 m/s and qc\_rms\_littrow\_max = 900 m/s.
 
 
+%----------------------------------------------------------------
+
 \section{cal\_BADPIX\_spirou}
 \label{section:qc_cal_BADPIX_spirou}
 
+%----------------------------------------------------------------
+
 No quality control performed yet.
+
+%----------------------------------------------------------------
 
 \section{cal\_CCF\_E2DS\_spirou}
 \label{section:qc_cal_CCF_E2DS_spirou}
+
+%----------------------------------------------------------------
 
 Section needs writing
 
