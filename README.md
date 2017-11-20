@@ -285,7 +285,7 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [x] ~~cal_loc_RAW_spirou~~
     - [x] ~~cal_SLIT_spirou~~
     - [x] ~~cal_FF_RAW_spirou~~
-    - [ ] cal_extract_RAW_spirou
+    - [x] ~~cal_extract_RAW_spirou~~
     - [ ] cal_DRIFT_RAW_spirou
     - [ ] cal_HC_e2DS
     - [ ] cal_DRIFT-PEAK_E2DS
