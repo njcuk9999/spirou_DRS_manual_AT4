@@ -7,6 +7,9 @@
 \newcommand{\calff}{cal\_ff\_RAW\_spirou.py}
 \newcommand{\calext}{cal\_extract\_RAW\_spirou\definevariable{fiber}.py}
 \newcommand{\calextall}{cal\_extract\_RAW\_spirouALL.py}
+\newcommand{\caldrift}{cal\_DRIFT\_RAW\_spirou.py}
+
+\newcommand{\spirouRV}{spirouRV.py}
 \newcommand{\hadmricdp}{hadmrICDP\_SPIROU.py}
 \newcommand{\kwdrs}{KW\_DRS.py}
 \newcommand{\rootdrsloc}{\definevariable{kw\_root\_drs\_loc}}
@@ -364,6 +367,30 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 \ParamList{satseuil}{64536}{Saturation threshold on order profile plot}{\calext, \calextall}{\calext, \calextall}
 
 
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Drift parameters}
+
+%----------------------------------------------------------------
+
+\ParamList{noise}{100}{The value of the noise for drift calculation}{\caldrift}{\caldrift}
+% future ic_drift_noise
+
+\ParamList{seuilmax}{1.e9}{The maximum flux for good (unsaturated) pixels}{\caldrift}{\caldrift}
+% future ic_drift_maxflux
+
+\ParamList{size}{12}{The size around a saturated pixel to flag as unusable}{\caldrift}{\spirouRV.deltavrms2d(), \spirouRV.renorm\_cosmics2d(), \spirouRV.calcvrdrifts2d()}
+% future ic_drift_boxsize
+
+% Future: drift_nlarge
+
+\ParamList{skip}{3}{Parameter to skip files in the sequence, only every ``skip'' file is used when loading `fp\_fp' files from \definevariable{DATA\_ROOT\_RAW}.}{\caldrift}{\caldrift}
+% future: drift_file_skip
+
+\ParamList{cut}{3}{Define the number of standard deviations cut at in cosmic renormalisation}{\caldrift}{\caldrift, \spirouRV.renorm\_cosmics2d()}
+
+\ParamList{nomax}{28}{Define the number of orders to use (starting from 0 to max) used to get median drift  median(order0 --> order max)}{\caldrift}{\caldrift}
+% future: ic_drift_n_order_max
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
@@ -443,6 +470,9 @@ DATE    & = & `2013-11-26T09:06:14' & / & UTC Date of file creation \\
 INSTRUME& = & `SPIROU'           & / & Instrument Name \\
 \end{tabular}
 \end{table}
+
+% Future: ACQTIME1
+% Future: ACQTIME
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
