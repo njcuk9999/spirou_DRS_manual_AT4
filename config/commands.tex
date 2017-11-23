@@ -35,10 +35,10 @@
 \begin{itemize}
 	\item \textbf{#1:}
     
-    \hspace*{1em} \begin{tabular}{>{\color{red}}l c r c l}
+    \hspace*{1em} \begin{tabular}{>{\color{red}}l c r c p{10cm}}
 	#1 & = & #2 & / & #3 \\
-	\multicolumn{5}{l}{\textcolor{gray}{Used in:} #4} \\
-	\multicolumn{5}{l}{\textcolor{gray}{Defined in:} #5} \\
+	\textcolor{gray}{Used in:}  & \multicolumn{4}{p{10cm}}{#4} \\
+	\textcolor{gray}{Defined in:} & \multicolumn{4}{p{10cm}}{#5} \\
 	\end{tabular}
 \end{itemize}
 }
@@ -59,10 +59,10 @@
 \begin{itemize}
 	\item \textbf{#1:}
     
-    \hspace*{1em} \begin{tabular}{>{\color{red}}l c r c l}
+    \hspace*{1em} \begin{tabular}{>{\color{red}}l c r c p{10cm}}
 	#1 & = & \textcolor{blue}{#2} & / & #3 \\
-	\multicolumn{5}{l}{\textcolor{gray}{Used in:} #4} \\
-	\multicolumn{5}{l}{\textcolor{gray}{Defined in:} #5} \\
+	\textcolor{gray}{Used in:}  & \multicolumn{4}{p{10cm}}{#4} \\
+	\textcolor{gray}{Defined in:} & \multicolumn{4}{p{10cm}}{#5} \\
 	\end{tabular}
 \end{itemize}
 }
@@ -82,11 +82,15 @@
 \begin{itemize}
 	\item \textbf{#2:}
     
-    \hspace*{1em} \begin{tabular}{>{\color{red}}l c r c l}
+    \hspace*{1em} \begin{tabular}{>{\color{red}}l c r c p{10cm}}
 	#1 & = & 0 & / & #3 \\
-	\multicolumn{5}{l}{\textcolor{gray}{Used in:} #4} \\
-	\multicolumn{5}{l}{\textcolor{gray}{Defined in:} #5} \\
 	\end{tabular}
+
+	\hspace*{1em} \begin{tabular}{l p{12cm}}
+	\textcolor{gray}{Used in:} & #4 \\
+	\textcolor{gray}{Defined in:} & #5 \\
+	\end{tabular}
+
 \end{itemize}
 }
 
