@@ -8,6 +8,7 @@
 \newcommand{\calext}{cal\_extract\_RAW\_spirou\definevariable{fiber}.py}
 \newcommand{\calextall}{cal\_extract\_RAW\_spirouALL.py}
 \newcommand{\caldrift}{cal\_DRIFT\_RAW\_spirou.py}
+\newcommand{\calbadpix}{cal\_BADPIX\_spirou.py}
 
 \newcommand{\spirouRV}{spirouRV.py}
 \newcommand{\hadmricdp}{hadmrICDP\_SPIROU.py}
@@ -392,6 +393,25 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 \ParamList{nomax}{28}{Define the number of orders to use (starting from 0 to max) used to get median drift  median(order0 --> order max)}{\caldrift}{\caldrift}
 % future: ic_drift_n_order_max
 
+
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{Bad pixel mask parameters}
+
+%----------------------------------------------------------------
+
+\ParamList{wmed}{7}{We construct a "similar" flat by taking the running median of the flag in the x dimension over a boxcar width of wmed (suggested value of ~7 pix). This assumes that the flux level varies only by a small amount over wmed pixels and that the bad pixels are isolated enough that the median along that box will be representative of the flux they should have if they were not bad}{\calbadpix}{\calbadpix}
+% future: badpix_flat_med_wid
+
+\ParamList{illum\_cut}{0.05}{Defines the illumination cut parameter. If we only cut the pixels that fractionally deviate by more than a certain amount, we are going to have lots of bad pixels in unillumnated regions of the array. We therefore need to set a threshold below which a pixels is considered unilluminated. First of all, the flat field image is normalized by its 90th percentile. This sets the brighter orders to about 1. We then set an illumination threshold below which only the dark current will be a relevant parameter to decide that a pixel is "bad"}{\calbadpix}{\calbadpix}
+%future: badpix_illum_cut
+
+\ParamList{cut\_ratio}{0.5}{The maximum differential pixel response relative to the expected value}{\calbadpix}{\calbadpix}
+% future: badpix_flat_cut_ratio
+
+\ParamList{max\_hotpix}{100.0}{Maximum flux in ADU/s to be considered too hot to be used}{\calbadpix}{\calbadpix}
+% future: badpix_max_hotpix
+
 % ----------------------------------------------------------
 \vspace{0.5cm}
 \subsection{Quality Control Variables}
@@ -689,6 +709,21 @@ defined in a few files, specific FITS rec files that these are used in are liste
 \noindent Note all cal\_loc keywords are also copied to ``\calext, \calextall [*\_e2ds\_\definevariable{fiber}.fits'' files
 
 
+% ----------------------------------------------------------
+\vspace{0.5cm}
+\subsection{cal\_badpix keywords}
+
+%----------------------------------------------------------------
+
+\KWList{BHOT}{BHOT}{Fraction of hot pixels [\%]}{\calbadpix [*\_badpixel.fits]}{\calbadpix}
+
+\KWList{BBFLAT}{BFLAT}{Fraction of bad pixels from flat [\%]}{\calbadpix [*\_badpixel.fits]}{\calbadpix}
+
+\KWList{BNDARK}{NDARK}{Fraction of NaN pixels in dark [\%]}{\calbadpix [*\_badpixel.fits]}{\calbadpix}
+
+\KWList{BNFLAT}{BNFLAT}{Fraction of NaN pixels in flat [\%]}{\calbadpix [*\_badpixel.fits]}{\calbadpix}
+
+\KWList{BBAD}{BBAD}{Fraction of bad pixels with all criteria [\%]}{\calbadpix [*\_badpixel.fits]}{\calbadpix}
 
 
 
