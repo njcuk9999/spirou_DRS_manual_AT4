@@ -243,10 +243,12 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
         - [x] ~~cal_extract~~
         - [x] ~~cal_drift~~
         - [ ] cal_HC_e2DS
+        - [ ] cal_DRIFT_E2DS
         - [ ] cal_DRIFT-PEAK_E2DS
         - [ ] cal_WAVE_E2DS
-        - [ ] cal_BADPIX
+        - [x] ~~cal_BADPIX~~
         - [ ] cal_CCF_E2DS
+        - [ ] pol_spirou
     - Keywords
         - [x] ~~cal_dark~~
         - [x] ~~cal_loc~~
@@ -255,10 +257,12 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
         - [x] ~~cal_extract~~
         - [x] ~~cal_drift~~
         - [ ] cal_HC_e2DS
+        - [ ] cal_DRIFT_E2DS
         - [ ] cal_DRIFT-PEAK_E2DS
         - [ ] cal_WAVE_E2DS
-        - [ ] cal_BADPIX
+        - [x] ~~cal_BADPIX~~
         - [ ] cal_CCF_E2DS
+        - [ ] pol_spirou
 - The Modules
     - [x] ~~Needs a file tree~~
     - [x] ~~spirouBACK~~
@@ -276,10 +280,12 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [x] ~~cal_extract_RAW_spirou~~
     - [x] ~~cal_DRIFT_RAW_spirou~~
     - [x] ~~cal_HC_E2DS~~
+    - [ ] cal_DRIFT_E2DS
     - [x] ~~cal_DRIFT-PEAK_E2DS~~
     - [x] ~~cal_WAVE_E2DS~~
     - [x] ~~cal_BADPIX~~
     - [x] ~~cal_CCF_E2DS~~
+    - [ ] pol_spirou
 - Quality control
     - [x] ~~cal_DARK_spirou~~
     - [x] ~~cal_loc_RAW_spirou~~
@@ -287,10 +293,12 @@ The `@` symbol can be used to highlight custom keywords (used `\@` to use the `@
     - [x] ~~cal_FF_RAW_spirou~~
     - [x] ~~cal_extract_RAW_spirou~~
     - [x] ~~cal_DRIFT_RAW_spirou~~
-    - [ ] cal_HC_e2DS
+    - [ ] cal_HC_E2DS
+    - [ ] cal_DRIFT_E2DS
     - [ ] cal_DRIFT-PEAK_E2DS
     - [x] ~~cal_WAVE_E2DS~~
     - [x] ~~cal_BADPIX~~
     - [ ] cal_CCF_E2DS
-    
+    - [ ] pol_spirou
+        
 [Back to top](#table-of-contents)
