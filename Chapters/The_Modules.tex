@@ -359,30 +359,245 @@ Contains function for the ordres extraction
 
 \begin{lstlisting}[style=pythonstyle]
 readkeyloco(fitsfilename, kw, nbo, nbc)
+    """
+    Reads the localisation parameters from fitsfilename header
 
+    :param fitsfilename: string, the FITS file name to read
+    :param kw: string, the prefix for the FITS file header constant
+    :param nbo: int, the number of orders to extract from header
+    :param nbc: int, the number of fit coefficients for each order
+   
+    :return value: numpy array (2D), the values from the header
+                   size = nbo x nbc
+    """
+\end{lstlisting}
+
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @cosmic_filter@(spe, window_size=128, sigma_clip=4.5)
+    """
+    Corrects for cosmic rays via a positive sigma clipping on a window
+    
+    :param spe: the extracted image for this order
+    :param window_size: int, the size of the window
+    :param sigma_clip: float, the sigma of the sigma clip
+    
+    :return spec: the corrected extracted image for this order
+    :return nbcos: 0 
+    """
 
+\end{lstlisting}
+
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract0@(data, pos, sig, plage, ccdgain)
+    """
+    Extraction of this order using summation over a constant range
+    
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position 
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param plage: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension)
+    :param ccdgain: float, the gain of the image
+    
+    :return: numpy array (1D), the extracted pixels for this order
+    """
+\end{lstlisting}
 
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract_weigth@(data, pos, sig, plage, order_profil, ccdgain, sigdet)
+    """
+    Extraction of Horne with weights from the order profile
+    
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param plage: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension)
+    :param order_profil: numpy array (2D), the order profile of the image
+    :param ccdgain: float, the gain of the image
+    :param sigdet: float, the sig det for the image
+    
+    :return: numpy array (1D), the extracted pixels for this order
+    """
+\end{lstlisting}
 
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract_tilt_weigth@(data, pos, sig, tilt, plage, order_profil, ccdgain,
                     sigdet)
+    """
+    Extraction of this order with tilt and weights from order profile
+    
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param tilt: float, the tilt for this order (from cal_SLIT via calibDB)
+    :param plage: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension)
+    :param order_profil: numpy array (2D), the order profile of the image
+    :param ccdgain: float, the gain of the image
+    :param sigdet: float, the sig det for the image
 
+    :return: numpy array (1D), the extracted pixels for this order
+    """
+\end{lstlisting}
+
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract_weigth2@(data, pos, sig, plage1, plage2, order_profil, ccdgain,
                 sigdet)
+    """
+    Extraction of Horne with weights from the order profile, with option for
+    unequal range for the width around the central position
 
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param plage1: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension) for the rows before (top y-dimension)
+    :param plage2: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension) for the rows after (bottom y-dimension)
+    :param order_profil: numpy array (2D), the order profile of the image
+    :param ccdgain: float, the gain of the image
+    :param sigdet: float, the sig det for the image
+
+    :return: numpy array (1D), the extracted pixels for this order
+    """
+\end{lstlisting}
+
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract_tilt_weigth2@(data, pos, sig, tilt, plage1, plage2, order_profil,
                      ccdgain, sigdet)
+    """
+    Extraction of this order with tilt and weights from order profile, with 
+    option for unequal range for the width around the central position
 
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param tilt: float, the tilt for this order (from cal_SLIT via calibDB)
+    :param plage1: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension) for the rows before (top y-dimension)
+    :param plage2: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension) for the rows after (bottom y-dimension)
+    :param order_profil: numpy array (2D), the order profile of the image
+    :param ccdgain: float, the gain of the image
+    :param sigdet: float, the sig det for the image
+
+    :return: numpy array (1D), the extracted pixels for this order
+    """
+\end{lstlisting}
+
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract_horne@(data, pos, sig, plage, order_profil, ccdgain, sigdet)
+    """
+    Extraction of Horne with weights from the order profile using the variance
+    as a normalisation
 
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param plage: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension)
+    :param order_profil: numpy array (2D), the order profile of the image
+    :param ccdgain: float, the gain of the image
+    :param sigdet: float, the sig det for the image
+
+    :return: numpy array (1D), the extracted pixels for this order
+    """
+
+\end{lstlisting}
+
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract_tilt_horne@(data, pos, sig, tilt, plage, order_profil, ccdgain,
                    sigdet)
+    """
+    Extraction of this order with tilt from order profile using the variance
+    as a normalisation
 
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param tilt: float, the tilt for this order (from cal_SLIT via calibDB)
+    :param plage: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension)
+    :param order_profil: numpy array (2D), the order profile of the image
+    :param ccdgain: float, the gain of the image
+    :param sigdet: float, the sig det for the image
+
+    :return: numpy array (1D), the extracted pixels for this order
+    """
+\end{lstlisting}
+
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract_tilt@(data, pos, sig, tilt, plage, ccdgain)
+    """
+    Extraction of this order with tilt from order profile
 
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param tilt: float, the tilt for this order (from cal_SLIT via calibDB)
+    :param plage: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension)
+    :param ccdgain: float, the gain of the image
+
+    :return: numpy array (1D), the extracted pixels for this order
+    """
+\end{lstlisting}
+
+\subsection{}
+\begin{lstlisting}[style=pythonstyle]
 @extract@(data, pos, sig, opt, nbsig, ccdgain, sigdet, seuilcosmic)
+    """
+    Extraction function with multiple options set by opt:
+        0 = extraction over a constant range
+        1 = extraction from summation over a constant sigma
+        2 = horne extraction
+        3 = horce extraction with cosmic elimination
+    
+    :param data: numpy array (2D), the image to be extracted
+    :param pos: numpy array (1D), the fit coefficients for the position
+                centers for this order
+    :param sig: numpy array (1D), the fit coefficients for the widths for this
+                order
+    :param opt: int, defines extraction option:
+        0 = extraction over a constant range
+        1 = extraction from summation over a constant sigma
+        2 = horne extraction
+        3 = horce extraction with cosmic elimination
+    
+    :param nbsig: float, the size in number of rows around the centers to fit
+                  to (y-axis dimension)
+    :param ccdgain: float, the gain of the image
+    :param sigdet: float, the sig det for the image
+    :param seuilcosmic: float, cosmic threshold (cut off)
+    
+    :return: numpy array (1D), the extracted pixels for this order
+    """
 \end{lstlisting}
 
 % -----------------------------------------------------------------------------------
@@ -906,48 +1121,149 @@ Contains functions for order localization
 \subsection{tableloco}
 \begin{lstlisting}[style=pythonstyle]
 @tableloco@(tblfilename, a)
+    """
+    Update the table localisation file
+
+    Not current used in DRS
+
+    :param tblfilename: string, filename of localisation file
+    :param a: numpy array (2D), the localisation parameters for each order
+              size = number of orders by number of localisation parameters
+
+    :return None:
+    """
 \end{lstlisting}
 
 \vspace{0.5cm}
 \subsection{keyloco}
 \begin{lstlisting}[style=pythonstyle]
 @keyloco@(fitsfilename, ac, ass)
+    """
+    Update the localization keywords (CTR and SIG) on the fits
+    file "fitsfilename".
+    Keys are send to spirouFITS.write_listnewkey for writing
+
+    Not current used in DRS
+
+    :param fitsfilename: string, FITS file name
+    :param ac: numpy array (2D), the position center fit coefficients
+               size = number of orders x number of fit coefficients
+    :param ass: numpy array (2D), the width fit coefficients
+               size = number of orders x number of fit coefficients
+
+    :return None:
+    """
 \end{lstlisting}
 
 \vspace{0.5cm}
 \subsection{keyloco2}
 \begin{lstlisting}[style=pythonstyle]
 @keyloco2@(fitsfilename, ac, ass)
+    """
+    Update the localization keywords (CTR and SIG) on the fits
+    file "fitsfilename".
+    Keys are written using pcfitsio (required module to use)
+
+    Not current used in DRS
+
+    :param fitsfilename: string, FITS file name
+    :param ac: numpy array (2D), the position center fit coefficients
+               size = number of orders x number of fit coefficients
+    :param ass: numpy array (2D), the width fit coefficients
+               size = number of orders x number of fit coefficients
+
+    :return None:
+    """
 \end{lstlisting}
 
 \vspace{0.5cm}
 \subsection{writekeyloco3}
 \begin{lstlisting}[style=pythonstyle]
 @writekeyloco3@(fitsfilename, a)
+    """
+    Update the localization keywords on the fits file "fitsfilename".
+    Keys are send to spirouFITS.write_listnewkey for writing
+
+    Not current used in DRS
+
+    :param fitsfilename: string, FITS file name
+    :param a: numpy array (2D), the position center fit coefficients
+               size = number of orders x number of fit coefficients
+
+    :return None:
+    """
 \end{lstlisting}
 
 \vspace{0.5cm}
 \subsection{writekeyloco}
 \begin{lstlisting}[style=pythonstyle]
 @writekeyloco@(fitsfilename, a, kw)
+    """
+    Update the localization keywords (generic 2D 
+    localisation coefficients) on the fits file "fitsfilename".
+    Keys are send to spirouFITS.write_listnewkey for writing
+
+    Not current used in DRS
+
+    :param fitsfilename: string, FITS file name
+    :param a: numpy array (2D), the "kw" fit coefficients
+               size = number of orders x number of fit coefficients
+
+    :return None:
+    """
 \end{lstlisting}
 
 \vspace{0.5cm}
 \subsection{readkeyloco}
 \begin{lstlisting}[style=pythonstyle]
 @readkeyloco@(fitsfilename, ic_locnbmaxo, ic_locdfitc)
+    """
+    Read 2D key list from "fitsfilename" header for key prefixes
+    "CTR" and "SIG" size = (ic_locnbmaxo x ic_locdfitc)
+    Keys are read using pcfitsio (required module to use)
+    
+    Not current used in DRS
+    
+    :param fitsfilename: string, FITS file name
+    :param ic_locnbmaxo: int, number of orders to extract from header
+    :param ic_locdfitc: int, number of fit coefficients to extract per order
+    
+    :return value: list, values from header size ic_locnbmaxo x ic_locdfitc
+    """
 \end{lstlisting}
 
 \vspace{0.5cm}
 \subsection{readkeyloco3}
 \begin{lstlisting}[style=pythonstyle]
 @readkeyloco3@(fitsfilename, rootkeyname)
+    """
+    Read 2D key list from "fitsfilename" header for key prefixes
+    "rootkeyname" (up to the first 1000)
+    Keys are read using pcfitsio (required module to use)
+
+    Not current used in DRS
+
+    :param fitsfilename: string, FITS file name
+    :param rootkeyname: string, the header prefix to extract
+
+    :return value: list, values from header
+    """
 \end{lstlisting}
 
 \vspace{0.5cm}
 \subsection{write\_fitsloco}
 \begin{lstlisting}[style=pythonstyle]
 @write_fitsloco@(fitsfilename, a, dim)
+    """
+    Write the fits localisation file
+    
+    :param fitsfilename: string, file name to write fits file to 
+    :param a: numpy array (2D), the coefficient array
+              size = number of orders x number of fit coefficients
+    :param dim: int, the number of columns (x-axis dimension) 
+    
+    :return None: 
+    """
 \end{lstlisting}
 
 
@@ -956,12 +1272,57 @@ Contains functions for order localization
 \section{The spirouRV module}
 % -----------------------------------------------------------------------------------
 
-Contains functions to compute radial velocity
+\subsection{deltavrms2d}
+\begin{lstlisting}[style=pythonstyle]
+@deltavrms2d@(spe, wave, sigdet, seuilmax=350000., size=12):
+    """
+    Compute photon noise uncertainty
+    
+    :param spe: numpy array (2D), the extracted orders
+    :param wave: numpy array (2D), the wave image
+    :param sigdet: float, the noise or sigdet of the image
+    :param seuilmax: float, the maximum threshold for good (unsaturated pixels)
+    :param size: int, the size in pixels around a saturated pixel to not use
+    
+    :return dvrms2: numpy array (1D), photon noise uncertainty for each order
+    :return meanpond: numpy array (1D), the weighted mean for each order
+    """
+\end{lstlisting}
 
-% -----------------------------------------------------------------------------------
-\clearpage
-\newpage
-\section{The spirouVISU module}
-% -----------------------------------------------------------------------------------
+\vspace{0.5cm}
+\subsection{}
 
-Contains functions for visualization
+\begin{lstlisting}[style=pythonstyle]
+@calcvrdrifts2d@(speref, spe, wave, sigdet, seuilmax=350000., size=12)
+    """
+    Compute the radial velocity drift between the reference extraction and the
+    current extraction
+    
+    :param speref: numpy array (2D), the reference extracted orders
+    :param spe: numpy array (2D), the current extracted orders
+    :param wave: numpy array (2D), the wave image
+    :param sigdet: float, the noise or sigdet of the image
+    :param seuilmax: float, the maximum threshold for good (unsaturated pixels)
+    :param size: int, the size in pixels around a saturated pixel to not use
+    
+    :return vrdrift: numpy array (1D) the drift for each order 
+    """
+\end{lstlisting}
+
+\vspace{0.5cm}
+\subsection{}
+
+\begin{lstlisting}[style=pythonstyle]
+@renorm_cosmics2d@(speref, spe, seuilmax=350000., size=12, cut=4.5)
+    """
+    Correction of the cosmics and renormalisation by comparison with the 
+    reference spectrum
+    
+    :param speref: numpy array (2D), the reference extracted orders
+    :param spe: numpy array (2D), the current extracted orders
+    :param seuilmax: float, the maximum threshold for good (unsaturated pixels)
+    :param size: int, the size in pixels around a saturated pixel to not use
+    :param cut: float, the number of sigma above to cut at (cosmic rejection)
+    :return:
+    """
+\end{lstlisting}
