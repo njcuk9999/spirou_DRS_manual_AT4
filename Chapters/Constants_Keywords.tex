@@ -8,6 +8,7 @@
 \newcommand{\calext}{cal\_extract\_RAW\_spirou\definevariable{fiber}.py}
 \newcommand{\calextall}{cal\_extract\_RAW\_spirouALL.py}
 \newcommand{\caldrift}{cal\_DRIFT\_RAW\_spirou.py}
+\newcommand{\caldrifte}{cal\_DRIFT\_E2DS\_spirou.py}
 \newcommand{\calbadpix}{cal\_BADPIX\_spirou.py}
 
 \newcommand{\spirouRV}{spirouRV.py}
@@ -352,7 +353,10 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 \ParamList{ic\_extfblaz}{50}{Half size blaze smoothing window}{\calff, \calext, \calextall}{\hadmricdp}
 
 
-\ParamList{ic\_order\_plot}{5}{Order to plot on ff image plot}{\calff, \calext, \calextall}{\calff, \hadmricdp}
+\ParamList{ic\_order\_plot}{5}{Order to plot on ff image plot}{\calff}{\calff, \hadmricdp}
+% Future ic_ff_order_plot
+
+\ParamList{ic\_order\_plot}{20}{Order to plot on ff image plot}{\calext, \calextall, \caldrift, \caldrifte}{\calff, \hadmricdp}
 % Future ic_ff_order_plot
 
 % Future ic_blaze_fitn
@@ -374,13 +378,13 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 
 %----------------------------------------------------------------
 
-\ParamList{noise}{100}{The value of the noise for drift calculation}{\caldrift}{\caldrift}
+\ParamList{noise}{100}{The value of the noise for drift calculation}{\caldrift, \caldrifte}{\caldrift, \caldrifte}
 % future ic_drift_noise
 
-\ParamList{seuilmax}{1.e9}{The maximum flux for good (unsaturated) pixels}{\caldrift}{\caldrift}
+\ParamList{seuilmax}{1.e9}{The maximum flux for good (unsaturated) pixels}{\caldrift}{\caldrift, \caldrifte}
 % future ic_drift_maxflux
 
-\ParamList{size}{12}{The size around a saturated pixel to flag as unusable}{\caldrift}{\spirouRV.deltavrms2d(), \spirouRV.renorm\_cosmics2d(), \spirouRV.calcvrdrifts2d()}
+\ParamList{size}{12}{The size around a saturated pixel to flag as unusable}{\caldrift, \caldrifte}{\spirouRV.deltavrms2d(), \spirouRV.renorm\_cosmics2d(), \spirouRV.calcvrdrifts2d()}
 % future ic_drift_boxsize
 
 % Future: drift_nlarge
@@ -389,10 +393,19 @@ Note: these variables depend on prefix of input file. First entry is for `flat\_
 % future: drift_file_skip
 
 \ParamList{cut}{3}{Define the number of standard deviations cut at in cosmic renormalisation}{\caldrift}{\caldrift, \spirouRV.renorm\_cosmics2d()}
+% future: ic_drift_cut_raw
 
-\ParamList{nomax}{28}{Define the number of orders to use (starting from 0 to max) used to get median drift  median(order0 --> order max)}{\caldrift}{\caldrift}
+\ParamList{cut}{4.5}{Define the number of standard deviations cut at in cosmic renormalisation}{\caldrifte}{\caldrifte, \spirouRV.renorm\_cosmics2d()}
+% future: ic_drift_cut_e2ds
+
+\ParamList{nomax}{28}{Define the number of orders to use (starting from 0 to max) used to get median drift  median(order0 --> order max). Note: not used in \caldrifte}{\caldrift}{\caldrift}
 % future: ic_drift_n_order_max
 
+% Future: drift_type_raw
+
+% Future: drift_type_e2ds
+
+% Future: ic_drift_order_plot
 
 % ----------------------------------------------------------
 \vspace{0.5cm}
