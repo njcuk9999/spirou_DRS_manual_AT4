@@ -1087,6 +1087,111 @@ cal_HC_E2DS_spirou.py  night_repository  hc_hc*.fits
 \label{section:cal_drift_e2ds}
 % ----------------------------------------------------------------------------------
 
+Calculates relative (radial velocity) drift between all files and individual files. \\
+
+% \TODO{Once writen up the new version update this description}
+
+\noindent File prefixes allowed:
+\begin{itemize}
+	\item fp\_fp
+\end{itemize}
+
+\subsection{Summary of procedure}
+\begin{enumerate}
+	\item first file is reference image (must be an E2DS file) extracted using one of the cal\_extract\_RAW recipes
+	\item loops around all other `fp\_fp' files in directory
+	\item calculates photon noise uncertainty and estimated RV uncertainty on spectrum
+	\begin{itemize}
+		\item uses wave file
+	\end{itemize}
+	\item calculates RV drift and mean RV drift between reference (mean of files) and other `fp\_fp' files
+	\item saves drift values to file
+\end{enumerate}
+
+\subsection{Running cal\_DRIFT\_E2DS\_spirou}
+
+To run cal\_DRIFT\_RAW\_spirou type:
+\begin{lstlisting}[language=bash, style=bashstyle]
+cal_DRIFT_E2DS_spirou.py  night_repository  filename
+\end{lstlisting}
+
+Note: Filenames must start with `fp\_fp' and must be a E2DS file extracted using a cal\_extract\_RAW recipe.
+
+\subsection{Example working run}
+
+An example run where everything worked is below:
+
+\begin{lstlisting}[style=text]
+cal_DRIFT_E2DS_spirou.py 20170710 fp_fp02a203_e2ds_AB.fits
+||DRS  SPIROU   v   (interactive mode)
+19:54:17.9 -   || *****************************************
+19:54:17.9 -   || * SPIROU \@(#) Geneva Observatory ()
+19:54:17.9 -   || *****************************************
+19:54:17.9 -   ||(dir_data_raw)      DRS_DATA_RAW=/scratch/Projects/SPIRou_Pipeline/data/raw/
+19:54:17.9 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/scratch/Projects/SPIRou_Pipeline/data/reduced/
+19:54:17.9 -   ||(dir_drs_config)    DRS_CONFIG=/scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/
+19:54:17.9 -   ||(dir_calib_db)      DRS_CALIB_DB=/scratch/Projects/SPIRou_Pipeline/data/calibDB
+19:54:17.9 -   ||(dir_data_msg)      DRS_DATA_MSG=/scratch/Projects/SPIRou_Pipeline/data/msg/
+19:54:17.9 -   ||(print_log)         DRS_LOG=1         %(0: minimum stdin-out logs)
+19:54:17.9 -   ||(plot_graph)        DRS_PLOT=NONE            %(def/undef/trigger)
+19:54:17.9 -   ||(used_date)         DRS_USED_DATE=undefined
+19:54:17.9 -   ||(working_dir)       DRS_DATA_WORKING=/scratch/Projects/SPIRou_Pipeline/data/tmp/
+19:54:17.9 -   ||                    DRS_INTERACTIVE is  set
+19:54:17.9 -   |cal_DRIFT_E2DS_spirou:|Now running : cal_DRIFT_E2DS_spirou on file(s):  fp_fp02a203_e2ds_AB.fits
+19:54:17.9 -   |cal_DRIFT_E2DS_spirou:|On directory /scratch/Projects/SPIRou_Pipeline/data/raw/20170710
+19:54:17.9 -   |cal_DRIFT_E2DS_spirou:|ICDP loaded from: /scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/hadmrICDP_SPIROU.py
+19:54:17.9 -   |cal_DRIFT_E2DS_spirou:|Reading File: /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp02a203_e2ds_AB.fits
+19:54:18.2 -   |cal_DRIFT_E2DS_spirou:|Calibration file: fp_fp02a203_tilt.fits already exists - not copied
+19:54:18.2 -   |cal_DRIFT_E2DS_spirou:|Calibration file: dark_flat02f10_loco_C.fits already exists - not copied
+19:54:18.9 -   |cal_DRIFT_E2DS_spirou:|Calibration file: dark_flat02f10_order_profil_C.fits already exists - not copied
+19:54:19.7 -   |cal_DRIFT_E2DS_spirou:|Calibration file: flat_dark02f10_order_profil_AB.fits already exists - not copied
+19:54:19.8 -   |cal_DRIFT_E2DS_spirou:|Calibration file: spirou_wave_ini3.fits already exists - not copied
+19:54:20.6 -   |cal_DRIFT_E2DS_spirou:|Calibration file: dark_dark02d406.fits already exists - not copied
+19:54:20.7 -   |cal_DRIFT_E2DS_spirou:|Calibration file: dark_flat02f10_flat_C.fits already exists - not copied
+19:54:20.7 -   |cal_DRIFT_E2DS_spirou:|Calibration file: flat_dark02f10_flat_AB.fits already exists - not copied
+19:54:20.8 -   |cal_DRIFT_E2DS_spirou:|Calibration file: flat_dark02f10_loco_AB.fits already exists - not copied
+19:54:21.6 -   |cal_DRIFT_E2DS_spirou:|Calibration file: dark_dark02d406_badpixel.fits already exists - not copied
+19:54:21.6 -   |cal_DRIFT_E2DS_spirou:|Reading wavelength solution
+19:54:21.6 -   |cal_DRIFT_E2DS_spirou:|Reading Flat-Field
+19:54:21.6 -   |cal_DRIFT_E2DS_spirou:|Extraction Reference file  /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp02a203_e2ds_AB.fits
+19:54:22.4 - * |cal_DRIFT_E2DS_spirou:|On fiber AB estimated RV uncertainty on spectrum is 0.025 m/s
+19:54:22.4 - * |cal_DRIFT_E2DS_spirou:|Nb fp_fp files found on directory =  2
+19:54:22.4 -   |cal_DRIFT_E2DS_spirou:|Reading File: /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp03a203_e2ds_AB.fits
+19:54:23.0 -   |cal_DRIFT_E2DS_spirou:|Time from ref= 0.09 h  - Drift mean= -2.91 +- 0.036  m/s - Flux ratio= 0.99 - Nb Cosmics= 392
+19:54:23.0 -   |cal_DRIFT_E2DS_spirou:|Reading File: /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp04a203_e2ds_AB.fits
+19:54:23.6 -   |cal_DRIFT_E2DS_spirou:|Time from ref= 0.18 h  - Drift mean= 10.23 +- 0.036  m/s - Flux ratio= 0.98 - Nb Cosmics= 346
+19:54:23.7 -   |cal_DRIFT_E2DS_spirou:|Total drift Peak-To-Peak= 13.135 m/s RMS= 6.567 m/s in 0.18 hour
+19:54:23.7 -   |cal_DRIFT_E2DS_spirou:|Drift per orders saved in /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp02a203_e2ds_AB_drift.fits
+19:54:24.5 -   |cal_DRIFT_E2DS_spirou:AB|Average Drift saved in /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp02a203_e2ds_AB_drift.tbl Saved
+19:54:24.5 - * |cal_DRIFT_E2DS_spirou:|Recipe cal_DRIFT_E2DS_spirou has been  successfully completed
+
+\end{lstlisting}
+
+
+\subsection{Interactive mode}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_DRIFT_E2DS_spirou_1.pdf}
+\caption{The extract FP orders for spectral order 20, x-axis is wavelength and y-axis is extract flux. \label{figure_cal_drift_e2ds_spirou_1}}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_DRIFT_E2DS_spirou_2.pdf}
+\caption{Photon noise uncertainty versus spectral order
+ \label{figure_cal_drift_e2ds_spirou_2}}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_DRIFT_E2DS_spirou_3.pdf}
+\caption{Mean drift in m/s against the time from the reference extraction. \label{figure_cal_drift_e2ds_spirou_3}}
+\end{center}
+\end{figure}
 
 % ----------------------------------------------------------------------------------
 \clearpage
@@ -1128,24 +1233,108 @@ cal_DRIFT-PEAK_E2DS_spirou.py  night_repository fp_fp*.fits
 
 \noindent Note: Filenames must start with fp\_fp.
 
-% \subsection{Example working run}
+\subsection{Example working run}
 
-% An example run where everything worked is below:
+An example run where everything worked is below:
 
-% \begin{lstlisting}[style=text]
-% cal_DRIFT-PEAK_E2DS_spirou.py  20170710 
-% \end{lstlisting}
+\begin{lstlisting}[style=text]
+cal_DRIFT-PEAK_E2DS_spirou.py 20170710 fp_fp02a203_e2ds_AB.fits
+||DRS  SPIROU   v   (interactive mode)
+20:15:42.9 -   || *****************************************
+20:15:42.9 -   || * SPIROU \@(#) Geneva Observatory ()
+20:15:42.9 -   || *****************************************
+20:15:42.9 -   ||(dir_data_raw)      DRS_DATA_RAW=/scratch/Projects/SPIRou_Pipeline/data/raw/
+20:15:42.9 -   ||(dir_data_reduc)    DRS_DATA_REDUC=/scratch/Projects/SPIRou_Pipeline/data/reduced/
+20:15:42.9 -   ||(dir_drs_config)    DRS_CONFIG=/scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/
+20:15:42.9 -   ||(dir_calib_db)      DRS_CALIB_DB=/scratch/Projects/SPIRou_Pipeline/data/calibDB
+20:15:42.9 -   ||(dir_data_msg)      DRS_DATA_MSG=/scratch/Projects/SPIRou_Pipeline/data/msg/
+20:15:42.9 -   ||(print_log)         DRS_LOG=1         %(0: minimum stdin-out logs)
+20:15:42.9 -   ||(plot_graph)        DRS_PLOT=NONE            %(def/undef/trigger)
+20:15:42.9 -   ||(used_date)         DRS_USED_DATE=undefined
+20:15:42.9 -   ||(working_dir)       DRS_DATA_WORKING=/scratch/Projects/SPIRou_Pipeline/data/tmp/
+20:15:42.9 -   ||                    DRS_INTERACTIVE is  set
+20:15:42.9 -   |cal_DRIFT-PEAK_E2DS_spirou:|Now running : cal_DRIFT-PEAK_E2DS_spirou on file(s):  fp_fp02a203_e2ds_AB.fits
+20:15:42.9 -   |cal_DRIFT-PEAK_E2DS_spirou:|On directory /scratch/Projects/SPIRou_Pipeline/data/raw/20170710
+20:15:43.0 -   |cal_DRIFT-PEAK_E2DS_spirou:|ICDP loaded from: /scratch/Projects/SPIRou_Pipeline/INTROOT/DRS_SPIROU/config/hadmrICDP_SPIROU.py
+20:15:43.0 -   |cal_DRIFT-PEAK_E2DS_spirou:|Reading File: /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp02a203_e2ds_AB.fits
+20:15:43.1 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: fp_fp02a203_tilt.fits already exists - not copied
+20:15:43.1 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: dark_flat02f10_loco_C.fits already exists - not copied
+20:15:43.1 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: dark_flat02f10_order_profil_C.fits already exists - not copied
+20:15:43.2 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: flat_dark02f10_order_profil_AB.fits already exists - not copied
+20:15:43.2 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: spirou_wave_ini3.fits already exists - not copied
+20:15:43.2 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: dark_dark02d406.fits already exists - not copied
+20:15:43.2 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: dark_flat02f10_flat_C.fits already exists - not copied
+20:15:43.2 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: flat_dark02f10_flat_AB.fits already exists - not copied
+20:15:43.2 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: flat_dark02f10_loco_AB.fits already exists - not copied
+20:15:43.3 -   |cal_DRIFT-PEAK_E2DS_spirou:|Calibration file: dark_dark02d406_badpixel.fits already exists - not copied
+20:15:43.3 -   |cal_DRIFT-PEAK_E2DS_spirou:|Reading wavelength solution 
+20:15:43.3 -   |cal_DRIFT-PEAK_E2DS_spirou:|Perform background correction 
+20:15:43.7 -   |cal_DRIFT-PEAK_E2DS_spirou:|Identification of FP peaks in the Reference file  /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp02a203_e2ds_AB.fits
+20:15:44.3 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 0 : 389 peaks found
+20:15:44.7 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 1 : 383 peaks found
+20:15:45.1 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 2 : 377 peaks found
+20:15:45.4 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 3 : 371 peaks found
+20:15:45.7 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 4 : 366 peaks found
+20:15:46.0 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 5 : 359 peaks found
+20:15:46.4 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 6 : 353 peaks found
+20:15:46.8 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 7 : 348 peaks found
+20:15:47.2 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 8 : 341 peaks found
+20:15:47.5 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 9 : 335 peaks found
+20:15:47.7 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 10 : 327 peaks found
+20:15:48.0 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 11 : 324 peaks found
+20:15:48.3 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 12 : 317 peaks found
+20:15:48.6 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 13 : 311 peaks found
+20:15:48.8 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 14 : 306 peaks found
+20:15:49.1 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 15 : 300 peaks found
+20:15:49.4 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 16 : 294 peaks found
+20:15:49.6 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 17 : 288 peaks found
+20:15:49.9 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 18 : 283 peaks found
+20:15:50.1 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 19 : 277 peaks found
+20:15:50.4 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 20 : 270 peaks found
+20:15:50.6 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 21 : 264 peaks found
+20:15:50.9 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 22 : 258 peaks found
+20:15:51.1 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 23 : 252 peaks found
+20:15:51.3 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 24 : 246 peaks found
+20:15:51.5 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 25 : 241 peaks found
+20:15:51.7 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 26 : 235 peaks found
+20:15:51.9 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 27 : 229 peaks found
+20:15:52.1 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 28 : 223 peaks found
+20:15:52.3 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 29 : 217 peaks found
+20:15:52.5 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 30 : 211 peaks found
+20:15:52.6 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 31 : 120 peaks found
+20:15:52.9 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 32 : 214 peaks found
+20:15:53.0 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 33 : 193 peaks found
+20:15:53.2 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 34 : 187 peaks found
+20:15:54.0 -   |cal_DRIFT-PEAK_E2DS_spirou:|Order 35 : 345 peaks found
+20:15:54.0 - * |cal_DRIFT-PEAK_E2DS_spirou:|Total Nb of FP lines found = 10354 
+20:15:54.0 - * |cal_DRIFT-PEAK_E2DS_spirou:|Nb of lines removed due to suspicious width = 616 
+20:16:00.4 - * |cal_DRIFT-PEAK_E2DS_spirou:|Nb fp_fp files found on directory =  2 
+20:16:00.4 -   |cal_DRIFT-PEAK_E2DS_spirou:|Reading File: /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp03a203_e2ds_AB.fits
+20:16:07.4 - * |cal_DRIFT-PEAK_E2DS_spirou:|Time from ref= 0.09 h  - Drift mean= -2.53 +- 0.21 m/s
+20:16:07.4 -   |cal_DRIFT-PEAK_E2DS_spirou:|Reading File: /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp04a203_e2ds_AB.fits
+20:16:13.9 - * |cal_DRIFT-PEAK_E2DS_spirou:|Time from ref= 0.18 h  - Drift mean= 9.44 +- 0.23 m/s
+20:16:14.0 -   |cal_DRIFT-PEAK_E2DS_spirou:|Total drift Peak-To-Peak= 11.97 m/s RMS= 5.99 m/s in 0.18 hour 
+20:16:14.0 -   |cal_DRIFT-PEAK_E2DS_spirou:|Drift per orders saved in /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp02a203_e2ds_AB_driftnew.fits
+20:16:14.9 -   |cal_DRIFT-PEAK_E2DS_spirou:AB|Average Drift saved in /scratch/Projects/SPIRou_Pipeline/data/reduced/20170710/fp_fp02a203_e2ds_AB_driftnew.tbl Saved 
+20:16:14.9 - * |cal_DRIFT-PEAK_E2DS_spirou:|Recipe cal_DRIFT-PEAK_E2DS_spirou has been  successfully completed
 
-% \subsection{Interactive mode}
+\end{lstlisting}
 
-% \begin{figure}
-% \begin{center}
-% \includegraphics[width=.8\textwidth]{figures/}
-% \caption{ \label{}}
-% \end{center}
-% \end{figure}
+\subsection{Interactive mode}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_DRIFT-PEAK_E2DS_spirou_1.pdf}
+\caption{The extract FP orders for spectral order 20, x-axis is wavelength and y-axis is extract flux. \label{figure:cal_DRIFT-PEAK_E2DS_spirou_1}}
+\end{center}
+\end{figure}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/cal_DRIFT-PEAK_E2DS_spirou_2.pdf}
+\caption{Mean drift in m/s against the time from the reference extraction for the left side of the orders, the right side of the orders and the whole iamge. \label{figure:cal_DRIFT-PEAK_E2DS_spirou_2}}
+\end{center}
+\end{figure}
 % ----------------------------------------------------------------------------------
 \clearpage
 \newpage
