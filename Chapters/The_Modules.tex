@@ -357,6 +357,7 @@ Contains functions for the calibrations database (infos for master\_calib.txt, a
 
 Contains function for the ordres extraction
 
+\subsection{readkeyloco}
 \begin{lstlisting}[style=pythonstyle]
 readkeyloco(fitsfilename, kw, nbo, nbc)
     """
@@ -372,7 +373,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
     """
 \end{lstlisting}
 
-\subsection{}
+\subsection{cosmic\_filter}
 \begin{lstlisting}[style=pythonstyle]
 @cosmic_filter@(spe, window_size=128, sigma_clip=4.5)
     """
@@ -388,7 +389,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
 
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract0}
 \begin{lstlisting}[style=pythonstyle]
 @extract0@(data, pos, sig, plage, ccdgain)
     """
@@ -407,7 +408,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
     """
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract\_weigth}
 \begin{lstlisting}[style=pythonstyle]
 @extract_weigth@(data, pos, sig, plage, order_profil, ccdgain, sigdet)
     """
@@ -428,7 +429,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
     """
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract\_tilt\_weigth}
 \begin{lstlisting}[style=pythonstyle]
 @extract_tilt_weigth@(data, pos, sig, tilt, plage, order_profil, ccdgain,
                     sigdet)
@@ -451,7 +452,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
     """
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract\_weigth2}
 \begin{lstlisting}[style=pythonstyle]
 @extract_weigth2@(data, pos, sig, plage1, plage2, order_profil, ccdgain,
                 sigdet)
@@ -476,7 +477,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
     """
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract\_tilt\_weigth2}
 \begin{lstlisting}[style=pythonstyle]
 @extract_tilt_weigth2@(data, pos, sig, tilt, plage1, plage2, order_profil,
                      ccdgain, sigdet)
@@ -502,7 +503,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
     """
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract\_horne}
 \begin{lstlisting}[style=pythonstyle]
 @extract_horne@(data, pos, sig, plage, order_profil, ccdgain, sigdet)
     """
@@ -525,7 +526,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
 
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract\_tilt\_horne}
 \begin{lstlisting}[style=pythonstyle]
 @extract_tilt_horne@(data, pos, sig, tilt, plage, order_profil, ccdgain,
                    sigdet)
@@ -549,7 +550,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
     """
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract\_tilt}
 \begin{lstlisting}[style=pythonstyle]
 @extract_tilt@(data, pos, sig, tilt, plage, ccdgain)
     """
@@ -569,7 +570,7 @@ readkeyloco(fitsfilename, kw, nbo, nbc)
     """
 \end{lstlisting}
 
-\subsection{}
+\subsection{extract}
 \begin{lstlisting}[style=pythonstyle]
 @extract@(data, pos, sig, opt, nbsig, ccdgain, sigdet, seuilcosmic)
     """
@@ -1290,7 +1291,7 @@ Contains functions for order localization
 \end{lstlisting}
 
 \vspace{0.5cm}
-\subsection{}
+\subsection{calcvrdrifts2d}
 
 \begin{lstlisting}[style=pythonstyle]
 @calcvrdrifts2d@(speref, spe, wave, sigdet, seuilmax=350000., size=12)
@@ -1310,7 +1311,7 @@ Contains functions for order localization
 \end{lstlisting}
 
 \vspace{0.5cm}
-\subsection{}
+\subsection{renorm\_cosmics2d}
 
 \begin{lstlisting}[style=pythonstyle]
 @renorm_cosmics2d@(speref, spe, seuilmax=350000., size=12, cut=4.5)
